@@ -1,0 +1,449 @@
+
+
+International School
+Capstone Project 1
+CMU-SE 450 – C1SE.57
+
+Product Backlog
+Version 1.1
+Date: August 30th, 2026
+
+Smart Scheduling - Website for Automated Staff Scheduling and Shift
+
+Submitted by
+Tuan, Le Ha Duc
+Hien, Le Tran Thanh
+Nghia, Le Dinh
+Quan, Huynh Van Minh
+Luc, Huynh Vu
+Approved by
+PhD. Vu, Truong Tien
+
+Proposal Review Panel Representative:
+
+Name			Signature		Date
+
+Capstone Project 1- Mentor:
+
+Name			Signature		Date
+
+PROJECT INFORMATION
+
+Project acronym
+ | Smart Scheduling
+ | Project Title
+ | Smart Scheduling - Website for Automated Staff Scheduling and Shift
+ | Start Date
+ | 26 Aug 2026
+ | End Date
+ | 06 Dec 2026
+ | Lead Institution
+ | International School, Duy Tan University
+ | Project Mentor
+ | PhD. Vu, Truong Tien
+ | Scrum master / Project Leader & contact details
+ | Tuan, Le Ha DucEmail: lehaductuan05@gmail.comTel: 0852830905
+ | Partner Organization
+ | Duy Tan University
+ | Project Web URL
+ |
+ | Team members
+ | Name
+ | Email
+ | Tel
+ |
+ | Tuan, Le Ha Duc
+ | lehaductuan05@gmail.com
+ | 0852830905
+ |
+ | Hien, Le Tran Thanh
+ | lethanhhien414@gmail.com
+ | 0328675911
+ |
+ | Nghia, Le Dinh
+ | dinhnghia1475@gmail.com
+ | 0369485344
+ |
+ | Quan, Huynh Van Minh
+ | minhquan251205@gmail.com
+ | 0976461574
+ |
+ | Luc, Huynh Vu
+ | huynhvuluc123@gmail.com
+ | 0397636350
+ |
+DOCUMENT APPROVALS
+The following signatures are required for approval of this document.
+
+Tuan, Le Ha DucStudent ID: 29212761036Scrum Master
+ | Signature
+ | Date
+ | Hien, Le Tran ThanhStudent ID: 29201124759Product Owner
+ | Signature
+ | Date
+ | Nghia, Le DinhStudent ID: 29211156998Team Member
+ | Signature
+ | Date
+ | Quan, Huynh Van MinhStudent ID: 29211163309Team Member
+ | Signature
+ | Date
+ | Luc, Huynh VuStudent ID: 29219029552Team Member
+ | Signature
+ | Date
+ |
+
+	DOCUMENT NAME
+
+Document Title
+ | Product Backlog Document
+ | Author(s)
+ | Tuan, Le Ha Duc
+ | Role
+ | Scrum Master, Team Member
+ | Date
+ | August 30th, 2026
+ | File name:
+ | C1SE.57_PRODUCT_BACKLOG_Smart_Scheduling_v1.1.docx
+ |
+REVISION HISTORY
+Version
+ | Person(s)
+ | Date
+ | Description
+ | 1.0
+ | C1SE.57 Team
+ | 29-Aug-2026
+ | Create product backlog document
+ | 1.1
+ | C1SE.57 Team
+ | 30-Aug-2026
+ | Update product backlog based on the approved single-store scope and User Story Document
+ |
+
+TABLE OF CONTENTS
+
+		 TOC \h \z \t "C1,1,C2,2" 1.	Introduction	 PAGEREF _Toc58870983 \h 5
+		1.1.	Purpose	 PAGEREF _Toc58870984 \h 5
+		1.2.	Scope	 PAGEREF _Toc58870985 \h 5
+		1.3.	References	 PAGEREF _Toc58870986 \h 5
+		2.	Product Backlog	 PAGEREF _Toc58870987 \h 6
+		2.1.	Product Backlog Specification	 PAGEREF _Toc58870988 \h 6
+		3.	Constraint	 PAGEREF _Toc58870989 \h 10
+		4.	Stakeholders and User Descriptions Summary	 PAGEREF _Toc58870990 \h 10
+
+Introduction
+The agile product backlog in Scrum is a prioritized list of product capabilities and work items that are refined as the team learns more about the product. For Smart Scheduling, the backlog translates the approved single-store F&B scope into concise role-based needs for Admin, Manager, and Staff. It provides the basis for Sprint planning, refinement, implementation, testing, and review while remaining aligned with the project Proposal and User Story Document.
+
+Purpose
+Provide a prioritized list of the functions required to deliver the Smart Scheduling product within the approved Capstone scope.
+Give the Scrum team a common implementation reference that connects user needs, business value, and feature priority.
+
+Scope
+Lists the official user roles: Admin, Manager, and Staff.
+Includes employee/skill management, availability, shifts, manual and automatic scheduling, leave/swap/open-shift workflows, GPS attendance, timesheets, dashboard/reporting, notifications, and optional AI support.
+Keeps the implemented business scope to one F&B store; multi-store and multi-tenant functions are deferred.
+Prioritizes product functions from 1 to 5 so dependencies and core workflows can be planned before optional enhancements.
+Uses Laravel/Microsoft SQL Server as the core system while Scheduling Service and AI Service remain independent enhancement services.
+References
+Table 1: References
+No
+ | Reference
+ | Note
+ | 1
+ | C1SE.57_PROPOSAL_Smart_Scheduling_v1.3.docx
+ | Official scope, FR/NFR, architecture, technology stack, risks, and project schedule
+ | 2
+ | C1SE.57_USER_STORY_Smart_Scheduling_v1.1.docx
+ | User stories, actors, priorities, and acceptance criteria
+ |
+
+Product Backlog
+Product Backlog Specification
+Priority and Estimates
+Priorities are set from 1 to 5.
+◦ The maximum priority is 5 (core or dependency-critical).
+◦ The minimum priority is 1 (lowest-value or deferrable item).
+◦ Priorities of some backlog items can be the same as others.
+◦ If a backlog item has dependencies, the dependency should be implemented with equal or higher priority.
+
+Table 1: Product Backlog Specification (Admin)
+
+ID
+ | Theme
+ | As a/an
+ | I want to
+ | So that
+ | Priority
+ | PB01
+ | Account Login (US01)
+ | Admin
+ | Sign in securely
+ | I can access the administration functions permitted for my role
+ | 5
+ | PB02
+ | Role Based Access (US02)
+ | Admin
+ | Use role-controlled functions
+ | Protected operational data and functions remain secure
+ | 5
+ | PB03
+ | User Accounts (US24)
+ | Admin
+ | Manage system user accounts and access status
+ | Only authorized Admin, Manager, and Staff accounts can use the platform
+ | 5
+ | PB04
+ | System Services (US25)
+ | Admin
+ | Monitor service health and permitted system configuration
+ | I can operate and troubleshoot the platform safely
+ | 4
+ |
+
+Table 2: Product Backlog Specification (Manager)
+
+ID
+ | Theme
+ | As a/an
+ | I want to
+ | So that
+ | Priority
+ | PB01
+ | Account Login (US01)
+ | Manager
+ | Sign in securely
+ | I can use the management functions permitted for my role
+ | 5
+ | PB02
+ | Role Based Access (US02)
+ | Manager
+ | Access only Manager-authorized data and functions
+ | Employee and operational information remains protected
+ | 5
+ | PB03
+ | Employee Profiles (US03)
+ | Manager
+ | Create and update employee profiles
+ | Scheduling uses accurate staff information
+ | 5
+ | PB04
+ | Skills and Levels (US04)
+ | Manager
+ | Maintain employee skills and proficiency levels
+ | Each shift can be assigned to suitably qualified Staff
+ | 5
+ | PB05
+ | Deactivate Employee (US05)
+ | Manager
+ | Deactivate a departing employee account
+ | Access ends while scheduling, attendance, and timesheet history is preserved
+ | 5
+ | PB06
+ | Shift Requirements (FR05)
+ | Manager
+ | Define shifts, staffing requirements, positions/skills, and scheduling rules
+ | The system has valid inputs for manual and automatic scheduling
+ | 5
+ | PB07
+ | Availability Review (FR04)
+ | Manager
+ | Configure scheduling periods/deadlines and review Staff availability
+ | I can prepare schedule inputs before assignments are created
+ | 5
+ | PB08
+ | Auto Scheduling (US08)
+ | Manager
+ | Request a constraint-based Draft Schedule
+ | I spend less time allocating Staff manually
+ | 5
+ | PB09
+ | Publish Schedule (US09)
+ | Manager
+ | Review, adjust, validate, and publish a schedule
+ | Staff receive an approved official work schedule
+ | 5
+ | PB10
+ | Shift Swap Approval (US11)
+ | Manager
+ | Review and approve eligible shift-swap requests
+ | Schedule changes do not break availability, skill, hour, overlap, or rest rules
+ | 4
+ | PB11
+ | Open Shift / Replacement (US12)
+ | Manager
+ | Create an Open Shift for an unfilled vacancy
+ | Eligible Staff can help cover a staffing shortage
+ | 4
+ | PB12
+ | Replacement Candidates (US15)
+ | Manager
+ | View eligible replacement candidates
+ | I can cover an absence without breaking scheduling rules
+ | 5
+ | PB13
+ | Leave Approval (FR08)
+ | Manager
+ | Review and approve or reject leave requests
+ | Absences are controlled and affected shifts can be covered
+ | 5
+ | PB14
+ | Attendance Reconciliation (US18)
+ | Manager
+ | Compare actual attendance with the published schedule
+ | Late arrival, early departure, missing events, and absence are visible
+ | 5
+ | PB15
+ | Attendance Correction (US19)
+ | Manager
+ | Correct verified attendance errors with an audit reason
+ | Timesheets reflect verified actual work
+ | 4
+ | PB16
+ | Timesheet Approval (FR09)
+ | Manager
+ | Review and approve actual working time
+ | Reports and labor summaries use verified timesheet data
+ | 5
+ | PB17
+ | Labor Cost Estimate (US20)
+ | Manager
+ | Estimate labor cost from approved actual working hours
+ | I can monitor staffing cost without treating it as statutory payroll
+ | 4
+ | PB18
+ | Dashboard (US21)
+ | Manager
+ | View staffing, attendance, working-hour, and request indicators
+ | I can identify operational issues promptly
+ | 4
+ | PB19
+ | Operational Reports (US22)
+ | Manager
+ | Export schedule, attendance, and working-hour reports
+ | Approved operational information can be reviewed or shared
+ | 3
+ | PB20
+ | AI Assistant (US23)
+ | Manager
+ | Ask questions about verified operational data
+ | I can better understand staffing shortages and workforce statistics
+ | 2
+ |
+
+Table 3: Product Backlog Specification (Staff)
+
+ID
+ | Theme
+ | As a/an
+ | I want to
+ | So that
+ | Priority
+ | PB01
+ | Account Login (US01)
+ | Staff
+ | Sign in securely
+ | I can use the Staff functions permitted for my role
+ | 5
+ | PB02
+ | Role Based Access (US02)
+ | Staff
+ | Access only my permitted personal and operational data
+ | My information and other Staff records remain protected
+ | 5
+ | PB03
+ | Personal Profile (US06)
+ | Staff
+ | View and update permitted personal information
+ | My contact details remain current
+ | 3
+ | PB04
+ | Availability (US07)
+ | Staff
+ | Submit available time ranges for a scheduling period
+ | My assigned shifts fit my availability
+ | 5
+ | PB05
+ | Published Schedule (US10)
+ | Staff
+ | View my official work schedule and changes
+ | I know when I am required to work
+ | 5
+ | PB06
+ | Shift Swap (US11)
+ | Staff
+ | Request a direct shift swap
+ | I can resolve a personal conflict through a controlled workflow
+ | 4
+ | PB07
+ | Open Shift (US13)
+ | Staff
+ | Claim an eligible Open Shift on a first-come, first-served basis
+ | I can take additional work when I satisfy all scheduling rules
+ | 5
+ | PB08
+ | Leave Request (US14)
+ | Staff
+ | Submit leave or emergency leave for affected work periods
+ | The Manager can review my absence and arrange coverage
+ | 5
+ | PB09
+ | Cancel Leave (US16)
+ | Staff
+ | Cancel a pending leave request when allowed
+ | An absence that is no longer needed is withdrawn safely
+ | 4
+ | PB10
+ | GPS Attendance (US17)
+ | Staff
+ | Check in and check out from the Mobile App
+ | My actual working time is recorded
+ | 5
+ | PB11
+ | Personal Timesheet (FR09)
+ | Staff
+ | View my attendance events and approved timesheet
+ | I can review my recorded working hours and identify discrepancies
+ | 4
+ | PB12
+ | Notifications (FR10)
+ | Staff
+ | Receive schedule, request, replacement, and deadline notifications
+ | I can respond to operational changes on time
+ | 4
+ |
+
+Constraint
+Table 3: Constraint
+Constraint
+ | Condition
+ | Time
+ | The development plan runs from 21 Aug 2026 to the Final Release on 27 Nov 2026 (99 days in the Proposal schedule), within the overall project period ending 06 Dec 2026.
+ | People constraint
+ | 5 team members work together to analyze, design, implement, test, document, and deliver the project.
+ | Requirements
+ | According to the approved Smart Scheduling Proposal v1.3 and User Story Document v1.1. The MVP is limited to one F&B store with Admin, Manager, and Staff roles.
+ |
+
+Stakeholders and User Descriptions Summary
+
+Table 4: Stakeholders and User Descriptions Summary
+
+Name
+ | Description
+ | Role
+ | Product Owner
+ | The stakeholder who provides business priorities and validates product requirements.
+ | Hien, Le Tran Thanh
+ | Scrum Master
+ | Facilitates Scrum activities, coordinates the team, removes blockers, and supports delivery planning.
+ | Tuan, Le Ha Duc
+ | Requirement Analyzer
+ | Analyzes stakeholder needs and translates operational requirements into backlog items and acceptance criteria.
+ | All Members
+ | Software Architect
+ | Defines and reviews the system architecture, service boundaries, data flow, and technical integration decisions.
+ | All Members
+ | Coder
+ | Implements, reviews, tests, and integrates the Web, Mobile, Backend, Scheduling, AI, and database components according to sprint assignments.
+ | All Members
+ |

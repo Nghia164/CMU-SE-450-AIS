@@ -1,0 +1,778 @@
+
+18807150
+
+INTERNATIONAL SCHOOL
+
+CAPSTONE PROJECT 1
+CMU-SE 450 - C1SE.57
+USER STORY DOCUMENT
+Version: 1.1
+Smart Scheduling - Website for Automated Staff Scheduling and Shift
+Smart Scheduling
+		Mentor:  PhD. Vu, Truong Tien
+	Team Member:
+	Tuan, Le Ha Duc
+	Hien, Le Tran Thanh
+	Nghia, Le Dinh
+	Quan, Huynh Van Minh
+	Luc, Huynh Vu
+	Approved by PhD. Vu, Truong Tien
+
+User Story Review Panel Representative:
+
+									Name 	 	 	 	Signature  	 	Date
+
+Capstone Project 1 - Mentor:
+
+									Name 	 	 	 	Signature  	 	Date
+
+									Da Nang, 30/08/2026
+PROJECT INFORMATION
+Project Acronym
+ | Smart Scheduling
+ | Project Title
+ | Smart Scheduling - Website for Automated Staff Scheduling and Shift
+ | Start Date
+ | 26 - Aug - 2026
+ | End Date
+ | 06 - Dec - 2026
+ | Lead Institution
+ | International School, Duy Tan University
+ | Role / Student ID
+ | Name
+ | Email
+ | Phone
+ | Project Mentor
+ | PhD. Vu, Truong Tien
+ | vudalat@yahoo.com
+ | 0914083188
+ | 29212761036
+ | Tuan, Le Ha Duc
+ | lehaductuan05@gmail.com
+ | 0852830905
+ | 29201124759
+ | Hien, Le Tran Thanh
+ | lethanhhien414@gmail.com
+ | 0328675911
+ | 29211156998
+ | Nghia, Le Dinh
+ | dinhnghia1475@gmail.com
+ | 0369485344
+ | 29211163309
+ | Quan, Huynh Van Minh
+ | minhquan251205@gmail.com
+ | 0976461574
+ | 29219029552
+ | Luc, Huynh Vu
+ | huynhvuluc123@gmail.com
+ | 0397636350
+ |
+
+SIGNATURE
+Document Approvals: The following signatures are required for approval of this document.
+
+Mentor
+ |
+PhD. Vu, Truong Tien
+ | Signature:
+ |
+ |
+ |
+ | Date:
+ |
+ | Scrum master
+ | Tuan, Le Ha Duc
+ | Signature:
+ |
+ |
+ |
+ | Date:
+ |
+ | Team member(s)
+
+ | Hien, Le Tran Thanh
+ | Signature:
+ |
+ |
+ |
+ | Date:
+ |
+ | Team member(s)
+ | Nghia, Le Dinh
+ | Signature:
+ |
+ |
+ |
+ | Date:
+ |
+ |
+ | Quan, Huynh Van Minh
+ | Signature:
+ |
+ |
+ |
+ | Date:
+ |
+ |
+ | Luc, Huynh Vu
+ | Signature:
+ |
+ |
+ |
+ | Date:
+ |
+ |
+REVISION HISTORY
+		Version
+ | 		Date
+ | 		Description
+ | 		1.0
+ | 29/08/2026
+ | 		Create a User Story Document
+ | 1.1
+ | 30/08/2026
+ | Update the User Story Document based on the approved project scope and requirements.
+ |
+TABLE OF CONTENTS
+	 TOC \o "1-3" \h \z \u 1. Introduction	 PAGEREF _Toc241943225 \h 5
+	1.1 Overview document	 PAGEREF _Toc241943226 \h 5
+	1.2 Project background	 PAGEREF _Toc241943227 \h 5
+	1.2.1 Business value	 PAGEREF _Toc241943228 \h 5
+	1.2.2 Solution	 PAGEREF _Toc241943229 \h 6
+	2. User Stories	 PAGEREF _Toc241943230 \h 6
+	2.1 US01 Account Login	 PAGEREF _Toc241943231 \h 6
+	2.2 US02 Role Based Access Control	 PAGEREF _Toc241943232 \h 6
+	2.3 US03 Create and Edit Employee Profile	 PAGEREF _Toc241943233 \h 7
+	2.4 US04 Assign Skills and Skill Levels	 PAGEREF _Toc241943234 \h 7
+	2.5 US05 Deactivate Employee Account	 PAGEREF _Toc241943235 \h 7
+	2.6 US06 Update Personal Profile	 PAGEREF _Toc241943236 \h 8
+	2.7 US07 Register Weekly Availability	 PAGEREF _Toc241943237 \h 8
+	2.8 US08 Generate an Automatic Draft Schedule	 PAGEREF _Toc241943238 \h 8
+	2.9 US09 Review Adjust and Publish Schedule	 PAGEREF _Toc241943239 \h 9
+	2.10 US10 View Published Schedule and Changes	 PAGEREF _Toc241943240 \h 9
+	2.11 US11 Request and Approve a Direct Shift Swap	 PAGEREF _Toc241943241 \h 10
+	2.12 US12 Create an Open Shift or Replacement Offer	 PAGEREF _Toc241943242 \h 10
+	2.13 US13 Accept an Open Shift Offer	 PAGEREF _Toc241943243 \h 10
+	2.14 US14 Submit Leave or Emergency Leave	 PAGEREF _Toc241943244 \h 11
+	2.15 US15 Find Eligible Replacement Staff	 PAGEREF _Toc241943245 \h 11
+	2.16 US16 Cancel a Leave Request	 PAGEREF _Toc241943246 \h 11
+	2.17 US17 GPS Check In and Check Out	 PAGEREF _Toc241943247 \h 12
+	2.18 US18 Reconcile Scheduled and Actual Attendance	 PAGEREF _Toc241943248 \h 12
+	2.19 US19 Adjust Attendance with an Audit Reason	 PAGEREF _Toc241943249 \h 12
+	2.20 US20 Estimate Labor Cost from Approved Timesheets	 PAGEREF _Toc241943250 \h 13
+	2.21 US21 View the Management Dashboard	 PAGEREF _Toc241943251 \h 13
+	2.22 US22 Export Operational Reports	 PAGEREF _Toc241943252 \h 14
+	2.23 US23 Use the Optional AI Assistant	 PAGEREF _Toc241943253 \h 14
+	2.24 US24 Manage User Accounts and Access	 PAGEREF _Toc241943254 \h 14
+	2.25 US25 Monitor and Configure System Services	 PAGEREF _Toc241943255 \h 15
+	3. Table User Story’s Priority	 PAGEREF _Toc241943256 \h 16
+		4.	System Architecture	 PAGEREF _Toc241943257 \h 17
+		5.	Product backlog	 PAGEREF _Toc241943258 \h 18
+		6.	References	 PAGEREF _Toc241943259 \h 18
+
+	    1. Introduction
+In software development, a User Story describes a capability from the perspective of a system user in business language. It captures who needs a capability, what they need, and why it provides value. In Smart Scheduling, user stories connect F&B workforce needs with implementable functions and testable acceptance criteria.
+The stories in this document support requirement clarification, Product Backlog planning, development, testing and review. Acceptance criteria define expected behavior and do not imply that a feature has already been completed.
+		    1.1 Overview document
+	This document provides a user-story and goal-oriented view of Smart Scheduling and supports the project by:
+	Defining what Admin, Manager and Staff need from the system within the official single-store scope.
+	Providing acceptance criteria that can be converted into test cases and Definition-of-Done checks.
+	Maintaining traceability between operational needs, scheduling behavior, attendance/timesheet workflows and implementation planning.
+	Providing a common reference for the team, mentor, reviewers and stakeholders during Scrum refinement and review.
+		    1.2 Project background
+		    1.2.1 Business value
+	Small and medium F&B stores often rely on part-time staff whose availability changes frequently. Managers must reconcile availability, skills, staffing requirements, leave, working-hour/rest constraints and last-minute changes while also verifying actual attendance. Spreadsheet and chat-based coordination increases repeated manual work, makes conflicts easier to miss and makes actual working-hour reporting harder to control. Smart Scheduling aims to improve staffing visibility and provide one consistent workflow from availability to published schedules, attendance, timesheets and reports.
+    1.2.2 Solution
+	Smart Scheduling is a Web and Mobile workforce-management system for one F&B store. React Web supports Admin and Manager workflows, while Staff use the Mobile App for availability, published schedules, GPS attendance, leave, shift swap/open shift, timesheets and notifications. Laravel and Microsoft SQL Server form the always-available core; Redis supports queue/cache. Python/FastAPI with Google OR-Tools CP-SAT generates constraint-aware Draft Schedules, while an optional AI service explains verified data. Manager confirmation remains required for official schedule and workforce decisions.
+2. User Stories
+2.1 US01 Account Login
+US name
+ | US01 - Account Login
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Admin / Manager / Staff
+ | Pre-condition
+ | An active account has been provisioned.
+ | Description
+ | As an authorized system user, I want to sign in securely, so that I can use the functions permitted for my role.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  Valid credentials open the correct role workspace; invalid credentials or disabled accounts are rejected without exposing sensitive details.
+•  Expired or revoked sessions cannot access protected functions; the user is required to authenticate again.
+ |
+ |
+ | 2.2 US02 Role Based Access Control
+US name
+ | US02 - Role Based Access Control
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Admin / Manager / Staff
+ | Pre-condition
+ | The user has an active account and an assigned role.
+ | Description
+ | As an authorized system user, I want access to be limited by my role, so that protected staff and management data remains secure.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  Admin, Manager, and Staff permissions are enforced by the Laravel API; Staff can access only permitted personal and operational data.
+•  Changing an identifier or calling a protected API directly cannot bypass RBAC checks; rejected requests return no protected data.
+ |
+ |
+ | 2.3 US03 Create and Edit Employee Profile
+US name
+ | US03 - Create and Edit Employee Profile
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Manager
+ | Pre-condition
+ | The Manager is logged in and has employee-management permission.
+ | Description
+ | As a Manager, I want to create and update employee profiles, so that scheduling uses accurate staff information.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  Required identity, contact, employment type, position, contract-related fields and status are validated before saving; duplicate account identifiers are rejected.
+•  Profile changes do not silently alter published schedules or historical attendance and timesheet records.
+ |
+ |
+ | 2.4 US04 Assign Skills and Skill Levels
+US name
+ | US04 - Assign Skills and Skill Levels
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Manager
+ | Pre-condition
+ | An employee profile exists.
+ | Description
+ | As a Manager, I want to maintain employee skills and proficiency levels, so that each shift can be assigned to suitably qualified staff.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  An employee can have multiple skills and levels; updates are stored and available to scheduling and replacement eligibility checks.
+•  Automatic scheduling, swaps and replacement acceptance reject a candidate who does not meet the required skill or minimum level.
+ |
+ |
+ | 2.5 US05 Deactivate Employee Account
+US name
+ | US05 - Deactivate Employee Account
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Manager
+ | Pre-condition
+ | The employee account exists and is active.
+ | Description
+ | As a Manager, I want to deactivate a departing employee account, so that access ends while operational history is preserved.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  Deactivation blocks login and excludes the employee from new assignments, open shifts and replacement selection.
+•  Historical schedules, attendance and timesheets remain available; affected future assignments are flagged for Manager review rather than silently deleted.
+ |
+ |
+ | 2.6 US06 Update Personal Profile
+US name
+ | US06 - Update Personal Profile
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Staff
+ | Pre-condition
+ | The Staff account is active.
+ | Description
+ | As a Staff member, I want to view and update permitted personal information, so that my contact details remain current.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  Staff can edit only permitted profile fields and receive validation feedback before saving.
+•  Staff cannot change role, employment status, contract, pay rate, position, skills, or another employee profile.
+ |
+ |
+ | 2.7 US07 Register Weekly Availability
+US name
+ | US07 - Register Weekly Availability
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Staff
+ | Pre-condition
+ | A scheduling period and availability submission deadline exist.
+ | Description
+ | As a Staff member, I want to submit available time ranges for a scheduling period, so that my assigned shifts fit my availability.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  Valid time ranges can be added or updated before the deadline; invalid or conflicting ranges are rejected with a clear message.
+•  Late submissions are blocked according to the configured deadline; a normal assignment must fit fully inside an applicable available range.
+ |
+ |
+ | 2.8 US08 Generate an Automatic Draft Schedule
+US name
+ | US08 - Generate an Automatic Draft Schedule
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Manager
+ | Pre-condition
+ | Employees, availability, shifts, staffing requirements and scheduling rules are configured.
+ | Description
+ | As a Manager, I want to request a constraint-based draft schedule, so that I spend less time allocating staff manually.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  The request creates a traceable scheduling run; OR-Tools returns a Draft/Suggestion and does not publish an official schedule automatically.
+•  A valid draft contains zero hard-constraint violations and explicitly reports unfilled demand or failure/timeout status without changing the current official schedule.
+ |
+ |
+ | 2.9 US09 Review Adjust and Publish Schedule
+US name
+ | US09 - Review Adjust and Publish Schedule
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Manager
+ | Pre-condition
+ | A draft schedule or manually created schedule exists.
+ | Description
+ | As a Manager, I want to review, adjust and publish a validated schedule, so that Staff receive an approved work schedule.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  Manual changes are revalidated against hard constraints; hard-constraint violations are always blocked and cannot be overridden. Only explicitly defined soft-constraint warnings may be overridden by an authorized Manager when permitted by business rules, and the override reason is recorded for audit.
+•  Publishing requires Manager confirmation, creates an official schedule version and triggers notifications to affected Staff.
+ |
+ |
+ | 2.10 US10 View Published Schedule and Changes
+US name
+ | US10 - View Published Schedule and Changes
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Staff
+ | Pre-condition
+ | A published schedule contains assignments for the Staff member.
+ | Description
+ | As a Staff member, I want to view my official work schedule and changes, so that I know when I am required to work.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  The Mobile App shows only the current published schedule, including assigned date, start/end time, position or required skill when applicable.
+•  Relevant publication or assignment changes generate notifications linked to the latest schedule; unapproved drafts are not shown as official.
+ |
+ |
+ | 2.11 US11 Request and Approve a Direct Shift Swap
+US name
+ | US11 - Request and Approve a Direct Shift Swap
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Staff / Manager
+ | Pre-condition
+ | A published assignment exists and an eligible swap partner is identified.
+ | Description
+ | As Staff and Manager, we want a controlled shift-swap workflow, so that personal conflicts can be resolved without breaking scheduling rules.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  The receiving Staff member must agree before Manager approval; rejection or cancellation leaves official assignments unchanged.
+•  Before approval, both assignments are revalidated for availability, skills, leave, overlap, working-hour limits and rest time; only Manager approval updates the schedule.
+ |
+ |
+ | 2.12 US12 Create an Open Shift or Replacement Offer
+US name
+ | US12 - Create an Open Shift or Replacement Offer
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Manager
+ | Pre-condition
+ | An unfilled position or vacancy exists.
+ | Description
+ | As a Manager, I want to create an Open Shift for an unfilled vacancy, so that eligible Staff can help cover a staffing shortage.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  The Open Shift records shift time, required position/skill, minimum skill level, claim window and status; only eligible Staff can view and claim it.
+•  Creating an Open Shift does not assign Staff or alter approved leave; OPEN vacancies can be closed or cancelled by authorized management, while CLAIMED vacancies cannot be claimed again.
+ |
+ |
+ | 2.13 US13 Accept an Open Shift Offer
+US name
+ | US13 - Accept an Open Shift Offer
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Staff
+ | Pre-condition
+ | An active Open Shift with status OPEN is available to the Staff member.
+ | Description
+ | As a Staff member, I want to claim an eligible Open Shift on a first-come, first-served basis, so that I can take additional eligible work.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  Claiming revalidates active status, availability, required position/skill and minimum skill level, approved leave, overlap, working-hour limits and rest time using current data.
+•  The Backend commits the claim using a database transaction and Optimistic Locking/version checking so only one Staff member can claim the vacancy; later concurrent requests receive an unavailable/conflict result and no duplicate assignment is created.
+ |
+ |
+ | 2.14 US14 Submit Leave or Emergency Leave
+US name
+ | US14 - Submit Leave or Emergency Leave
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Staff
+ | Pre-condition
+ | The Staff account is active.
+ | Description
+ | As a Staff member, I want to submit a leave request and identify affected work periods, so that the Manager can review my absence and arrange coverage.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  The request captures valid dates/times, reason and affected assignments when applicable; submission creates a Pending request and notifies the Manager.
+•  Submitting leave does not silently remove an official assignment; the Staff member can view Pending, Approved, Rejected or Cancelled status.
+ |
+ |
+ | 2.15 US15 Find Eligible Replacement Staff
+US name
+ | US15 - Find Eligible Replacement Staff
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Manager
+ | Pre-condition
+ | A vacancy or affected shift has been identified.
+ | Description
+ | As a Manager, I want to view eligible replacement candidates, so that I can cover an absence without breaking scheduling rules.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  Candidate filtering checks active status, availability, required skills/levels, approved leave, overlap, working-hour limits and rest time; no-match cases are clearly reported.
+•  Core candidate filtering remains usable when the Scheduling Service or AI Service is unavailable; eligibility is revalidated before final confirmation.
+ |
+ |
+ | 2.16 US16 Cancel a Leave Request
+US name
+ | US16 - Cancel a Leave Request
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Staff
+ | Pre-condition
+ | The Staff member owns the leave request.
+ | Description
+ | As a Staff member, I want to cancel a pending leave request, so that an absence that is no longer needed is withdrawn safely.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  A Pending leave request can be cancelled and the updated status is visible to the Manager without changing unrelated assignments.
+•  Cancellation is blocked after leave approval and a confirmed replacement; other non-pending cases require Manager review and cannot silently restore a previous assignment.
+ |
+ |
+ | 2.17 US17 GPS Check In and Check Out
+US name
+ | US17 - GPS Check In and Check Out
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Staff
+ | Pre-condition
+ | The Staff member has an applicable assigned shift and grants location permission.
+ | Description
+ | As a Staff member, I want to check in and check out from the Mobile App, so that my actual working time is recorded.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  The Backend validates store geofence, GPS accuracy, attendance window and server time; duplicate submissions do not create duplicate attendance events.
+•  Outside-geofence, insufficient-accuracy or missing-permission cases show a clear reason and can be reviewed by the Manager; GPS is collected only at attendance events.
+ |
+ |
+ | 2.18 US18 Reconcile Scheduled and Actual Attendance
+US name
+ | US18 - Reconcile Scheduled and Actual Attendance
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Manager
+ | Pre-condition
+ | A published assignment and applicable attendance rules exist.
+ | Description
+ | As a Manager, I want to compare actual attendance with the published schedule, so that late arrival, early departure, missing events and absence are visible.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  Attendance events are evaluated using configured shift times and grace periods; absence is determined only after the relevant attendance window.
+•  Missing or inconsistent events are flagged for review rather than converted into unsupported working hours; reconciliation does not depend on AI.
+ |
+ |
+ | 2.19 US19 Adjust Attendance with an Audit Reason
+US name
+ | US19 - Adjust Attendance with an Audit Reason
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Manager
+ | Pre-condition
+ | An inaccurate attendance record or missing event has been identified.
+ | Description
+ | As a Manager, I want to correct verified attendance errors with an audit reason, so that timesheets reflect actual work.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  A correction requires valid event times and a reason; original value, new value, editor and timestamp are retained for audit.
+•  Dependent timesheets are recalculated or returned for review; approved data is not silently overwritten and Staff cannot approve their own corrections.
+ |
+ |
+ | 2.20 US20 Estimate Labor Cost from Approved Timesheets
+US name
+ | US20 - Estimate Labor Cost from Approved Timesheets
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Manager
+ | Pre-condition
+ | Approved timesheets and applicable effective pay rates are available.
+ | Description
+ | As a Manager, I want to estimate labor cost from approved actual working hours, so that I can monitor staffing cost.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  The estimate uses approved actual hours, effective rates and configured applicable adjustments; missing inputs are clearly flagged and the calculation breakdown is available.
+•  Results are explicitly labelled estimates rather than statutory payroll; tax, insurance, statutory deductions and accounting settlement are outside scope.
+ |
+ |
+ | 2.21 US21 View the Management Dashboard
+US name
+ | US21 - View the Management Dashboard
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Manager
+ | Pre-condition
+ | The Manager is authenticated and operational data exists for the selected period.
+ | Description
+ | As a Manager, I want to view staffing, attendance, working-hour and request indicators, so that I can identify operational issues promptly.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  Date filters apply consistently to staffing coverage, attendance, actual hours, estimated cost and pending requests; no-data cases are distinguished from zero.
+•  Dashboard figures come from authoritative Laravel/Microsoft SQL Server records and remain available when AI or the Scheduling Service is unavailable.
+ |
+ |
+ | 2.22 US22 Export Operational Reports
+US name
+ | US22 - Export Operational Reports
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Manager
+ | Pre-condition
+ | The selected report and export format are enabled.
+ | Description
+ | As a Manager, I want to export schedules, attendance and working-hour reports, so that approved operational information can be reviewed or shared.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  PDF/Excel exports, when enabled, match the selected period, filters, displayed totals and schedule/timesheet status; draft and estimate labels are preserved.
+•  Empty-data or export-failure cases show clear feedback; Staff cannot export protected management data.
+ |
+ |
+ | 2.23 US23 Use the Optional AI Assistant
+US name
+ | US23 - Use the Optional AI Assistant
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Manager
+ | Pre-condition
+ | AI support is enabled and the Manager has permission to the requested operational data.
+ | Description
+ | As a Manager, I want to ask questions about verified operational data, so that I can better understand staffing shortages and workforce statistics.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  AI responses use predefined permission-checked Laravel functions and verified data; unavailable or unsupported information is acknowledged without inventing values.
+•  AI cannot publish schedules, directly edit production data, or decide salary, reward, penalty or other official employment actions; AI failure does not block core functions.
+ |
+ |
+ | 2.24 US24 Manage User Accounts and Access
+US name
+ | US24 - Manage User Accounts and Access
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Admin
+ | Pre-condition
+ | An Admin account has been provisioned and authenticated.
+ | Description
+ | As an Admin, I want to manage system user accounts and access status, so that only authorized Admin, Manager and Staff accounts can use the platform.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  Admin can create, activate, deactivate and maintain permitted account/access information with validation and an auditable record of sensitive changes.
+•  Account deactivation blocks protected access without deleting historical schedules, attendance or timesheets associated with an employee.
+ |
+ |
+ | 2.25 US25 Monitor and Configure System Services
+US name
+ | US25 - Monitor and Configure System Services
+ | Create by
+ | C1SE.57 Team
+ | Last update by
+ | C1SE.57 Team
+ | Actor
+ | Admin
+ | Pre-condition
+ | The Admin is authenticated and has system-administration permission.
+ | Description
+ | As an Admin, I want to view service health and manage permitted system configuration, so that the platform can be monitored and operated safely.
+ | User Story
+ | Acceptance Criteria
+ |
+ | •  The system exposes status for the Laravel Core, Microsoft SQL Server, Redis, Scheduling Service and AI Service and distinguishes healthy, failed or unavailable optional services.
+•  Permitted configuration changes are validated and audited; failure of Scheduling or AI is reported without preventing core employee, manual scheduling, attendance, timesheet and reporting workflows.
+ |
+ |
+ |     3. Table User Story’s Priority
+User Story ID
+ | User Story Name
+ | Priority
+ | US01
+ | Account Login
+ | High
+ | US02
+ | Role Based Access Control
+ | High
+ | US03
+ | Create and Edit Employee Profile
+ | High
+ | US04
+ | Assign Skills and Skill Levels
+ | High
+ | US05
+ | Deactivate Employee Account
+ | High
+ | US06
+ | Update Personal Profile
+ | Low
+ | US07
+ | Register Weekly Availability
+ | High
+ | US08
+ | Generate an Automatic Draft Schedule
+ | High
+ | US09
+ | Review Adjust and Publish Schedule
+ | High
+ | US10
+ | View Published Schedule and Changes
+ | High
+ | US11
+ | Request and Approve a Direct Shift Swap
+ | Medium
+ | US12
+ | Create an Open Shift or Replacement Offer
+ | Medium
+ | US13
+ | Accept an Open Shift Offer
+ | High
+ | US14
+ | Submit Leave or Emergency Leave
+ | High
+ | US15
+ | Find Eligible Replacement Staff
+ | High
+ | US16
+ | Cancel a Leave Request
+ | Medium
+ | US17
+ | GPS Check In and Check Out
+ | High
+ | US18
+ | Reconcile Scheduled and Actual Attendance
+ | High
+ | US19
+ | Adjust Attendance with an Audit Reason
+ | Medium
+ | US20
+ | Estimate Labor Cost from Approved Timesheets
+ | Medium
+ | US21
+ | View the Management Dashboard
+ | Medium
+ | US22
+ | Export Operational Reports
+ | Low
+ | US23
+ | Use the Optional AI Assistant
+ | Low
+ | US24
+ | Manage User Accounts and Access
+ | High
+ | US25
+ | Monitor and Configure System Services
+ | Medium
+ | Table 1: User Story’s Priority
+System Architecture
+Reference to Smart Scheduling Proposal v1.3 and the approved System Context, Logical Architecture and Deployment Architecture diagrams. Core dependency: React Web / Mobile App -> Laravel REST API -> Microsoft SQL Server/Redis; Scheduling and AI services are isolated optional services.
+
+Product backlog
+Reference to C1SE.57_PRODUCT_BACKLOG_Smart_Scheduling_v1.1.docx, synchronized with the approved single-store scope and this User Story Document.
+
+References
+[1]. C1SE.57_PROPOSAL_Smart_Scheduling_v1.3.docx - project scope, requirements and architecture baseline.
+[2]. C1SE.57_Smart_Scheduling_UserStory_v1.1.docx - prior user-story identifiers and acceptance-criteria continuity.
+[3]. C1SE.33_AA2S_UserStory_v2.0.docx - User Story document structure and presentation template.
+

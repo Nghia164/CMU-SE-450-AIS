@@ -1,0 +1,751 @@
+International School
+Capstone Project 1
+CMU-SE 450_C1SE.57
+Project Proposal
+Version 1.3
+Date : August 26, 2026
+Smart Scheduling - Website for Automated Staff Scheduling and Shift
+Submitted by
+Tuan, Le Ha Duc
+Hien, Le Tran Thanh
+Nghia, Le Dinh
+Quan, Huynh Van Minh
+Luc, Huynh Vu
+Approved by
+PhD. Vu, Truong Tien
+Proposal Review Panel Representative:
+NameSignatureDate
+Capstone Project 1 - Mentor:
+Name PhD. Vu, Truong Tien Signature            Date
+PROJECT INFORMATION
+Project acronym
+Smart Scheduling
+Project Title
+Smart Scheduling - Website for Automated Staff Scheduling and Shift
+Start Date
+August 21, 2026
+End Date
+December 06, 2026
+Lead Institution
+International School, Duy Tan University
+Project Mentor
+PhD Vu, Truong Tien
+Email: vudalat@yahoo.com
+Tel: 0914083188
+Scrum master / Project Leader & contact details
+Tuan, Le Ha Duc
+Email: lehaductuan05@gmail.com
+Tel: 0852830905
+Partner Organization
+Duy Tan University
+Project Web URL
+Team members
+Name
+Email
+Tel
+29212761036
+Tuan, Le Ha Duc
+lehaductuan05@gmail.com
+0852830905
+29201124759
+Hien, Le Tran Thanh
+lethanhhien414@gmail.com
+0328675911
+29211163309
+Quan, Huynh Van Minh
+minhquan251205@gmail.com
+0976461574
+29219029552
+Luc, Huynh Vu
+huynhvuluc123@gmail.com
+0397636350
+29211156998
+Nghia, Le Dinh
+dinhnghia1475@gmail.com
+0369485344
+DOCUMENT APPROVALS
+The following signatures are required for approval of this document.
+PhD Vu, Truong Tien
+Mentor
+Signature
+Date
+Tuan, Le Ha Duc
+Student ID: 29212761036
+Scrum Master
+Signature
+Date
+Hien, Le Tran Thanh
+Student ID: 29201124759
+Product Owner
+Signature
+Date
+Quan, Huynh Van Minh
+Student ID: 29211163309
+Team Member
+Signature
+Date
+Luc, Huynh Vu
+Student ID: 29219029552
+Team Member
+Signature
+Date
+Nghia, Le Dinh
+Student ID: 29211156998
+Team Member
+Signature
+Date
+DOCUMENT NAME
+Document Title
+Proposal Document
+Author(s)
+Tuan, Le Ha Duc
+Role
+Scrum Master, Team Member
+Date
+27 Aug 2026
+File name:
+C1SE.57_PROPOSAL_Smart_Scheduling_v1.3
+REVISION HISTORY
+Version
+Date
+Comments
+Author
+v1.0
+26 Aug 2026
+Initial release
+All members
+v1.1
+26 Aug 2026
+Revised scope, F&B market context, Web/Mobile architecture, multi-tenant design, fault isolation, scheduling constraints, GPS attendance, AI boundaries, and NFRs
+All members
+v1.3
+27 Aug 2026
+Aligned the official scope to one F&B store; removed multi-tenant/multi-store concepts; standardized Admin/Manager/Staff roles; simplified System Context, Logical Architecture, and Deployment Architecture diagrams; preserved Scheduling/AI boundaries and graceful degradation.
+All members
+TABLE OF CONTENTS
+2.Team Members8
+3.Supervisor(s)8
+4.Problem Statement8
+5.Survey/Existing Solutions10
+6.Objectives and Scope11
+6.1.Objectives11
+6.2.Scope13
+7.Key Features & Requirements17
+7.1.Key Features (Main Functions)17
+7.2.Requirements18
+8.Constrains and Assumptions20
+9.Target Users/Stakeholders24
+10.Technology Stack25
+11.Methodology & Development Plan27
+11.1.Scrum Process28
+11.2.Sprint Plan29
+12.System Architecture Overview31
+12.1.System Architecture31
+12.2.System Context32
+13.Potential Risks and Mitigation Strategies35
+14.Expected Outcomes/Deliverables37
+15.Conclusion40
+16.References40
+17.Attachment41
+17.1.Brief description of product ideas41
+17.2.Requirements42
+LIST OF TABLES
+Table 1. Team’s Information Organization8
+Table 2. Comparative Analysis10
+Table 3. Constraints and Assumptions20
+Table 4. AI/GPT Ethics and Responsible Use23
+Table 5. Project Schedule29
+Table 6. Cost person/hours30
+Table 7. Total cost estimation30
+Table 8. Description31
+Table 9. Risk and Mitigation Strategies35
+Table 10. Requirements42
+Table 11. Level of Technical Complexity and Applicable Standards44
+LIST OF FIGURES
+Figure 1. General SCRUM Process28
+Figure 2. System Context Diagram32
+Figure 3. Logical Architecture Diagram33
+Project Title
+Smart Scheduling - Website for Automated Staff Scheduling and Shift
+Team Members
+Table 1. Team’s Information Organization
+Full Name
+Phone
+Email
+Position
+Tuan, Le Ha Duc
+0852830905
+lehaductuan05@gmail.com
+Scrum Master
+Hien, Le Tran Thanh
+0328675911
+lethanhhien414@gmail.com
+Product Owner
+Quan, Huynh Van Minh
+0976461574
+minhquan251205@gmail.com
+Team Member
+Luc, Huynh Vu
+0397636350
+huynhvuluc123@gmail.com
+Team Member
+Nghia, Le Dinh
+0369485344
+dinhnghia1475@gmail.com
+Team Member
+Supervisor(s)
+Full name: Truong Tien Vu
+Email: vudalat@yahoo.com
+Tel: 0914083188
+Department: Department of Science and Technology
+Problem Statement
+Vietnam’s F&B market is large but increasingly demanding in terms of operational efficiency. According to the Vietnam F&B Market Report 2025 by iPOS.vn and Nestlé Professional, Vietnam had approximately 329,500 F&B service outlets in 2025, up only 2.0% from 2024. More than 50,000 F&B outlets closed during the first half of 2025 under cost pressure, showing a strong market screening process in which businesses with weaker operations are more likely to exit. The same report estimates total F&B industry revenue at more than VND 726.5 trillion in 2025, indicating that the market remains large while competition increasingly depends on operational effectiveness.
+This context is especially relevant to independent restaurants, cafés, tea shops, and other small or medium F&B stores, which are the target users of Smart Scheduling. Independent F&B businesses accounted for 91.7% of sector revenue in 2025, while the market continued to move toward more professional and standardized operations. The report also shows that 22.23% of surveyed businesses considered rising labor costs without corresponding productivity gains to be a barrier to profit margins. Part-time labor creates an additional management challenge: the report specifically notes that standardizing employment obligations for part-time workers is becoming more important and can create financial and administrative pressure for F&B businesses.
+At the store level, these pressures appear in daily workforce operations. Managers must collect changing staff availability, ensure each shift has enough employees and required skills, avoid overlapping assignments, respect working-hour and rest rules, respond to sudden leave, and verify actual attendance. When these activities are handled through spreadsheets, chat messages, or informal manual processes, the manager must repeatedly reconcile availability, skills, staffing needs, leave status, and actual working time. This makes schedule changes slow, increases the risk of inconsistent assignments, and makes labor-cost control and performance reporting more difficult.
+Smart Scheduling addresses this operational problem with a Web and Mobile workforce-management ecosystem for F&B. Laravel and Microsoft SQL Server form the always-available core system for employee management, availability, manual scheduling, leave, attendance, timesheets, dashboards, and reports. A separate Python/OR-Tools Scheduling Service generates optimized draft schedules using Constraint Programming, while an AI Assistant acts only as an optional decision-support layer. Both intelligent services are fault-isolated and asynchronous: if AI or the solver is unavailable, the core workflow continues to operate, and the Manager can still create or edit schedules manually. The Manager always makes the final operational decision.
+Survey/Existing Solutions
+Table 2. Comparative Analysis
+Product / System
+How They Solve the Problem
+Strengths
+Limitations / Differences from Smart Scheduling
+When I Work
+Online scheduling, availability, shift change, notifications, and automatic scheduling workflows.
+Mature manager–employee workflow and mobile scheduling communication.
+Smart Scheduling focuses on explicit constraint modeling, unfilled-shift explanations, F&B-specific part-time availability, and an architecture where the optimizer is optional rather than required for core operation.
+Deputy
+Scheduling, time tracking/geofencing, leave, communication, and workforce-demand features.
+Broad workforce-management feature set and established attendance controls.
+Smart Scheduling narrows scope to F&B shift operations, transparent OR-Tools optimization, single-store academic prototype design, and a separated Laravel Core / Scheduling / AI architecture.
+Homebase
+Scheduling, mobile time tracking, leave and payroll-related small-business workflows, with assistant features.
+Small-business-oriented UX and integrated staff operations.
+Smart Scheduling separates optimization from AI: OR-Tools enforces scheduling rules, while AI only explains verified backend data; official schedules require human confirmation.
+Microsoft Shifts (Teams)
+Schedule creation/sharing and employee shift/leave requests inside Microsoft Teams.
+Works well for organizations already using Microsoft 365 and provides familiar collaboration workflows.
+Smart Scheduling adds a dedicated constraint-optimization service, GPS attendance/timesheet workflow, explicit shortage handling, and F&B-focused staffing rules.
+The reviewed solutions demonstrate that availability management, shift exchange, leave requests, notifications, geofenced time tracking, and automatic scheduling are established needs in workforce-management software. Smart Scheduling does not attempt to reproduce a complete international HR suite. Instead, it focuses on the operational needs of small and medium F&B stores in Vietnam: configurable constraint-based scheduling, transparent reporting of unfilled shifts and scheduling conflicts, GPS attendance, part-time availability management, and graceful degradation when optimization or AI services are unavailable. The Scheduling Engine and AI Assistant are deliberately separated: OR-Tools performs optimization, while AI explains verified data and supports decisions rather than directly changing official schedules or employee outcomes.
+Objectives and Scope
+Objectives
+The project objectives are defined based on the SMART criteria:
+Specific: Build Smart Scheduling as a Web and Mobile workforce-management system for small and medium F&B businesses. The system will support three operational roles: Admin, Manager, and Staff. Core functions include role-based account and employee management, employee skills and contracts, weekly availability, shift requirements, manual and automatic scheduling, schedule review/publishing, leave and shift-swap processing, GPS check-in/check-out, timesheets, dashboards, reports, notifications, and an optional AI Assistant. The automatic Scheduling Service will use Python + OR-Tools CP-SAT and return draft suggestions rather than directly publishing a schedule.
+Measurable: Core APIs must remain functional when AI Service or Scheduling Service is stopped. For the target test dataset of approximately 20–30 employees and a weekly schedule, the solver will use a configurable time limit of 15 seconds. A valid generated schedule must contain zero hard-constraint violations. When staffing is insufficient, the engine must not fail silently; it must identify unfilled shifts through slack variables and return the best feasible draft together with shortage information. Unauthorized role access test cases must be rejected. Concurrent Open Shift claiming must result in only one successful assignment. Attendance and approved Timesheet calculations must match the defined test cases, and core API P95 response time should remain below 500 ms in the agreed test environment.
+Achievable: The core platform will use React.js for the management Web application, React Native (JavaScript/JSX) for the Staff mobile application, Laravel for the REST API and business rules, Microsoft SQL Server for relational data, and Redis for queues and cache. The Scheduling Service will be implemented as an independent Python/FastAPI service using OR-Tools. Long-running scheduling and AI requests will run asynchronously through jobs with status records, timeout, retry, and circuit-breaker behavior. AI does not require training a custom model for the MVP; it will call predefined, permission-checked backend endpoints and explain verified data.
+Relevant: The project targets operational efficiency in Vietnam’s F&B sector, where iPOS.vn reports 329,500 service outlets in 2025 and continuing pressure to professionalize operations. The report identifies labor cost/productivity as a profit-margin barrier for 22.23% of surveyed businesses [1]. Smart Scheduling therefore focuses on improving workforce allocation, staffing visibility, attendance verification, and management responsiveness rather than building a general-purpose HR or accounting platform.
+Time-bound: Development, integration, testing, and deployment will be completed within the Capstone schedule. Implementation will prioritize the operational MVP: authentication and role-based access control, employee/skill management, availability, shift management, manual scheduling, OR-Tools scheduling, publishing, leave, GPS attendance, timesheets, and basic dashboard/reporting. Shift-swap, Open Shift, and the optional AI Assistant follow after the core workflow is stable; workforce-demand forecasting is Future Scope.
+Scope
+In Scope (The system will support): Smart Scheduling focuses on workforce scheduling and shift operations for small and medium F&B businesses. The Capstone scope supports one F&B store only. All scheduling, attendance, timesheet, and reporting data belong to this single store; multi-store and multi-tenant operation are deferred to future scope. The main scope is divided into the following functional groups:
+Account and Access Control Management
+Authentication and RBAC: Secure authentication and role-based authorization for Admin, Manager, and Staff. Each protected function is restricted according to the user role.
+Account lifecycle: Admin manages system user accounts and access; Manager manages employee profiles for the single store. Disabled accounts retain historical scheduling, attendance, and timesheet data.
+Employee, Contract, and Skill Management
+Employee management: Authorized Manager users can create and update employee profiles, employment type, position, skills and skill levels, contract information, and effective pay rates.
+Staff self-service: Staff can view permitted personal information, maintain basic profile data, and use the Mobile App for availability, schedule, attendance, leave, swap, and notification functions.
+Availability, Shift, and Schedule Management
+Availability registration: Staff register weekly available time ranges before a Manager-defined deadline. A shift is normally assignable only when it falls completely within the employee’s available period.
+Automatic Scheduling Engine: Laravel creates a SchedulingRun and sends a job asynchronously through Redis. The Python/OR-Tools service optimizes assignments using employee availability, approved leave, skills/skill levels, contract limits, rest time, consecutive shifts, store operating hours, and shift staffing requirements.
+Schedule review, manual editing, and publishing: Solver output is stored as a Draft/Suggestion. The Manager reviews and may edit the schedule before publishing. Hard-constraint violations are always blocked; only allowed soft-constraint warnings may be overridden and audited. Published schedules are versioned.
+Schedule notifications: Staff receive notifications after publication and when their published assignment changes.
+Leave, Shift Swap, Open Shift, and Staff Shortage Support
+Shift Swap: Staff can request a direct swap. Before Manager approval, the system revalidates availability, skill, leave, overlap, working-hour, and rest constraints.
+Open Shift Claim: When a shift is unfilled or vacant, eligible Staff may claim it first-come, first-served. Laravel revalidates eligibility before commit; transactions and Optimistic Locking prevent double booking.
+Fallback candidate filtering: If the Python Scheduling Service is unavailable, Laravel can still filter replacement candidates using core rules such as active status, availability, required skill, approved leave, overlap, working-hour limits, and rest time; Manager confirmation remains required.
+Attendance, Timesheet, and Decision Support
+GPS Attendance: Staff check in/out through the Mobile App. The Backend validates store geofence, GPS accuracy, server time, and configured attendance windows. GPS is collected only for attendance events, not for continuous tracking.
+Timesheet: Actual working time is calculated from attendance data and configured rules such as grace period, break, rounding, and approved overtime. Approved Timesheet data—not merely planned schedule hours—is used for labor summaries.
+AI Assistant: AI is an optional support layer that calls predefined, permission-filtered Laravel endpoints to explain verified statistics, scheduling shortages, and candidate information. AI has no direct write access to the production database and cannot make final reward, penalty, salary, promotion, or official scheduling decisions. If GPT or another external LLM is used, only the minimum authorized data is sent, and every generated answer is treated as an advisory suggestion requiring human review.
+Dashboard, Reporting, Monitoring, and Notifications
+Dashboard and reports: Laravel calculates operational indicators directly from Microsoft SQL Server, including staffing status, attendance, working hours, estimated labor cost, pending requests, and scheduling-run status. Reports can be exported to PDF and Excel.
+Service monitoring: Admin can view health status for the Core API, database, Redis, Scheduling Service, and AI Service.
+Notifications: Queue-based notifications support schedule publication/change, shift reminder, leave result, swap request, replacement offer, and availability deadline.
+Out of Scope / Deferred Scope: To keep the Capstone implementation feasible, the following functions are not part of the required MVP or are limited to decision-support level:
+Fully autonomous AI decisions: AI cannot publish schedules, directly modify official employee records, or automatically make employment decisions. Human confirmation remains mandatory.
+Full enterprise HRIS: Recruitment, insurance processing, benefits administration, formal performance appraisal, and complete employee lifecycle management are outside the core scope.
+Complete payroll and accounting: The system provides approved working-hour and estimated labor-cost data, but it does not calculate official tax, insurance, deductions, or statutory payroll.
+Continuous employee location tracking: GPS is used only at attendance events; the system does not track Staff locations continuously.
+Multi-store and cross-store scheduling: Support for multiple stores/branches, cross-store assignment, and centralized multi-store management is deferred to Future Scope.
+Business-demand forecasting in the MVP: Revenue, order volume, customer traffic, inventory, and holiday-demand prediction are deferred until sufficient historical operational data is available.
+Automatic schedule publication without Manager confirmation: Scheduling results remain drafts until an authorized user reviews and publishes them.
+Guaranteeing perfect staffing when resources do not exist: If eligible Staff are insufficient, the system reports unfilled positions/shifts instead of violating hard constraints or claiming that every shift can always be fully covered.
+Key Features & Requirements
+Key Features (Main Functions)
+Authentication and RBAC for Admin, Manager, and Staff.
+Employee, contract, effective pay-rate, position, skill, and skill-level management with history preservation.
+Weekly availability registration with configurable deadlines and schedule periods.
+Constraint-based Scheduling Engine using Python + OR-Tools CP-SAT with asynchronous jobs, time limits, unfilled-shift slack, and conflict information.
+Manual schedule editing, versioned publishing, and staff notifications; core scheduling remains usable even if the optimization service is offline.
+Direct Shift Swap with full eligibility revalidation before Manager approval.
+Open Shift Claim / replacement handling with transaction or Optimistic Locking to prevent simultaneous double assignment.
+Leave Management and emergency replacement support with a Laravel rule-based fallback when the Scheduling Service is unavailable.
+GPS check-in/check-out, Attendance verification, and approved Timesheet calculation based on actual work data.
+Dashboard and PDF/Excel reporting calculated by Laravel/ Microsoft SQL Server without depending on AI.
+Optional AI Assistant for verified data explanation and decision support through permission-controlled backend functions.
+Responsive React Web for Admin/Manager plus Mobile App for Staff, with queue-based notifications and service health monitoring.
+Requirements
+Functional Requirements (FR):
+FR01 – Authentication & Account Lifecycle: Secure login, refresh/session handling, account disabling, and credential recovery through configured channels.
+FR02 – Authorization & Role-Based Access Control: Enforce RBAC for Admin, Manager, and Staff; unauthorized role access must be rejected.
+FR03 – Employee / Contract / Skill Management: Maintain employee profiles, employment type, positions, skill levels, contracts, effective pay rates, and active/inactive status.
+FR04 – Availability Management: Staff register available time ranges; Manager configures registration deadlines and scheduling periods.
+FR05 – Shift & Schedule Management: Manager defines shifts, required headcount, positions/skills, operating hours, and scheduling rules; manual scheduling is always available.
+FR06 – Automated Scheduling: Create asynchronous Scheduling Run jobs and generate draft assignments with OR-Tools while enforcing hard constraints and minimizing weighted soft-constraint penalties.
+FR07 – Schedule Review & Publish: Store solver results as draft suggestions; validate manual edits; version and publish an official schedule only after authorized confirmation.
+FR08 – Leave / Shift Swap / Open Shift: Process leave and swap requests, revalidate eligibility, manage replacement offers, and prevent race-condition double booking.
+FR09 – GPS Attendance & Timesheet: Validate check-in/out against store geofence and configured rules, then calculate reviewable/approvable actual Timesheet records.
+FR10 – Dashboard, Reports, Notifications & AI Support: Provide operational statistics, exports, notifications, service/job status, and an optional AI Assistant that explains verified backend data.
+Non-Functional Requirements (NFR):
+NFR01 – Performance: Core API target P95 < 500 ms in the agreed test environment. Scheduling jobs for the target weekly dataset (approximately 20–30 employees) use a configurable maximum solver time of 15 seconds.
+NFR02 – Security & Privacy: Passwords use one-way hashing; protected APIs require secure tokens and authorization; role-based authorization is enforced; GPS is collected only for attendance and internal service access is protected.
+NFR03 – Data Integrity & Concurrency: Transactions/Optimistic Locking prevent double booking; published schedules and approved timesheets are versioned or audited; money values use fixed-precision storage.
+NFR04 – Fault Isolation & Graceful Degradation: Stopping AI Service must not break core APIs; stopping Scheduling Service must not prevent manual scheduling, attendance, leave, timesheet, dashboard, or reports.
+NFR05 – Maintainability & Observability: Use Layered Architecture in Laravel and separate optional services; internal APIs are versioned; each service provides /health; logs/jobs use request_id for tracing; failed jobs can be retried safely.
+Constrains and Assumptions
+Table 3. Constraints and Assumptions
+Constraint
+Constraint Description
+Guidelines for Acceptance
+Economic
+The target F&B market operates under strong margin pressure; the system must avoid requiring expensive infrastructure for the academic prototype.
+Use open-source components where possible, resource-limited containers, configurable AI quotas, and clear MVP/optional-feature boundaries.
+Environmental
+Optimization and AI can be CPU/RAM intensive and may affect server availability if deployed together without limits.
+Run Core, Scheduling, and AI as separate processes/containers; queue long tasks; apply resource limits, timeouts, and circuit breakers.
+Ethical
+The system may use GPT/LLM services and processes employee identity, availability, attendance/GPS, pay-rate, and performance-related operational data. Generative AI can produce incorrect, biased, or privacy-sensitive suggestions if it is treated as an authoritative decision maker.
+Use GPT/LLM only as optional advisory support; send only the minimum authorized data; never send passwords, access tokens, or unnecessary raw GPS data; prohibit direct AI writes to official business data; require human review for scheduling and employment-related decisions; log AI requests/results; verify AI-generated facts against authoritative backend data and disclose AI assistance in academic work.
+Public health, safety, and welfare
+Bad schedules can cause excessive hours, insufficient rest, or unsafe workload.
+Treat overlap, approved leave, working-hour limits, and required rest as hard constraints/configured policy rules; do not trade them away merely to cover a shift.
+Social and Global
+The design may later serve multiple stores or business types while the Capstone implementation remains focused on Vietnamese F&B.
+Keep the MVP single-store; use configurable rules, versioned internal APIs, and modular service interfaces so multi-store support can be added later without changing the core workflow.
+Cultural
+Part-time staffing and shift flexibility are common in the target F&B context, but policies differ by business and regulation.
+Keep working-hour/rest/attendance rules configurable and document assumptions instead of hard-coding unsupported legal values.
+Sustainability
+The system includes Web, Mobile, Laravel Core, queue, optimizer, optional AI, and monitoring, which increases technical complexity.
+Prioritize the core operational workflow first; isolate optional services; maintain automated tests, logs, health checks, and documented interfaces.
+8.1. AI/GPT Ethics and Responsible Use
+GPT or another external LLM may be used only as an optional assistant. The Laravel/ Microsoft SQL Server core remains the source of truth. AI output is treated as untrusted advisory content and must never directly determine an official schedule, reward, penalty, salary change, promotion, dismissal, or other employment outcome. The project applies the following governance rules:
+Table 4. AI/GPT Ethics and Responsible Use
+Ethics Area
+Responsible-Use Rule / Acceptance
+Human oversight
+GPT/AI is advisory only. Manager must review and confirm official schedules and all employment-related actions. AI cannot directly publish schedules or change reward, penalty, pay, promotion, or dismissal records.
+Privacy & data minimization
+Send only the minimum authorized data needed for the request. Do not send passwords, access tokens, secrets, or unnecessary raw GPS coordinates to an external LLM.
+Fairness & non-discrimination
+Employee suggestions use explicit operational factors such as availability, skill, leave, working-hour limits, and rest rules. Protected or irrelevant personal characteristics are not used for ranking.
+Accuracy & hallucination control
+Authoritative numbers are calculated by Laravel/SQL Server. GPT may explain verified values but must not invent records, silently overwrite data, or be treated as the source of truth.
+Transparency & auditability
+AI-generated content is identified as a suggestion. AiRequest/AiSuggestion status, user/role context, timestamps, and request_id are logged so outputs can be reviewed.
+Academic integrity
+GPT-assisted drafting, coding, or analysis is reviewed by the team. External facts are verified and cited, and AI assistance is disclosed according to course/project requirements.
+Target Users/Stakeholders
+Primary Users
+Store Manager in a small or medium F&B store: responsible for employee management, staffing, schedule approval, attendance review, labor visibility, and day-to-day operational decisions.
+Shift-based Staff, especially part-time employees: users who need a clear channel to register changing availability, receive schedules, check in/out, request leave or swaps, and review their actual working time.
+Admin: operates the Smart Scheduling platform, manages system accounts and configuration, monitors service health, and maintains platform-level settings without routinely managing the store’s daily staff schedule.
+Benefits for primary users:
+Reduce repeated manual reconciliation of availability, staffing requirements, skills, leave, and working-hour rules by generating constraint-aware draft schedules and clearly identifying unfilled shifts.
+Improve operational continuity: if the optimization or AI service is unavailable, the core Laravel/ Microsoft SQL Server workflow and manual scheduling remain usable instead of making the whole system unavailable.
+Improve transparency through published schedule versions, GPS attendance, approved timesheets, auditable overrides, and verified-data dashboards that support labor-cost and staffing decisions.
+Technology Stack
+Web Frontend:
+React.js: Management Web application for Admin and Manager, including employee management, calendar scheduling, dashboards, reports, and service status.
+Responsive CSS / component library: Ensures management screens work across common desktop and tablet/mobile browser sizes.
+Axios / Fetch API: All Web requests communicate with the Laravel REST API; the browser does not call Python or AI services directly.
+Mobile Application and Core Backend:
+React Native (JavaScript/JSX): Staff mobile application for availability, schedules, GPS check-in/check-out, leave, shift swap, replacement offers, timesheets, and push notifications.
+Laravel (PHP): Core REST API and business layer for authentication, RBAC policies, employee/shift/leave/attendance/timesheet logic, reports, job orchestration, and data validation.
+Redis: Queue and cache for asynchronous Scheduling/AI jobs, notifications, retries, and short-lived operational data.
+Authentication & Authorization: Short-lived access token/JWT strategy with revocable refresh/session handling, RBAC, and role-based policy checks.
+Database and Optional Services:
+Microsoft SQL Server: Authoritative relational database for core business data, including:
+Users/Roles, single-store configuration, Employees, contracts/pay rates, positions, skills, and availability.
+Operating hours, holidays, shifts, requirements, schedule versions, assignments, and scheduling rules.
+Leave, swap/open-shift offers, GPS attendance, timesheets, notifications/device tokens, audit logs, and service/job records.
+SchedulingRuns, AiRequests/AiSuggestions, health/monitoring metadata, and report data required by the application.
+Microsoft SQL Server transactions, foreign keys, unique constraints, and version fields protect integrity. Optional services do not receive unrestricted write access to the production database.
+Optimization, AI, and Integration Services:
+Python + FastAPI + OR-Tools CP-SAT: Independent Scheduling Service. It receives validated scheduling snapshots/jobs, applies hard constraints and weighted soft objectives, and returns draft results plus shortage/conflict metadata.
+AI Service: Optional service that calls predefined Laravel endpoints to summarize or explain verified permission-filtered data. It has no direct unrestricted SQL access and is never required for core API functions.
+System Architecture and Deployment:
+Architecture Pattern: Layered Architecture for the Laravel Core plus independently deployable Scheduling and AI services. Dependency direction is Web/Mobile → Laravel → SQL Server/Redis; Laravel invokes optional services only when required.
+Asynchronous communication: Long-running Scheduling/AI work is represented by job records (QUEUED/RUNNING/DONE/FAILED/TIMEOUT/CANCELLED), queued through Redis, and observed by polling or notification.
+Fault protection: Internal calls use timeouts, retry policy, circuit breaker behavior, idempotency/duplicate-run protection, and resource limits per service/container.
+Deployment: Docker Compose runs Laravel, SQL Server, Redis, Scheduling Service, and AI Service as separate processes/containers so high solver/LLM load cannot directly consume the Core API’s entire resource budget.
+Development, Testing, and Operations Tools:
+Git/GitHub: Version control, branch workflow, code review, and team collaboration.
+Postman + automated tests: API, authorization, role-authorization, scheduling-rule, concurrency, and graceful-degradation tests.
+Docker / Docker Compose: Reproducible local and demo environment with separate resource boundaries for Core, Scheduling, and AI services.
+Figma: UI/UX design for Web and Mobile flows.
+Draw.io / architecture diagrams: System Context, logical/deployment architecture, sequence, state, and data-flow diagrams.
+Methodology & Development Plan
+Our project management method uses the SCRUM framework, which is known for its flexibility and iterative development process. This approach allows us to divide the project into short and manageable stages called sprints. Each sprint focuses on specific features and allows the team to adjust the work based on stakeholder needs.
+Scrum Process
+Figure 1. General SCRUM Process
+Scrum is an Agile framework used for software development based on an iterative and incremental approach, aimed at managing software projects as well as product or application development processes. Scrum focuses on project management mechanisms, where an appropriate amount of time is dedicated to planning. This methodology operates on an empirical process control mechanism, using feedback loops as the core management technique, rather than applying a traditional command-and-control management model. Scrum's approach to project planning and management is to empower the execution level with decision-making authority—where the characteristics and practical factors of the work are best understood.
+Technically, Smart Scheduling uses React.js for the management Web interface, a React Native Mobile App for Staff, Laravel/ Microsoft SQL Server as the always-available core, Redis for asynchronous jobs, Python/FastAPI + OR-Tools for scheduling optimization, and an optional AI Service for verified-data decision support. This separation allows the team to test the business workflow independently from the intelligent services and to demonstrate graceful degradation during failures.
+The Scrum process also includes explicit risk and quality checkpoints: constraint rules and test datasets are reviewed each sprint; role-authorization and concurrency scenarios are automated; service health and failed jobs are monitored; requirement changes are recorded in the backlog; and high-risk integrations are tested early with mocks before end-to-end integration.
+Sprint Plan
+Table 5. Project Schedule
+No
+Task Name
+Duration (Day)
+Start Date
+End Date
+1
+Initial
+7
+21/08/2026
+27/08/2026
+1.1
+Gathering Requirement
+4
+21/08/2026
+24/08/2026
+1.2
+Create Proposal Document
+3
+25/08/2026
+27/08/2026
+2
+Start Up
+4
+28/08/2026
+31/08/2026
+2.1
+Project Kick-off Meeting
+1
+28/08/2026
+28/08/2026
+2.2
+Create Document
+3
+29/08/2026
+31/08/2026
+3
+Development
+88
+01/09/2026
+27/11/2026
+3.1
+Sprint 1
+22
+01/09/2026
+22/09/2026
+3.2
+Sprint 2
+22
+23/09/2026
+14/10/2026
+3.3
+Sprint 3
+22
+15/10/2026
+05/11/2026
+3.4
+Sprint 4
+22
+06/11/2026
+27/11/2026
+4
+Project’s Retrospective Meeting
+1
+28/11/2026
+28/11/2026
+5
+Final Release
+8
+29/11/2026
+06/12/2026
+Total
+108
+21/08/2026
+06/12/2026
+Budget and Cost Estimate
+Table 6. Cost person/hours
+Full Name
+Role
+Salary Rate (USD/hour)
+Tuan, Le Ha Duc
+Scrum Master
+2
+Hien, Le Tran Thanh
+Product Owner
+2
+Nghia, Le Dinh
+Team Member
+2
+Quan, Huynh Van Minh
+Team Member
+2
+Luc, Huynh Vu
+Team Member
+2
+Table 7. Total cost estimation
+No
+Criteria
+Price (USD)
+Total (USD)
+1
+Working hour
+$2/hour
+$3240
+2
+Other costs
+$100
+$500
+$3740
+Table 8. Description
+Description
+Amount
+Unit
+Number of members
+5
+Person
+Number of working hours per day
+3
+Hour
+The cost of working per hour per person
+2
+USD
+The duration of the project
+108
+Day
+The number of project days
+108
+Day
+Explain:
+Amount of working hours = 5 members * 3 hours * 108 days
+Others cost: 5 people * $100
+System Architecture Overview
+System Architecture
+The Smart Scheduling architecture is centered on an always-available Laravel Core rather than on the optimizer or AI. React Web and the Staff Mobile App communicate only with the Laravel REST API. Laravel owns authentication, authorization, business rules, data validation, attendance, timesheet, reporting, and official schedule state. Microsoft SQL Server is the authoritative data store, while Redis supports queues/cache and asynchronous processing.
+Core Data Layer: users and roles, single-store configuration, employees, contracts/pay rates, skills, availability, operating hours, shifts, schedule versions/assignments, leave/swap/open-shift records, attendance, timesheets, notifications, job status, and audit logs.
+Presentation Layer: React Web for Admin/Manager and Mobile App for Staff. Clients never directly access the database, Scheduling Service, or AI Service.
+Core Business Layer: Laravel implements RBAC policies, manual scheduling, validation, publishing, leave/swap workflows, geofence attendance, timesheet approval, dashboards/reports, notifications, job orchestration, and fallback replacement filtering.
+The Scheduling Service and AI Service are independent enhancement services. Laravel creates a SchedulingRun or AiRequest, queues work asynchronously, and stores the service result as Draft/Suggestion data. Official business data changes only after validation and, where required, Manager confirmation.
+Fault isolation is a mandatory architecture rule. If AI Service is stopped, all core functions and dashboard/report calculations continue. If Scheduling Service is stopped, Manager can still create, edit, validate, and publish schedules manually. Internal calls have timeout and circuit-breaker protection, and each service exposes a health check.
+System Context Diagram
+Figure 2. System Context Diagram
+Figure 3. Logical Architecture Diagram
+ADMIN
+Into the system:
+System account and platform configuration
+Platform configuration and service-management actions
+System/service monitoring requests
+Account status / access-control actions
+From System to Admin:
+Account/service status, health status, and operational logs allowed by role
+MANAGER
+Into the system:
+Employee/skill/contract data and scheduling requirements
+Availability review, shift definitions, leave/swap approvals, manual schedule edits, publish/override decisions
+Dashboard/report requests and optional AI queries
+From System to Manager:
+Draft/official schedules, unfilled-shift/conflict information, attendance/timesheet data, reports, notifications, and AI suggestions
+STAFF
+Into the system:
+Availability, leave, shift-swap/open-shift responses, GPS check-in/check-out, and permitted profile updates
+From System to Staff:
+Published schedule/version changes, shift reminders, request results, replacement offers, attendance/timesheet information
+SCHEDULING SERVICE (optional)
+Receives validated scheduling job snapshots from Laravel and returns draft assignments plus shortage/conflict metadata.
+AI SERVICE (optional)
+Calls permission-controlled Laravel functions/endpoints and returns explanatory suggestions; it does not directly write official business data.
+REDIS / NOTIFICATION INFRASTRUCTURE
+Supports queued jobs, retries, cache, and push-notification dispatch; failure must not corrupt authoritative Microsoft SQL Server data.
+Graceful Degradation
+AI unavailable → AI Assistant shows temporarily unavailable; core workflow and reports remain operational.
+Scheduling unavailable → Auto Schedule is unavailable/queued, but manual scheduling and all core operations remain operational.
+Internal services use /health, timeout, retry/circuit-breaker protection, versioned internal APIs, and request_id tracing.
+Scheduling results and AI outputs are stored as Draft/Suggestion records and become official only through controlled core workflows.
+Potential Risks and Mitigation Strategies
+Table 9. Risk and Mitigation Strategies
+No
+Risks Details
+Percent
+Impact (1-5)
+Exposure
+Mitigation Strategies
+1
+Race condition during Open Shift Claim can assign the same vacancy to more than one Staff member.
+45%
+5
+2.25
+Use transaction + Optimistic Locking/version checking, unique constraints, and final eligibility revalidation before commit.
+2
+Scheduling input can be genuinely infeasible or understaffed; treating minimum coverage as a strict hard constraint may cause the solver to return no useful schedule.
+55%
+5
+2.75
+Use unfilled/slack variables with very high penalty; keep safety constraints hard; return best feasible draft plus shortage/conflict details.
+3
+Scheduling Service or AI Service can be slow, unavailable, or overloaded and could otherwise block the main application.
+45%
+5
+2.25
+Asynchronous Redis jobs, timeout, retry, circuit breaker, /health, separate containers/resource limits, and graceful-degradation tests.
+4
+Unauthorized data access through incorrect RBAC checks or AI queries.
+30%
+5
+1.50
+Laravel RBAC policies, permission-controlled AI functions, no unrestricted AI SQL, automated authorization tests, and audit logs.
+5
+GPS attendance can be inaccurate or spoofed, and indoor location may have poor accuracy.
+40%
+4
+1.60
+Validate GPS accuracy, server time/geofence, and attendance windows; flag invalid events for Manager-reviewed correction and document that GPS reduces—not eliminates—fraud.
+6
+Project scope may become too large because Web, Mobile, Scheduling, AI, reports, and optional services and advanced features are combined.
+60%
+4
+2.40
+Maintain MVP cut line; finish Core workflow and scheduling first; defer AI/forecasting/advanced analytics if sprint capacity is insufficient.
+Expected Outcomes/Deliverables
+The project is expected to produce the following deliverables:
+Web and Mobile Applications:
+A complete Smart Scheduling MVP for small and medium F&B businesses, with a React management Web application and a React Native Staff Mobile App.
+Management functions for role-based access, single-store configuration, employees, skills, contracts/pay rates, availability, shifts, manual scheduling, schedule publishing/versioning, leave, attendance, timesheets, dashboards, reports, and service health.
+Staff functions for availability registration, published schedule, GPS attendance, leave, shift-swap/open-shift interactions, timesheet review, and notifications.
+An independent Python/FastAPI + OR-Tools Scheduling Service that creates constraint-aware draft schedules, reports unfilled shifts, uses a time limit, and does not block core operations when unavailable.
+Concurrency-safe Open Shift / replacement handling with transaction or Optimistic Locking and final eligibility revalidation before approval.
+Leave and replacement workflows with a Laravel rule-based fallback candidate filter when the Scheduling Service is not available.
+Dashboard/reporting based on authoritative Laravel/ Microsoft SQL Server data, plus optional AI Assistant functions that explain verified data without directly writing production business records.
+Source Code:
+Organized source code for Web Frontend, Staff Mobile App, Laravel Core API, Scheduling Service, optional AI Service, database migrations/seed data, and Docker deployment configuration.
+Web Frontend implemented with React.js and responsive UI components.
+Core Backend implemented with Laravel REST APIs, RBAC policies, transactions, queue orchestration, audit logging, and report endpoints.
+Scheduling Service implemented with Python/FastAPI and OR-Tools CP-SAT; AI Service isolated as an optional enhancement.
+Microsoft SQL Server stores authoritative business data; Redis supports queue/cache; services run independently in Docker containers/processes.
+Authentication and authorization enforce RBAC and role permissions; protected operations and service communications are validated.
+All source code is version-controlled using Git/GitHub.
+Technical Documentation:
+System Requirements Specification (SRS), Business Rules, and Use Case Specifications
+System Architecture, Deployment, Sequence/State Diagrams, and Database Design
+Web/Mobile UI Design and User Flow Documentation
+REST/Internal API and asynchronous-job contract documentation
+Test Plan, Test Cases, Scheduling Dataset/Baseline Evaluation, and Test Report
+Security, Privacy, Access-Control, Fault-Isolation, and Risk Report
+User Manual / Deployment Guide
+Project Process Documentation:
+Project Proposal and Project Plan
+Product Backlog and User Stories
+Sprint Backlogs and Burndown/Progress Tracking
+Test Cases and Defect/Issue Tracking
+Coding / API / Database Standards
+Meeting Minutes and Mentor Review Notes
+Risk Register and Architecture Decision Records where applicable
+Sprint Review / Retrospective and Reflection
+Development and configuration records required for reproducibility
+Final Report:
+A complete final report covering the F&B operational context, requirements, constraint model, access-control/security design, system architecture, implementation, graceful-degradation strategy, scheduling evaluation datasets and results, attendance/timesheet workflow, testing, risks, limitations, and future extensions.
+Defense Materials:
+Presentation Slides: Project problem and iPOS-backed context, objectives/scope, architecture, core workflow, scheduling model, graceful degradation, test results, and demonstrated outcomes.
+Demo Video: A 5–10 minute demonstration covering availability → auto/manual scheduling → Manager review/publish → Staff notification → GPS attendance → timesheet, plus a failure scenario showing that the core system remains usable when AI or Scheduling Service is stopped.
+Conclusion
+Smart Scheduling is proposed as a practical workforce-operations system for Vietnam’s F&B sector, not merely as an automatic timetable generator. The iPOS.vn & Nestlé Professional 2025 report shows a market of about 329,500 F&B outlets, strong cost pressure, and increasing demand for professionalized operations. The project responds by integrating structured employee/availability data, configurable shift rules, constraint-based scheduling, GPS attendance, timesheets, and verified operational reporting into one workflow.
+The design deliberately protects the core workflow from intelligent-service failures. Laravel/ Microsoft SQL Server remain the system of record and support manual operations at all times; OR-Tools optimization and AI decision support are independent enhancements. This architecture enables the project to demonstrate both technical depth—constraint optimization, asynchronous jobs, concurrency control, fault isolation, and graceful degradation—and practical value for F&B workforce management.
+References
+Table 9. References
+No.
+References
+Document Information
+1
+Market Report
+iPOS.vn & Nestlé Professional, “Báo cáo Thị trường Kinh doanh Ẩm thực tại Việt Nam năm 2025”, pages 3–4, 15–20, 30, 34, 39, 46, 89–90.
+2
+Scrum Model
+https://en.wikipedia.org/wiki/Scrum_(software_development)
+https://www.atlassian.com/agile/scrum
+https://www.digite.com/agile/scrum-methodology/
+https://www.scrum.org/resources/scrum-guide
+https://learn.microsoft.com/en-us/azure/devops/boards/sprints/best-practices-scrum?view=azure-devops
+3
+Technical
+https://platform.openai.com/docs/overview
+https://learn.microsoft.com/en-us/sql/
+https://react.dev/learn
+https://nodejs.org/en
+https://code.visualstudio.com/docs/languages/php
+4
+Standard
+https://www.nws.noaa.gov/oh/hrl/developers_docs/General_So ftware_Standards.pdf
+https://standards.ieee.org/standard/12208-2017.html
+https://en.wikipedia.org/wiki/Scrum_(software_development)
+5
+Others
+Microsoft Shifts – Get started
+Attachment
+Brief description of product ideas
+Smart Scheduling is a Web and Mobile workforce-management ecosystem for small and medium F&B businesses. It collects employee availability and skill/contract data, supports manual scheduling, and uses an independent OR-Tools Scheduling Service to generate optimized draft schedules subject to operational constraints. Published schedules feed a Staff Mobile App for notifications and GPS attendance; attendance feeds timesheets and reports. Leave, shift swap, and open shift workflows help Managers handle changes. Laravel/ Microsoft SQL Server form the always-available core, while Scheduling and AI services are optional enhancements with asynchronous jobs, health checks, timeout/circuit-breaker protection, and graceful degradation. AI only explains verified, permission-filtered data and does not make final employment or scheduling decisions.
+Requirements
+Table 10. Requirements
+High-level Functional Requirements
+Account and permission management
+Account, authentication, and RBAC management for Admin, Manager, and Staff
+Single-store configuration, employee, contract/pay-rate, position, skill and skill-level management
+Weekly availability registration and deadline management
+Shift requirements, operating hours, manual scheduling, and schedule versioning
+Asynchronous OR-Tools automatic scheduling with hard/soft constraints and unfilled-shift reporting
+Manager review, constraint validation, publish/republish, and notifications
+Leave, shift swap, Open Shift Claim, and emergency replacement workflows
+GPS check-in/check-out, attendance verification, and Timesheet approval
+Dashboard, PDF/Excel reports, audit logs, and job monitoring
+Quality Requirements (e.g., related to issues: Easy to Use, Easy to Like, Easy to Learn, Easy to Understand, Easy to Buy,...)
+1. Easy to use
+2. Easy to understand
+3. Easy to interact
+4. Easy to track
+5. Consistency
+Operational Requirements (related to the following issues: Speed, Accuracy, Performance, Stability, Load Protection, Scalability, Safety,...)
+1. Speed and performance: The scheduling algorithm must return results within a maximum of 15 seconds for the target test dataset.
+2. Accuracy: When a solution exists, the Scheduling Engine must meet 100% of the configured hard constraints.
+3. Stability: The system must stably handle scheduling, shift swaps, leave requests, and Open Shift Claim.
+4. Data integrity: Open Shift Claim must prevent Race Conditions and Double Booking during concurrent claims.
+5. Scalability: The system architecture allows adding new scheduling rules and constraints in the future.
+6. Security: Passwords must be securely hashed; JWT and RBAC protect data and functions.
+Environmental and Operational Requirements (related to the following issues: physical impact on the environment, interaction with relevant or existing systems, conditions of commercialization of products,...)
+1. Web platform: The system is deployed as a Web Application and can be used via web browsers.
+2. Deployment environment: The system can be packaged and deployed using Docker.
+3. Network connection: The system assumes a stable network connection during usage and testing.
+4. Operation scope: The system supports one store or one operation unit within the project scope.
+Maintenance and Support Requirements
+1. Easy to maintain source code
+2. Easy to extend
+3. Full documentation provided
+Security/Safety Requirements (related to the following issues: conditions of use/access to products, personal freedom, inspection,...)
+1. User information security: Personal information and Staff accounts must be protected from unauthorized access.
+2. Authentication: Use JWT to authenticate users.
+3. Authorization: RBAC ensures that Managers and Staff can only access functions and data that match their permissions.
+4. Password protection: Do not save passwords in plaintext and use a one-way hashing mechanism like bcrypt.
+5. Concurrent processing safety: Use Optimistic Locking for Open Shift Claim to prevent Double Booking.
+Table 11. Level of Technical Complexity and Applicable Standards
+Level of Technical Complexity
+1Involves broad or conflicting technical issues
+2. Has no clear solutions
+3. Addresses problems not covered by current standards and regulations
+X
+4. Involves many different stakeholder groups
+X
+5. Includes many components or sub-problems to solve
+X
+6. Involves many different fields/domains
+X
+7. Can create significant impacts in multiple contexts
+Applicable standards
+X
+1. Source code standards (React, Laravel, Python, and SQL...)
+X
+2. Design standards (object-oriented design, analysis, and design templates...).
+3. IEEE (1058, 1540, 830, 1016, 829, 1012, 1008)
+X
+4. ISO/IEC/IEEE 12207:2017 (TCVN 10539:2014);
+ISO/IEC 25051:2006 (TCVN 10540:2014);
+5. Other standards (related to specific topics)

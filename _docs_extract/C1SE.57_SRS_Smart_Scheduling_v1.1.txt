@@ -1,0 +1,2681 @@
+SOFTWARE REQUIREMENT SPECIFICATIONDOCUMENT
+Smart Scheduling - Website for Automated Staff Scheduling and Shift
+Version 1.1
+ABSTRACT
+This document specifies the software requirements for Smart Scheduling, a single-store F&B workforce scheduling system that supports employee management, availability collection, constraint-based schedule generation, schedule publication, leave and shift replacement workflows, GPS attendance, timesheets, operational reporting, and an optional AI Assistant.
+Project Title
+Smart Scheduling - Website for Automated Staff Scheduling and Shift
+Lead Institution
+The International School, Duy Tan University
+Project Mentor
+PhD. Vu, Truong Tien
+Team Name
+C1SE.57
+Team Members
+Tuan, Le Ha DucHien, Le Tran ThanhNghia, Le DinhQuan, Huynh Van MinhLuc, Huynh Vu
+Start Date
+Aug 26, 2026
+End Date
+Dec 06, 2026
+Document Version
+1.1
+PROPRIETARY INFORMATION: The information contained in this document is the property of Team C1SE.57 and is intended for academic project use within Duy Tan University.
+Table of Contents
+Revision History5
+1. Introduction6
+1.1. Purpose6
+1.2. Intended Audience and Reading Suggestions6
+1.3. References6
+2. PROJECT OVERVIEW7
+2.1. Project Description7
+2.2. Business Problems7
+2.3. Business Need7
+2.4. Project Analyst8
+2.4.1. Business Function Diagram8
+2.4.2. System Context Diagram8
+2.4.3. Data Flow Diagram8
+2.5. Software Requirement Specification9
+2.5.1. High level Functional Requirement (FR)9
+2.5.2. Stakeholders13
+2.5.3. Use case13
+2.5.3.1. List of use cases13
+2.5.3.2. Smart Scheduling System Use Case Diagram Overview14
+2.5.4. List of business rule14
+2.5.5. Use Case Specification16
+UC.01: Login17
+UC.02: Manage User Accounts19
+UC.03: Manage Account Access21
+UC.04: View System / Service Health23
+UC.05: Manage System Configuration25
+UC.06: Login27
+UC.07: Manage Employees and Skills29
+UC.08: Manage Shifts and Scheduling Rules31
+UC.09: View Staff Availability33
+UC.10: Run Auto Scheduling35
+UC.11: Review / Edit / Publish Schedule37
+UC.12: Review Leave Requests39
+UC.13: Manage Swap / Open Shift / Replacement41
+UC.14: Manage Attendance and Timesheet43
+UC.15: View Dashboard / Export Reports45
+UC.16: Ask AI Assistant47
+UC.17: Login49
+UC.18: View / Update Personal Profile51
+UC.19: Register Availability53
+UC.20: View Work Schedule55
+UC.21: GPS Check-in / Check-out57
+UC.22: Submit Leave Request59
+UC.23: Request Shift Swap / Accept Open Shift61
+UC.24: View Timesheet / Working Hours63
+UC.25: View Notifications65
+2.5.6. Software Quality Attributes66
+2.5.6.1. Usability66
+2.5.6.2. Reliability66
+2.5.6.3. Security66
+2.5.6.4. Maintainability66
+2.5.6.5. Portability67
+2.5.6.6. Performance67
+2.6. Software Design Description67
+2.6.1. Sequence Diagrams67
+2.6.1.1. Login67
+2.6.1.2. Manage User Accounts67
+2.6.1.3. Manage Account Access67
+2.6.1.4. View System / Service Health68
+2.6.1.5. Manage System Configuration68
+2.6.1.6. Login68
+2.6.1.7. Manage Employees and Skills68
+2.6.1.8. Manage Shifts and Scheduling Rules68
+2.6.1.9. View Staff Availability68
+2.6.1.10. Run Auto Scheduling68
+2.6.1.11. Review / Edit / Publish Schedule68
+2.6.1.12. Review Leave Requests68
+2.6.1.13. Manage Swap / Open Shift / Replacement69
+2.6.1.14. Manage Attendance and Timesheet69
+2.6.1.15. View Dashboard / Export Reports69
+2.6.1.16. Ask AI Assistant69
+2.6.1.17. Login69
+2.6.1.18. View / Update Personal Profile69
+2.6.1.19. Register Availability69
+2.6.1.20. View Work Schedule69
+2.6.1.21. GPS Check-in / Check-out70
+2.6.1.22. Submit Leave Request70
+2.6.1.23. Request Shift Swap / Accept Open Shift70
+2.6.1.24. View Timesheet / Working Hours70
+2.6.1.25. View Notifications70
+2.6.2. Activity Diagrams70
+2.6.2.1. Login70
+2.6.2.2. Manage User Accounts70
+2.6.2.3. Manage Account Access70
+2.6.2.4. View System / Service Health70
+2.6.2.5. Manage System Configuration71
+2.6.2.6. Login71
+2.6.2.7. Manage Employees and Skills71
+2.6.2.8. Manage Shifts and Scheduling Rules71
+2.6.2.9. View Staff Availability71
+2.6.2.10. Run Auto Scheduling71
+2.6.2.11. Review / Edit / Publish Schedule71
+2.6.2.12. Review Leave Requests71
+2.6.2.13. Manage Swap / Open Shift / Replacement72
+2.6.2.14. Manage Attendance and Timesheet72
+2.6.2.15. View Dashboard / Export Reports72
+2.6.2.16. Ask AI Assistant72
+2.6.2.17. Login72
+2.6.2.18. View / Update Personal Profile72
+2.6.2.19. Register Availability72
+2.6.2.20. View Work Schedule72
+2.6.2.21. GPS Check-in / Check-out72
+2.6.2.22. Submit Leave Request73
+2.6.2.23. Request Shift Swap / Accept Open Shift73
+2.6.2.24. View Timesheet / Working Hours73
+2.6.2.25. View Notifications73
+2.6.3. State Diagram73
+2.6.4. Class Diagram73
+2.6.5. Allocation Diagram74
+Appendix A: Glossary74
+Revision History
+Date
+Change Item
+Description
+by
+Version
+30/08/2026
+Initial SRS
+Create theory sections, FR baseline, stakeholders, business rules and initial use-case specifications.
+C1SE.57 Team
+1.0
+31/08/2026
+Update SRS
+Refine use-case specifications and software quality attributes; reserve diagram sections for later insertion.
+C1SE.57 Team
+1.1
+1. Introduction
+1.1. Purpose
+This Software Requirement Specification (SRS) defines the functional and non-functional requirements for Smart Scheduling. The document translates the approved project scope into implementable and testable requirements for a single F&B store. It is intended to serve as the common baseline for analysis, design, development, integration, testing, and acceptance activities.
+The purposes of this document are:
+• Provide the Scrum Master and project team with a clear scope and requirement baseline for estimation and Sprint planning.
+• Describe system stakeholders, functional requirements, business rules, and detailed use cases so developers and designers can implement consistent behavior.
+• Provide testers with pre-conditions, post-conditions, main flows, alternative flows, exception flows, and measurable quality targets for test design.
+• Reserve the required analysis and design diagram sections from the template; diagrams will be inserted separately after review and approval.
+1.2. Intended Audience and Reading Suggestions
+Intended Audience
+Reading Suggestions
+Project Manager / Scrum Master
+Read the project overview, high-level functional requirements, constraints, quality attributes and use-case list for scope and estimation.
+Business Analyst / System Analyst
+Read the business problems, business needs, stakeholders, business rules and detailed use-case specifications.
+Architect / Developer
+Read functional requirements, use-case specifications, quality attributes, and the reserved software-design sections before implementation.
+Quality Control / Tester
+Use functional requirements, business rules, pre/post-conditions, main/alternative/exception flows, and quality attributes to design test cases and acceptance tests.
+1.3. References
+1. C1SE.57_PROPOSAL_Smart_Scheduling_v1.3.docx - approved project scope, architecture principles, technology stack, and quality targets.
+2. C1SE.57_PROJECT_PLAN_Smart_Scheduling_v1.1.docx - project schedule, Scrum approach, risks, milestones, resources, and testing strategy.
+3. C1SE.57_USER_STORY_Smart_Scheduling_v1.1.docx - user-oriented functional needs and acceptance expectations.
+4. C1SE.57_PRODUCT_BACKLOG_Smart_Scheduling_v1.1.docx - prioritized product work items.
+5. Google OR-Tools CP-SAT documentation - constraint programming concepts used by the Scheduling Service.
+6. Laravel, React.js, React Native, Microsoft SQL Server, Redis, FastAPI, and Docker official documentation - implementation references for the agreed technology stack.
+2. PROJECT OVERVIEW
+2.1. Project Description
+Smart Scheduling is a Web + Mobile workforce scheduling system designed for one small or medium F&B store, such as a cafe, restaurant, or milk-tea shop with many part-time employees. The system digitizes the workflow from employee availability registration, shift requirement setup, manual or automatic schedule generation, Manager review and publication, leave/swap/replacement handling, GPS attendance, timesheet processing, and operational dashboard/reporting.
+The Web application is primarily used by Admin and Manager, while Staff primarily use the React Native Mobile App. Laravel/Microsoft SQL Server form the core system of record. Redis supports queue/cache processing. Automatic scheduling is delegated to an independent Python/FastAPI service using Google OR-Tools CP-SAT. The optional AI Assistant is separated from the Scheduling Engine and is limited to explanation, summary, and advisory support based on data verified by the core backend.
+The official implementation scope is a single F&B store. Multi-store, multi-tenant, cross-store scheduling, service-plan quotas, full payroll/tax processing, continuous GPS tracking, and autonomous AI personnel decisions are outside the MVP scope.
+2.2. Business Problems
+• Part-time staff availability changes frequently, making manual schedule preparation time-consuming and error-prone.
+• Managers must simultaneously consider availability, approved leave, required positions/skills, staffing headcount, working-hour limits, rest time, and unexpected absences.
+• Schedules maintained through spreadsheets and chat messages can create duplicated assignments, missed updates, unclear responsibility, and difficulty tracing changes.
+• Unexpected leave or last-minute shift gaps require managers to manually search for replacement staff and can lead to double claims if the process is not concurrency-safe.
+• Planned schedules alone do not reflect actual working time, so businesses need a reliable attendance-to-timesheet process for working-hour monitoring and labor-cost estimation.
+• A failure in an optimization or AI component must not interrupt essential store operations such as employee management, manual scheduling, attendance, and reporting.
+2.3. Business Need
+• Centralize employee, skill, availability, shift, schedule, leave, attendance, and timesheet data in one authoritative system.
+• Reduce manual scheduling effort by generating constraint-based draft schedules while keeping the Manager responsible for review and publication.
+• Maintain schedule validity by enforcing hard constraints and reporting unfilled positions when available staff cannot safely cover demand.
+• Provide controlled leave, shift-swap, Open Shift, and replacement workflows that revalidate eligibility before changing official assignments.
+• Record actual attendance through event-time GPS checks and transform attendance into auditable timesheets.
+• Provide operational dashboards, PDF/Excel reports, notifications, and optional AI explanations without making the core application depend on AI.
+2.4. Project Analyst
+The analysis model identifies three production actors - Admin, Manager, and Staff - interacting with the Smart Scheduling system. Business-process and data-flow diagrams are intentionally reserved in this version of the SRS and will be inserted after diagram review so that the written requirements remain the stable source for validation.
+2.4.1. Business Function Diagram
+2.4.2. System Context Diagram
+2.4.3. Data Flow Diagram
+a. Data Flow Diagram Level 1
+b. Data Flow Diagram Level 2
+1. ADMIN
+2. MANAGER
+3. STAFF
+2.5. Software Requirement Specification
+2.5.1. High level Functional Requirement (FR)
+ID
+Field
+Content
+FR1.1
+Title
+Login
+Stakeholder
+Admin
+Description
+Allows an Admin to authenticate and access administration functions using a valid account.
+FR1.2
+Title
+Manage User Accounts
+Stakeholder
+Admin
+Description
+Allows the Admin to create, update, activate, deactivate, and review system user accounts for Admin, Manager, and Staff.
+FR1.3
+Title
+Manage Account Access
+Stakeholder
+Admin
+Description
+Allows the Admin to manage role and access status for existing system accounts.
+FR1.4
+Title
+View System / Service Health
+Stakeholder
+Admin
+Description
+Allows the Admin to view health information for the core system and optional supporting services.
+FR1.5
+Title
+Manage System Configuration
+Stakeholder
+Admin
+Description
+Allows the Admin to maintain permitted system-wide settings for the single F&B store.
+FR1.6
+Title
+Login
+Stakeholder
+Manager
+Description
+Allows a Manager to authenticate and access store-management functions using a valid account.
+FR1.7
+Title
+Manage Employees and Skills
+Stakeholder
+Manager
+Description
+Allows the Manager to create and update employee profiles, employment information, skills, skill levels, work-hour limits, and active status.
+FR1.8
+Title
+Manage Shifts and Scheduling Rules
+Stakeholder
+Manager
+Description
+Allows the Manager to define shifts, staffing requirements, priorities, and configurable scheduling constraints for the store.
+FR1.9
+Title
+View Staff Availability
+Stakeholder
+Manager
+Description
+Allows the Manager to review Staff availability submissions and identify missing or incomplete submissions for a scheduling period.
+FR1.10
+Title
+Run Auto Scheduling
+Stakeholder
+Manager
+Description
+Allows the Manager to request a constraint-based draft schedule generated by the Python/FastAPI Scheduling Service using Google OR-Tools CP-SAT.
+FR1.11
+Title
+Review / Edit / Publish Schedule
+Stakeholder
+Manager
+Description
+Allows the Manager to review a draft or manually created schedule, adjust assignments, validate hard constraints, and publish the official schedule.
+FR1.12
+Title
+Review Leave Requests
+Stakeholder
+Manager
+Description
+Allows the Manager to review Staff leave requests, inspect affected assignments, and approve or reject the requests.
+FR1.13
+Title
+Manage Swap / Open Shift / Replacement
+Stakeholder
+Manager
+Description
+Allows the Manager to review shift-swap requests, create or manage Open Shifts, view eligible replacements, and approve valid coverage changes.
+FR1.14
+Title
+Manage Attendance and Timesheet
+Stakeholder
+Manager
+Description
+Allows the Manager to review attendance against published schedules, identify exceptions, correct verified errors with an audit reason, and approve actual working-time records.
+FR1.15
+Title
+View Dashboard / Export Reports
+Stakeholder
+Manager
+Description
+Allows the Manager to view operational indicators and export schedule, attendance, timesheet, and working-hour reports in supported formats.
+FR1.16
+Title
+Ask AI Assistant
+Stakeholder
+Manager
+Description
+Allows the Manager to ask natural-language questions about verified operational data and receive advisory explanations or summaries from the optional AI service.
+FR1.17
+Title
+Login
+Stakeholder
+Staff
+Description
+Allows a Staff member to authenticate in the Mobile App and access Staff-authorized functions.
+FR1.18
+Title
+View / Update Personal Profile
+Stakeholder
+Staff
+Description
+Allows Staff to view their profile and update only permitted personal/contact information.
+FR1.19
+Title
+Register Availability
+Stakeholder
+Staff
+Description
+Allows Staff to submit and update available time intervals for a scheduling period before the configured deadline.
+FR1.20
+Title
+View Work Schedule
+Stakeholder
+Staff
+Description
+Allows Staff to view their own published work schedule and subsequent official changes for selected periods.
+FR1.21
+Title
+GPS Check-in / Check-out
+Stakeholder
+Staff
+Description
+Allows Staff to record attendance events from the Mobile App using event-time GPS validation.
+FR1.22
+Title
+Submit Leave Request
+Stakeholder
+Staff
+Description
+Allows Staff to request planned or emergency leave for a defined date/time period and provide a reason.
+FR1.23
+Title
+Request Shift Swap / Accept Open Shift
+Stakeholder
+Staff
+Description
+Allows Staff to request a direct swap for an assigned shift or claim an eligible Open Shift/replacement offer.
+FR1.24
+Title
+View Timesheet / Working Hours
+Stakeholder
+Staff
+Description
+Allows Staff to view their own approved timesheets and actual working-hour summaries for selected periods.
+FR1.25
+Title
+View Notifications
+Stakeholder
+Staff
+Description
+Allows Staff to view in-app notifications about schedules, leave, swaps, Open Shifts, attendance-related updates, and other supported events.
+2.5.2. Stakeholders
+Stakeholder
+Description
+Admin
+Operates the platform-level administration functions for the single-store system, including user accounts, account access, service health, and permitted system configuration.
+Manager
+Manages employees, skills, availability, shifts, scheduling rules, schedule generation and publication, leave/swap/open-shift workflows, attendance, timesheets, dashboards, reports, and AI-assisted explanations.
+Staff
+Uses the Mobile App to maintain permitted profile data, submit availability, view published schedules, check in/out using GPS, submit leave, request swaps or accept open shifts, view timesheets, and receive notifications.
+Project Mentor
+Provides academic guidance and reviews project scope, requirement quality, architecture, implementation progress, and deliverables. The mentor is a stakeholder but not a production-system actor.
+2.5.3. Use case
+2.5.3.1. List of use cases
+Use case ID
+Use case name
+Functional Req.
+UC.01
+Login
+FR1.1
+UC.02
+Manage User Accounts
+FR1.2
+UC.03
+Manage Account Access
+FR1.3
+UC.04
+View System / Service Health
+FR1.4
+UC.05
+Manage System Configuration
+FR1.5
+UC.06
+Login
+FR1.6
+UC.07
+Manage Employees and Skills
+FR1.7
+UC.08
+Manage Shifts and Scheduling Rules
+FR1.8
+UC.09
+View Staff Availability
+FR1.9
+UC.10
+Run Auto Scheduling
+FR1.10
+UC.11
+Review / Edit / Publish Schedule
+FR1.11
+UC.12
+Review Leave Requests
+FR1.12
+UC.13
+Manage Swap / Open Shift / Replacement
+FR1.13
+UC.14
+Manage Attendance and Timesheet
+FR1.14
+UC.15
+View Dashboard / Export Reports
+FR1.15
+UC.16
+Ask AI Assistant
+FR1.16
+UC.17
+Login
+FR1.17
+UC.18
+View / Update Personal Profile
+FR1.18
+UC.19
+Register Availability
+FR1.19
+UC.20
+View Work Schedule
+FR1.20
+UC.21
+GPS Check-in / Check-out
+FR1.21
+UC.22
+Submit Leave Request
+FR1.22
+UC.23
+Request Shift Swap / Accept Open Shift
+FR1.23
+UC.24
+View Timesheet / Working Hours
+FR1.24
+UC.25
+View Notifications
+FR1.25
+2.5.3.2. Smart Scheduling System Use Case Diagram Overview
+2.5.4. List of business rule
+Code
+Business rules
+Use case
+BR01
+Only active users with valid credentials may access protected functions.
+UC.01, UC.06, UC.17
+BR02
+RBAC must restrict functions and data according to the Admin, Manager, and Staff roles.
+All protected UCs
+BR03
+Employee records with historical schedules, attendance, or timesheets must be deactivated rather than physically deleted.
+UC.07
+BR04
+Availability must be submitted for a defined scheduling period before the configured deadline unless a Manager-authorized override is used.
+UC.09, UC.19
+BR05
+A Staff assignment must fall within valid availability and must not overlap approved leave.
+UC.10, UC.11, UC.13, UC.23
+BR06
+Assignments must satisfy required position, skill, and minimum skill level configured for the shift.
+UC.08, UC.10, UC.13
+BR07
+A Staff member must not be assigned to overlapping shifts.
+UC.10, UC.11, UC.13, UC.23
+BR08
+Assignments must respect configured contract and work-hour limits.
+UC.07, UC.10, UC.11, UC.13
+BR09
+Assignments must respect configured minimum rest time between consecutive shifts.
+UC.08, UC.10, UC.11, UC.13
+BR10
+Assignments must respect the configured maximum number of consecutive shifts or working days.
+UC.08, UC.10, UC.11, UC.13
+BR11
+Automatic scheduling must return a draft with zero hard-constraint violations. If demand cannot be fully covered, the system must expose unfilled positions instead of violating hard constraints.
+UC.10
+BR12
+Only a Manager may publish an official schedule. OR-Tools and the AI Assistant may not publish schedules directly.
+UC.11
+BR13
+Shift swaps, replacements, and Open Shift assignments must be revalidated against availability, skills, leave, overlap, work-hour, and rest rules before approval.
+UC.13, UC.23
+BR14
+A single Open Shift vacancy may be claimed successfully by only one Staff member; the assignment must be protected by transaction or optimistic-locking controls.
+UC.13, UC.23
+BR15
+A Staff member may cancel only a leave request that is still in a cancellable state; approved/rejected requests follow Manager workflow rules.
+UC.12, UC.22
+BR16
+GPS is captured only during check-in/check-out events. The backend validates geofence, GPS accuracy, server time, and attendance window; continuous location tracking is out of scope.
+UC.21
+BR17
+Attendance corrections require a Manager-provided reason and must be auditable.
+UC.14
+BR18
+Timesheets are derived from actual attendance using configured grace period, breaks, rounding, and approved overtime rules.
+UC.14, UC.24
+BR19
+Labor-cost values are operational estimates based on approved timesheets and effective pay rates; the system does not perform statutory payroll or tax processing.
+UC.07, UC.15
+BR20
+The AI Assistant is advisory only. It may explain verified data but may not directly modify production data, publish schedules, or make official HR decisions.
+UC.16
+BR21
+Failure of the Scheduling Service or AI Service must not prevent core Laravel/Microsoft SQL Server functions from operating; manual scheduling remains available when auto-scheduling is unavailable.
+UC.04, UC.10, UC.16
+BR22
+Dashboard and report figures must be generated from authoritative application data, including published schedules, attendance, and approved timesheets.
+UC.15
+BR23
+Important schedule, request, attendance, and Open Shift status changes must create in-app notifications for affected users.
+UC.11, UC.12, UC.13, UC.25
+BR24
+System configuration that affects scheduling, attendance, or service behavior may be changed only by Admin-authorized accounts.
+UC.05
+BR25
+Passwords must be stored using one-way hashing; API access must use authenticated JWT/session controls and server-side authorization.
+UC.01, UC.06, UC.17
+2.5.5. Use Case Specification
+The following specifications define the expected behavior of the system for each actor-facing use case. Each table includes pre-conditions, post-conditions, the primary success path, supported alternatives, exception handling, priority, and applicable business rules. Where an optional service is involved, the flow explicitly preserves core-system operation when the optional service is unavailable.
+UC.01: Login
+a.  Use Case Specification
+Use Case ID
+UC.01
+Use Case Name
+Login
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Admin
+Brief Description
+Allows an Admin to authenticate and access administration functions using a valid account.
+Goal
+Authenticate the Admin securely and establish an authorized session.
+Trigger
+The Admin opens the system and selects Login.
+Pre-conditions
+The Admin account exists, is active, and the core authentication service is available.
+Post-conditions
+A valid authenticated session is established and the Admin is redirected to the administration dashboard.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open the Web application.
+Display the Login screen.
+2
+Enter registered account identifier and password.
+Validate that required fields are present.
+3
+Select Login.
+Verify credentials against the authenticated account store.
+4
+Wait for authentication result.
+Create the authenticated session/JWT and load Admin permissions.
+5
+Continue to the system.
+Redirect to the Admin dashboard.
+Alternative Flow
+Invalid credentials
+Step
+Actor Action
+System Response
+1
+Submit an incorrect account identifier or password.
+Reject authentication and display a generic invalid-credentials message.
+2
+Correct the credentials and submit again.
+Re-run authentication without exposing which credential was incorrect.
+Alternative Flow
+Inactive account
+Step
+Actor Action
+System Response
+1
+Submit valid credentials for an inactive account.
+Reject access and inform the user that the account is inactive or unavailable.
+Exception Flow
+Authentication service or database unavailable
+Step
+Actor Action
+System Response
+1
+Submit valid credentials.
+The core service cannot complete account verification.
+2
+Wait or retry.
+Display a temporary service-unavailable message and do not create a session.
+Priority
+High
+Business Rule
+BR01, BR02, BR25
+UC.02: Manage User Accounts
+a.  Use Case Specification
+Use Case ID
+UC.02
+Use Case Name
+Manage User Accounts
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Admin
+Brief Description
+Allows the Admin to create, update, activate, deactivate, and review system user accounts for Admin, Manager, and Staff.
+Goal
+Maintain valid user accounts while preserving historical operational records.
+Trigger
+The Admin opens User Account Management.
+Pre-conditions
+The Admin is authenticated and has account-management permission.
+Post-conditions
+Account changes are validated, saved, audited, and reflected in subsequent authentication attempts.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open User Account Management.
+Display searchable account list and account statuses.
+2
+Choose Create, Edit, Activate, or Deactivate.
+Display the appropriate account form and current data.
+3
+Enter or update account information.
+Validate required fields, identifier uniqueness, and role values.
+4
+Select Save/Confirm.
+Persist valid changes and record an audit entry.
+5
+Review the result.
+Refresh the account list and display success status.
+Alternative Flow
+Duplicate identifier or email
+Step
+Actor Action
+System Response
+1
+Create or edit an account using an identifier already in use.
+Reject the change and identify the duplicated field.
+2
+Provide a unique value.
+Revalidate and allow the save operation.
+Alternative Flow
+Deactivate account with operational history
+Step
+Actor Action
+System Response
+1
+Select Deactivate for an account linked to historical data.
+Deactivate access without deleting historical schedules, attendance, or timesheets.
+Exception Flow
+Database write fails
+Step
+Actor Action
+System Response
+1
+Confirm an account change.
+The save operation fails.
+2
+Retry later.
+Keep the prior account state and display an error message.
+Priority
+High
+Business Rule
+BR02, BR03, BR25
+UC.03: Manage Account Access
+a.  Use Case Specification
+Use Case ID
+UC.03
+Use Case Name
+Manage Account Access
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Admin
+Brief Description
+Allows the Admin to manage role and access status for existing system accounts.
+Goal
+Ensure each account has only the permissions appropriate to its role and current status.
+Trigger
+The Admin selects an account and opens Access Management.
+Pre-conditions
+The Admin is authenticated; the target account exists.
+Post-conditions
+The new role/access status is stored and applied to future protected requests.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open Access Management.
+Display accounts, current roles, and access status.
+2
+Select an account.
+Display current role and permitted access settings.
+3
+Choose the required role or access state.
+Validate the selected role against supported roles: Admin, Manager, Staff.
+4
+Confirm the change.
+Save the access change and invalidate/refresh authorization data where required.
+5
+Review status.
+Display the updated role/access state and audit result.
+Alternative Flow
+No effective change
+Step
+Actor Action
+System Response
+1
+Select the same role/access state already assigned.
+Inform the Admin that no update is required and leave data unchanged.
+Alternative Flow
+Target session is active
+Step
+Actor Action
+System Response
+1
+Change role or deactivate an account with an active session.
+Apply the updated authorization on the next protected request or token refresh according to session policy.
+Exception Flow
+Authorization update fails
+Step
+Actor Action
+System Response
+1
+Confirm an access change.
+The backend cannot persist the update.
+2
+Retry.
+Preserve the previous access configuration and log the failure.
+Priority
+High
+Business Rule
+BR02, BR24, BR25
+UC.04: View System / Service Health
+a.  Use Case Specification
+Use Case ID
+UC.04
+Use Case Name
+View System / Service Health
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Admin
+Brief Description
+Allows the Admin to view health information for the core system and optional supporting services.
+Goal
+Identify degraded or unavailable components without exposing sensitive implementation secrets.
+Trigger
+The Admin opens System Health.
+Pre-conditions
+The Admin is authenticated; health-check endpoints are configured.
+Post-conditions
+The latest available health state is displayed for core and optional services.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open System Health.
+Request the health state of Laravel API, Microsoft SQL Server, Redis, Scheduling Service, and AI Service.
+2
+Wait for checks to complete.
+Classify each component as Available, Degraded, Unavailable, or Unknown.
+3
+Review component status.
+Display last-check time and a safe operational message.
+4
+Select Refresh if needed.
+Run health checks again within configured timeout limits.
+Alternative Flow
+Optional service unavailable
+Step
+Actor Action
+System Response
+1
+Open System Health while Scheduling or AI Service is down.
+Show the optional service as unavailable while indicating that core functions remain operational.
+Alternative Flow
+Health check timeout
+Step
+Actor Action
+System Response
+1
+A service does not answer before the configured timeout.
+Mark its state as Unknown/Timeout without blocking the health page.
+Exception Flow
+Core health data unavailable
+Step
+Actor Action
+System Response
+1
+Open System Health while the core API cannot query dependencies.
+Display a limited health result and a service warning; do not expose credentials or stack traces.
+Priority
+Medium
+Business Rule
+BR21, BR24
+UC.05: Manage System Configuration
+a.  Use Case Specification
+Use Case ID
+UC.05
+Use Case Name
+Manage System Configuration
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Admin
+Brief Description
+Allows the Admin to maintain permitted system-wide settings for the single F&B store.
+Goal
+Keep operational settings consistent for scheduling, attendance, notifications, and optional services.
+Trigger
+The Admin opens System Configuration.
+Pre-conditions
+The Admin is authenticated and has configuration permission.
+Post-conditions
+Validated configuration changes are saved, versioned/audited where applicable, and used by subsequent operations.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open System Configuration.
+Display configurable values such as store location/geofence, attendance windows, availability deadlines, scheduling limits, and service toggles.
+2
+Select a configuration group.
+Display current values and validation constraints.
+3
+Edit permitted values.
+Validate formats, ranges, required fields, and cross-field consistency.
+4
+Select Save.
+Persist valid settings and write an audit entry.
+5
+Review confirmation.
+Display the updated configuration and effective status.
+Alternative Flow
+Invalid value
+Step
+Actor Action
+System Response
+1
+Enter an invalid radius, time window, or scheduling limit.
+Reject the value and show the allowed range/format.
+2
+Correct the input.
+Revalidate before allowing Save.
+Alternative Flow
+Disable optional AI feature
+Step
+Actor Action
+System Response
+1
+Turn off the AI Assistant service toggle.
+Save the setting; core scheduling and management functions remain available.
+Exception Flow
+Configuration store unavailable
+Step
+Actor Action
+System Response
+1
+Select Save.
+The backend cannot persist configuration.
+2
+Retry later.
+Keep the previous effective configuration and display an error.
+Priority
+Medium
+Business Rule
+BR24, BR21
+UC.06: Login
+a.  Use Case Specification
+Use Case ID
+UC.06
+Use Case Name
+Login
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Manager
+Brief Description
+Allows a Manager to authenticate and access store-management functions using a valid account.
+Goal
+Authenticate the Manager securely and load Manager-authorized functions.
+Trigger
+The Manager opens the Web application and selects Login.
+Pre-conditions
+The Manager account exists, is active, and the core authentication service is available.
+Post-conditions
+A Manager session is established and the Manager dashboard is displayed.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open the Web application.
+Display the Login screen.
+2
+Enter account identifier and password.
+Validate required fields.
+3
+Select Login.
+Verify credentials and account status.
+4
+Wait for authentication.
+Create authenticated session/JWT and load Manager permissions.
+5
+Continue.
+Redirect to the Manager dashboard.
+Alternative Flow
+Invalid credentials
+Step
+Actor Action
+System Response
+1
+Submit invalid credentials.
+Reject authentication with a generic message.
+2
+Enter valid credentials and retry.
+Authenticate again.
+Alternative Flow
+Inactive Manager account
+Step
+Actor Action
+System Response
+1
+Submit valid credentials for an inactive account.
+Reject access and display account-unavailable status.
+Exception Flow
+Core authentication unavailable
+Step
+Actor Action
+System Response
+1
+Select Login during a core service failure.
+Do not create a session; display a temporary service-unavailable message.
+Priority
+High
+Business Rule
+BR01, BR02, BR25
+UC.07: Manage Employees and Skills
+a.  Use Case Specification
+Use Case ID
+UC.07
+Use Case Name
+Manage Employees and Skills
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Manager
+Brief Description
+Allows the Manager to create and update employee profiles, employment information, skills, skill levels, work-hour limits, and active status.
+Goal
+Maintain accurate staff data so scheduling and operational reports use valid employee information.
+Trigger
+The Manager opens Employee Management.
+Pre-conditions
+The Manager is authenticated; reference data such as positions/skills is available.
+Post-conditions
+Employee and skill information is saved and becomes available to scheduling and reporting; historical records remain preserved.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open Employee Management.
+Display current employee list and statuses.
+2
+Select Create Employee or an existing employee.
+Display the employee form and current profile.
+3
+Enter/update profile, employment type, position, hour limit, and applicable pay-rate information.
+Validate required fields and supported values.
+4
+Assign or update skills and skill levels.
+Validate that skills exist and levels are within configured range.
+5
+Select Save.
+Persist employee and skill data and record the change.
+6
+Review the employee profile.
+Display the updated employee information.
+Alternative Flow
+Deactivate employee
+Step
+Actor Action
+System Response
+1
+Select an active employee and choose Deactivate.
+Warn that access will end while historical data is retained.
+2
+Confirm.
+Set the employee/account inactive without deleting linked historical records.
+Alternative Flow
+Duplicate employee identifier
+Step
+Actor Action
+System Response
+1
+Enter an identifier already used by another employee.
+Reject the save and request a unique identifier.
+Exception Flow
+Referenced data unavailable
+Step
+Actor Action
+System Response
+1
+Open skill/position selection while reference data cannot be loaded.
+Prevent incomplete save and show a temporary error.
+Priority
+High
+Business Rule
+BR02, BR03, BR06, BR08, BR19
+UC.08: Manage Shifts and Scheduling Rules
+a.  Use Case Specification
+Use Case ID
+UC.08
+Use Case Name
+Manage Shifts and Scheduling Rules
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Manager
+Brief Description
+Allows the Manager to define shifts, staffing requirements, priorities, and configurable scheduling constraints for the store.
+Goal
+Provide the Scheduling Engine and manual scheduling workflow with accurate shift demand and rule configuration.
+Trigger
+The Manager opens Shift and Scheduling Rule Management.
+Pre-conditions
+The Manager is authenticated; store operating hours and skill/position data exist.
+Post-conditions
+Validated shift definitions, staffing requirements, and scheduling rules are stored for the selected scheduling period.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open Shift Management.
+Display shifts and staffing requirements for the selected period.
+2
+Create or edit a shift.
+Display fields for date, start/end time, headcount, position, required skill/level, and priority.
+3
+Enter shift and requirement data.
+Validate time order, operating hours, headcount, and reference data.
+4
+Open Scheduling Rules if changes are needed.
+Display work-hour, rest-time, and consecutive-shift settings permitted for the project.
+5
+Save changes.
+Persist valid shift/rule data for scheduling and manual assignment.
+Alternative Flow
+Invalid shift time
+Step
+Actor Action
+System Response
+1
+Enter an end time not later than start time or a shift outside operating hours.
+Reject the shift and request corrected time values.
+Alternative Flow
+Invalid staffing requirement
+Step
+Actor Action
+System Response
+1
+Enter zero/negative headcount or an unavailable skill/position.
+Reject the requirement and identify the invalid field.
+Exception Flow
+Rule configuration cannot be saved
+Step
+Actor Action
+System Response
+1
+Confirm valid rule changes.
+The backend fails to persist the configuration.
+2
+Retry.
+Keep the previous effective rule set.
+Priority
+High
+Business Rule
+BR06, BR09, BR10, BR11, BR12
+UC.09: View Staff Availability
+a.  Use Case Specification
+Use Case ID
+UC.09
+Use Case Name
+View Staff Availability
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Manager
+Brief Description
+Allows the Manager to review Staff availability submissions and identify missing or incomplete submissions for a scheduling period.
+Goal
+Give the Manager visibility into when employees can work before manual or automatic scheduling.
+Trigger
+The Manager opens Availability Overview and selects a scheduling period.
+Pre-conditions
+The Manager is authenticated; Staff records exist.
+Post-conditions
+Availability data for the selected period is displayed without modifying Staff submissions unless an authorized override workflow is used.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open Availability Overview.
+Display scheduling-period filter and Staff list.
+2
+Select a week/period.
+Load submitted availability intervals and submission status for each Staff member.
+3
+Review availability.
+Display available/unavailable windows and identify Staff with no submission.
+4
+Filter by employee, role, or skill if needed.
+Update the view while keeping the selected period.
+5
+Close or continue to scheduling.
+Retain the selected period as context for scheduling functions.
+Alternative Flow
+No availability submitted
+Step
+Actor Action
+System Response
+1
+Select a period where one or more Staff have not submitted availability.
+Mark those Staff as Missing/Not Submitted without assuming they are available.
+Alternative Flow
+Availability deadline passed
+Step
+Actor Action
+System Response
+1
+Review the period after deadline.
+Display final submission states and any authorized overrides separately.
+Exception Flow
+Availability data cannot be loaded
+Step
+Actor Action
+System Response
+1
+Select a period.
+Display a load-error message and keep the previous screen state.
+Priority
+High
+Business Rule
+BR04, BR05
+UC.10: Run Auto Scheduling
+a.  Use Case Specification
+Use Case ID
+UC.10
+Use Case Name
+Run Auto Scheduling
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Manager
+Brief Description
+Allows the Manager to request a constraint-based draft schedule generated by the Python/FastAPI Scheduling Service using Google OR-Tools CP-SAT.
+Goal
+Generate a feasible schedule draft that satisfies all hard constraints and clearly reports shortages instead of forcing invalid assignments.
+Trigger
+The Manager selects a scheduling period and chooses Run Auto Scheduling.
+Pre-conditions
+Employees, availability, approved leave, shifts, staffing requirements, and scheduling rules are sufficiently configured.
+Post-conditions
+A Scheduling Run is recorded and returns a Draft Schedule, unfilled positions, and conflict/shortage information; no schedule is published automatically.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open Auto Scheduling and select a scheduling period.
+Load scheduling inputs and current readiness status.
+2
+Select Run Auto Scheduling.
+Validate required employees, shifts, availability, leave, and rules.
+3
+Confirm the run.
+Create a Scheduling Run job and send verified input data to the Scheduling Service.
+4
+Wait for the configured solver time limit.
+OR-Tools evaluates hard constraints and optimization preferences.
+5
+Review the result.
+Return and store the Draft Schedule with unfilled positions and diagnostics.
+6
+Continue to Schedule Review.
+Open the draft for Manager review; do not publish automatically.
+Alternative Flow
+Input incomplete
+Step
+Actor Action
+System Response
+1
+Run scheduling when required shift demand or rule data is missing.
+Reject the run and list missing/invalid inputs.
+2
+Correct the configuration and run again.
+Revalidate the input set.
+Alternative Flow
+Insufficient eligible Staff
+Step
+Actor Action
+System Response
+1
+The solver cannot fill all required positions while satisfying hard constraints.
+Return the best feasible draft and explicitly mark unfilled positions/shortages; do not break hard constraints.
+Exception Flow
+Scheduling Service unavailable or timeout
+Step
+Actor Action
+System Response
+1
+Confirm Auto Scheduling while the Scheduling Service is unavailable.
+Mark the run Failed/Unavailable after timeout.
+2
+Continue working.
+Keep Laravel/Microsoft SQL Server core functions available and offer manual scheduling as the fallback.
+Priority
+High
+Business Rule
+BR05, BR06, BR07, BR08, BR09, BR10, BR11, BR21
+UC.11: Review / Edit / Publish Schedule
+a.  Use Case Specification
+Use Case ID
+UC.11
+Use Case Name
+Review / Edit / Publish Schedule
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Manager
+Brief Description
+Allows the Manager to review a draft or manually created schedule, adjust assignments, validate hard constraints, and publish the official schedule.
+Goal
+Ensure the final published schedule is Manager-approved, valid, and communicated to affected Staff.
+Trigger
+The Manager opens a Draft Schedule or a manually created schedule.
+Pre-conditions
+A schedule exists for the selected period; the Manager is authorized to edit/publish it.
+Post-conditions
+The schedule is either kept as Draft or successfully published as the official schedule, with Staff notifications generated for relevant changes.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open Schedule Review.
+Display the draft/manual schedule, unfilled positions, warnings, and assignment details.
+2
+Inspect assignments and shortages.
+Show employee availability, skills, leave, and rule validation context.
+3
+Optionally add, remove, or move an assignment.
+Revalidate the affected assignment against hard constraints.
+4
+Select Validate Schedule.
+Run full schedule validation and show all remaining hard-constraint issues.
+5
+Select Publish when validation passes.
+Atomically store the Published Schedule/version and mark it official.
+6
+Review confirmation.
+Notify affected Staff and display publication status.
+Alternative Flow
+Manual edit violates a hard constraint
+Step
+Actor Action
+System Response
+1
+Assign an ineligible Staff member or create an overlap.
+Reject or flag the edit and identify the violated rule.
+2
+Choose a valid assignment.
+Revalidate the schedule.
+Alternative Flow
+Schedule still has unfilled positions
+Step
+Actor Action
+System Response
+1
+Select Publish with allowed staffing shortages but no hard-constraint violation.
+Require Manager confirmation of visible unfilled positions before publication according to configured policy.
+Exception Flow
+Publish transaction fails
+Step
+Actor Action
+System Response
+1
+Select Publish.
+The database transaction fails before completion.
+2
+Return to review.
+Keep the prior official schedule unchanged and show publication failure.
+Priority
+High
+Business Rule
+BR07, BR11, BR12, BR23
+UC.12: Review Leave Requests
+a.  Use Case Specification
+Use Case ID
+UC.12
+Use Case Name
+Review Leave Requests
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Manager
+Brief Description
+Allows the Manager to review Staff leave requests, inspect affected assignments, and approve or reject the requests.
+Goal
+Make leave decisions while keeping schedule impact visible and enabling replacement workflows when approved leave creates a vacancy.
+Trigger
+The Manager opens Leave Requests.
+Pre-conditions
+The Manager is authenticated; at least one leave request exists.
+Post-conditions
+The leave request status becomes Approved or Rejected, the decision is recorded, and affected schedules are flagged for follow-up where necessary.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open Leave Requests.
+Display pending and recent requests with Staff and date information.
+2
+Select a pending request.
+Display reason, dates/times, request history, and affected published/draft assignments.
+3
+Review schedule impact.
+Show affected shifts and current replacement/coverage status.
+4
+Choose Approve or Reject and optionally enter a decision note.
+Validate that the request is still pending.
+5
+Confirm the decision.
+Save the new status and record the Manager decision.
+6
+Review result.
+Notify the Staff member; if approved leave affects an assignment, flag the vacancy for schedule adjustment/replacement.
+Alternative Flow
+Request already processed
+Step
+Actor Action
+System Response
+1
+Open a request that another Manager action has already processed.
+Refresh the request state and prevent duplicate decision.
+2
+Return to the request list.
+Display the current final status.
+Alternative Flow
+Leave request has no assigned shift
+Step
+Actor Action
+System Response
+1
+Approve leave for a period with no current assignment.
+Approve the request without creating a replacement vacancy.
+Exception Flow
+Decision cannot be saved
+Step
+Actor Action
+System Response
+1
+Confirm Approve/Reject.
+The backend cannot persist the decision.
+2
+Retry later.
+Keep the request in its prior state and do not notify a false result.
+Priority
+High
+Business Rule
+BR05, BR15, BR23
+UC.13: Manage Swap / Open Shift / Replacement
+a.  Use Case Specification
+Use Case ID
+UC.13
+Use Case Name
+Manage Swap / Open Shift / Replacement
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Manager
+Brief Description
+Allows the Manager to review shift-swap requests, create or manage Open Shifts, view eligible replacements, and approve valid coverage changes.
+Goal
+Resolve staffing gaps and shift-change requests without violating scheduling constraints or allowing double claims.
+Trigger
+The Manager opens Shift Coverage / Swap Management.
+Pre-conditions
+A published assignment, vacancy, swap request, or Open Shift exists; employee eligibility data is available.
+Post-conditions
+A valid replacement/swap is assigned and the schedule is updated, or the request remains unresolved with a clear reason.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open Shift Coverage / Swap Management.
+Display pending swaps, vacancies, Open Shifts, and replacement status.
+2
+Select a swap or vacancy.
+Display affected shift, current assignment, and eligible Staff candidates.
+3
+Review eligibility.
+Revalidate availability, skill, leave, overlap, work-hour, and rest constraints.
+4
+For a vacancy, create or update an Open Shift / replacement offer if needed.
+Publish the offer only to eligible Staff according to configured rules.
+5
+Select an eligible replacement or approve a valid direct swap.
+Perform final revalidation and concurrency check.
+6
+Confirm the change.
+Update the official assignment transactionally and close/adjust the related request or Open Shift.
+7
+Review result.
+Notify affected Staff and show the new coverage status.
+Alternative Flow
+No eligible replacement
+Step
+Actor Action
+System Response
+1
+Open a vacancy for which no Staff satisfies all hard constraints.
+Show No Eligible Replacement and keep the vacancy visible/unfilled.
+2
+Choose another operational response.
+Allow the Manager to keep the shift open or manually revise the schedule without violating hard constraints.
+Alternative Flow
+Swap partner becomes ineligible
+Step
+Actor Action
+System Response
+1
+Approve a swap after availability/leave data has changed.
+Reject the approval and explain the failed eligibility checks.
+Exception Flow
+Concurrent Open Shift claim
+Step
+Actor Action
+System Response
+1
+Two Staff attempt to claim the same vacancy.
+Use optimistic locking/transaction control so only one claim succeeds.
+2
+Review the later claim.
+Return Already Filled/Conflict and refresh assignment state.
+Priority
+High
+Business Rule
+BR13, BR14, BR23
+UC.14: Manage Attendance and Timesheet
+a.  Use Case Specification
+Use Case ID
+UC.14
+Use Case Name
+Manage Attendance and Timesheet
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Manager
+Brief Description
+Allows the Manager to review attendance against published schedules, identify exceptions, correct verified errors with an audit reason, and approve actual working-time records.
+Goal
+Produce accurate and auditable timesheets based on real attendance rather than planned schedule data alone.
+Trigger
+The Manager opens Attendance / Timesheet Management.
+Pre-conditions
+Published assignments and attendance records exist; attendance/timesheet rules are configured.
+Post-conditions
+Attendance corrections and approved timesheets are saved with audit information and become authoritative for working-hour reporting.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open Attendance / Timesheet Management and select a period.
+Load published assignments, check-in/out events, and exception statuses.
+2
+Review an employee/shift.
+Display scheduled time, actual events, late/early/missing indicators, and computed working time.
+3
+If a verified attendance error exists, choose Adjust Attendance.
+Require corrected values and an audit reason.
+4
+Confirm the correction.
+Validate time order and preserve the original record in audit history.
+5
+Review calculated timesheet.
+Apply configured grace, break, rounding, and approved-overtime rules.
+6
+Approve the timesheet.
+Store approved actual working time for reporting and cost estimation.
+Alternative Flow
+Missing check-out
+Step
+Actor Action
+System Response
+1
+Review an attendance record with Check-in but no Check-out.
+Mark the record Incomplete and prevent final timesheet approval until resolved according to policy.
+2
+Enter a verified correction with reason.
+Recalculate the timesheet after validation.
+Alternative Flow
+No attendance events
+Step
+Actor Action
+System Response
+1
+Review a scheduled shift without attendance.
+Mark as Missing Attendance/Absence for Manager review rather than assuming planned hours were worked.
+Exception Flow
+Invalid correction
+Step
+Actor Action
+System Response
+1
+Enter a check-out earlier than check-in or another invalid time combination.
+Reject the correction and explain the validation error.
+Exception Flow
+Timesheet save fails
+Step
+Actor Action
+System Response
+1
+Approve the timesheet.
+Keep the previous timesheet status and display a save failure; do not overwrite audit history.
+Priority
+High
+Business Rule
+BR17, BR18, BR22
+UC.15: View Dashboard / Export Reports
+a.  Use Case Specification
+Use Case ID
+UC.15
+Use Case Name
+View Dashboard / Export Reports
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Manager
+Brief Description
+Allows the Manager to view operational indicators and export schedule, attendance, timesheet, and working-hour reports in supported formats.
+Goal
+Provide current operational visibility and shareable reports based on authoritative system data.
+Trigger
+The Manager opens Dashboard or Reports.
+Pre-conditions
+The Manager is authenticated; data exists for the selected period.
+Post-conditions
+Dashboard indicators are displayed and, when requested, a PDF/Excel report is generated from the selected authoritative data.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open the Management Dashboard.
+Display default-period staffing, request, attendance, working-hour, and shortage indicators.
+2
+Select a period/filter.
+Refresh metrics using authoritative schedule, attendance, and timesheet data.
+3
+Open Reports.
+Display available report types and filters.
+4
+Select report type, period, and export format.
+Validate the requested report parameters.
+5
+Select Export.
+Generate PDF/Excel output from the selected dataset.
+6
+Download or view the result.
+Return the generated file and record export status.
+Alternative Flow
+No data for selected period
+Step
+Actor Action
+System Response
+1
+Select a period with no relevant records.
+Display zero/no-data state without generating misleading metrics.
+2
+Choose another period.
+Refresh the dashboard/report data.
+Alternative Flow
+Large report
+Step
+Actor Action
+System Response
+1
+Request a report requiring longer processing.
+Process asynchronously if configured and show generation status until the file is ready.
+Exception Flow
+Report generation fails
+Step
+Actor Action
+System Response
+1
+Select Export.
+The export process fails or times out.
+2
+Retry.
+Keep dashboard functions available and show a report-generation error.
+Priority
+High
+Business Rule
+BR19, BR22
+UC.16: Ask AI Assistant
+a.  Use Case Specification
+Use Case ID
+UC.16
+Use Case Name
+Ask AI Assistant
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Manager
+Brief Description
+Allows the Manager to ask natural-language questions about verified operational data and receive advisory explanations or summaries from the optional AI service.
+Goal
+Help the Manager interpret staffing shortages, attendance trends, and other verified operational information without delegating official decisions to AI.
+Trigger
+The Manager opens AI Assistant and submits a supported question.
+Pre-conditions
+The Manager is authenticated; AI support is enabled; the core backend can assemble authorized verified data for the question.
+Post-conditions
+An advisory response is displayed with no direct production-data modification; if AI is unavailable, the core system remains usable.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open AI Assistant.
+Display the advisory chat/Q&A interface and scope notice.
+2
+Enter a question about supported operational data.
+Send the question to Laravel for authorization and context preparation.
+3
+Wait for verified context.
+Laravel retrieves only authorized data from the core database and prepares the AI request.
+4
+Wait for AI response.
+The AI Service/LLM produces an explanation based on supplied verified context.
+5
+Review the answer.
+Display the advisory response with a reminder that Manager decisions remain final.
+Alternative Flow
+Question requires unsupported action
+Step
+Actor Action
+System Response
+1
+Ask the AI to publish a schedule, approve leave, change pay, or edit production data.
+Refuse the action and explain that the AI Assistant is advisory only.
+Alternative Flow
+Insufficient verified data
+Step
+Actor Action
+System Response
+1
+Ask a question for which required operational data is missing.
+Return a limited answer that states the missing data instead of inventing facts.
+Exception Flow
+AI Service unavailable or timeout
+Step
+Actor Action
+System Response
+1
+Submit a valid question while AI is unavailable.
+Display AI Unavailable/Timeout without affecting employee, schedule, attendance, timesheet, dashboard, or report functions.
+Priority
+Medium
+Business Rule
+BR20, BR21
+UC.17: Login
+a.  Use Case Specification
+Use Case ID
+UC.17
+Use Case Name
+Login
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Staff
+Brief Description
+Allows a Staff member to authenticate in the Mobile App and access Staff-authorized functions.
+Goal
+Authenticate Staff securely and establish a role-appropriate mobile session.
+Trigger
+The Staff member opens the Mobile App and selects Login.
+Pre-conditions
+The Staff account exists, is active, and the core authentication service is available.
+Post-conditions
+A Staff session is established and the Mobile App home screen is displayed.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open the Mobile App.
+Display the Login screen.
+2
+Enter account identifier and password.
+Validate required fields.
+3
+Select Login.
+Verify credentials and active account status.
+4
+Wait for authentication.
+Create authenticated session/JWT and load Staff permissions.
+5
+Continue.
+Open the Staff home screen and permitted functions.
+Alternative Flow
+Invalid credentials
+Step
+Actor Action
+System Response
+1
+Submit invalid credentials.
+Reject login and display a generic invalid-credentials message.
+2
+Correct the credentials and retry.
+Re-run authentication.
+Alternative Flow
+Inactive Staff account
+Step
+Actor Action
+System Response
+1
+Submit valid credentials for an inactive account.
+Reject access and display account-unavailable status.
+Exception Flow
+Network/core service unavailable
+Step
+Actor Action
+System Response
+1
+Select Login without a usable connection/core service.
+Do not create a session; display a connection/service error and allow retry.
+Priority
+High
+Business Rule
+BR01, BR02, BR25
+UC.18: View / Update Personal Profile
+a.  Use Case Specification
+Use Case ID
+UC.18
+Use Case Name
+View / Update Personal Profile
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Staff
+Brief Description
+Allows Staff to view their profile and update only permitted personal/contact information.
+Goal
+Keep Staff contact information current without allowing self-service changes to role, skills, pay rate, or management-controlled employment data.
+Trigger
+The Staff member opens Personal Profile.
+Pre-conditions
+The Staff member is authenticated and the employee profile exists.
+Post-conditions
+Permitted profile changes are validated and saved; protected employment fields remain unchanged.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open Personal Profile.
+Display the Staff profile and distinguish editable from read-only fields.
+2
+Select Edit.
+Enable permitted fields such as phone number or contact information.
+3
+Enter updated values.
+Validate format and required fields.
+4
+Select Save.
+Persist permitted changes to the employee profile.
+5
+Review confirmation.
+Display the updated profile and success status.
+Alternative Flow
+Invalid contact information
+Step
+Actor Action
+System Response
+1
+Enter an invalid email/phone format.
+Reject the save and identify the invalid field.
+2
+Correct the value.
+Revalidate and allow save.
+Alternative Flow
+Attempt to edit protected field
+Step
+Actor Action
+System Response
+1
+Attempt to change role, skills, employment type, hour limits, or pay-rate fields.
+Keep those fields read-only and do not accept the change.
+Exception Flow
+Profile cannot be loaded or saved
+Step
+Actor Action
+System Response
+1
+Open or save Personal Profile during a backend failure.
+Display a temporary error and preserve the previous stored profile.
+Priority
+High
+Business Rule
+BR02, BR03
+UC.19: Register Availability
+a.  Use Case Specification
+Use Case ID
+UC.19
+Use Case Name
+Register Availability
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Staff
+Brief Description
+Allows Staff to submit and update available time intervals for a scheduling period before the configured deadline.
+Goal
+Provide accurate availability input for constraint-based and manual scheduling.
+Trigger
+The Staff member opens Availability Registration and selects a scheduling period.
+Pre-conditions
+The Staff member is authenticated; the scheduling period and submission deadline exist.
+Post-conditions
+Valid availability intervals are stored for the selected period and become available to the Manager/Scheduling Engine.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open Availability Registration.
+Display the selected/default scheduling period and existing availability.
+2
+Choose a date/day and add available start/end time intervals.
+Validate time order and overlap within the submission.
+3
+Repeat for other days as needed.
+Update the draft availability view.
+4
+Select Submit/Save.
+Check the configured deadline and validate all intervals.
+5
+Review result.
+Store the availability and display submission status/time.
+Alternative Flow
+Overlapping or invalid intervals
+Step
+Actor Action
+System Response
+1
+Enter overlapping intervals or end time not later than start time.
+Reject the invalid interval and request correction.
+Alternative Flow
+Submission deadline passed
+Step
+Actor Action
+System Response
+1
+Select Submit after the deadline.
+Prevent self-service modification and display deadline status; any override requires Manager-authorized handling.
+Exception Flow
+Availability save fails
+Step
+Actor Action
+System Response
+1
+Submit valid availability.
+The backend cannot save the data.
+2
+Retry.
+Keep the unsaved draft on screen when possible and show an error.
+Priority
+High
+Business Rule
+BR04, BR05
+UC.20: View Work Schedule
+a.  Use Case Specification
+Use Case ID
+UC.20
+Use Case Name
+View Work Schedule
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Staff
+Brief Description
+Allows Staff to view their own published work schedule and subsequent official changes for selected periods.
+Goal
+Give Staff an accurate view of when and where they are expected to work.
+Trigger
+The Staff member opens My Schedule.
+Pre-conditions
+The Staff member is authenticated; a Published Schedule may exist for the selected period.
+Post-conditions
+Published assignments for the Staff member are displayed; draft schedules are not exposed as official work assignments.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open My Schedule.
+Display the current scheduling period and published assignments.
+2
+Select another period if needed.
+Load published schedule assignments for that period.
+3
+Select a shift.
+Display date, start/end time, position/role, status, and relevant notes.
+4
+Review schedule changes.
+Show any published updates and related notifications/history where available.
+Alternative Flow
+No published schedule
+Step
+Actor Action
+System Response
+1
+Select a period without a published schedule.
+Display No Published Schedule and do not show draft assignments as official.
+Alternative Flow
+Schedule changed after publication
+Step
+Actor Action
+System Response
+1
+Open a period with a newer published version.
+Display the latest official assignment and identify the update via notification/change status.
+Exception Flow
+Schedule data cannot be loaded
+Step
+Actor Action
+System Response
+1
+Open My Schedule during a backend/network error.
+Display a temporary error and allow retry; do not show stale data as confirmed unless clearly marked cached.
+Priority
+High
+Business Rule
+BR12, BR23
+UC.21: GPS Check-in / Check-out
+a.  Use Case Specification
+Use Case ID
+UC.21
+Use Case Name
+GPS Check-in / Check-out
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Staff
+Brief Description
+Allows Staff to record attendance events from the Mobile App using event-time GPS validation.
+Goal
+Capture trustworthy actual attendance while limiting location collection to check-in/check-out events.
+Trigger
+The Staff member opens Attendance near an assigned shift and selects Check-in or Check-out.
+Pre-conditions
+The Staff member is authenticated, has an applicable assignment, grants location permission, and the device can provide GPS data.
+Post-conditions
+A valid attendance event is stored with server time and validated location metadata, or the event is rejected with a clear reason.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open Attendance for an assigned shift.
+Display current attendance status and permitted action: Check-in or Check-out.
+2
+Select Check-in/Check-out.
+Request a one-time device location sample and accuracy value.
+3
+Allow location access.
+Send location sample and event request to the backend.
+4
+Wait for validation.
+Validate geofence, GPS accuracy, server time, assignment, and allowed attendance window.
+5
+Review result.
+Store the valid attendance event and display server-recorded event time/status.
+Alternative Flow
+Outside geofence
+Step
+Actor Action
+System Response
+1
+Submit an event from outside the configured radius.
+Reject the event and display Outside Allowed Location.
+2
+Move to the allowed location and retry.
+Run validation again with a new location sample.
+Alternative Flow
+GPS accuracy too low
+Step
+Actor Action
+System Response
+1
+Submit an event with accuracy worse than configured threshold.
+Request a better location sample instead of accepting unreliable GPS.
+Exception Flow
+Location permission denied or GPS unavailable
+Step
+Actor Action
+System Response
+1
+Select Check-in/Check-out without location permission/GPS.
+Explain that location is required for this attendance event and provide retry guidance.
+Exception Flow
+Network/backend unavailable
+Step
+Actor Action
+System Response
+1
+Submit an event while the backend is unavailable.
+Do not fabricate a successful check-in; show failure/pending status according to implementation policy.
+Priority
+High
+Business Rule
+BR16
+UC.22: Submit Leave Request
+a.  Use Case Specification
+Use Case ID
+UC.22
+Use Case Name
+Submit Leave Request
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Staff
+Brief Description
+Allows Staff to request planned or emergency leave for a defined date/time period and provide a reason.
+Goal
+Create a traceable leave request for Manager review and schedule-impact handling.
+Trigger
+The Staff member opens Leave Requests and selects New Request.
+Pre-conditions
+The Staff member is authenticated; request dates are valid.
+Post-conditions
+A valid leave request is stored with Pending status and becomes available to the Manager for review.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open Leave Requests.
+Display existing leave requests and New Request action.
+2
+Select New Request.
+Display leave type, start/end date/time, reason, and affected-shift context.
+3
+Enter request details.
+Validate date/time order and required fields.
+4
+Review affected assignments shown by the system.
+Display any published shifts overlapping the requested leave period.
+5
+Select Submit.
+Store the request as Pending and record submission time.
+6
+Review confirmation.
+Notify the Manager workflow and display Pending status to Staff.
+Alternative Flow
+Invalid date/time range
+Step
+Actor Action
+System Response
+1
+Enter an end before start or another invalid range.
+Reject submission and request corrected dates/times.
+Alternative Flow
+Duplicate/overlapping pending request
+Step
+Actor Action
+System Response
+1
+Submit leave overlapping an existing active request.
+Warn about the overlap and prevent an exact duplicate according to validation policy.
+Exception Flow
+Request cannot be saved
+Step
+Actor Action
+System Response
+1
+Select Submit.
+The backend cannot persist the request.
+2
+Retry later.
+Do not show a false Pending request; keep form data where possible.
+Priority
+High
+Business Rule
+BR05, BR15, BR23
+UC.23: Request Shift Swap / Accept Open Shift
+a.  Use Case Specification
+Use Case ID
+UC.23
+Use Case Name
+Request Shift Swap / Accept Open Shift
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Staff
+Brief Description
+Allows Staff to request a direct swap for an assigned shift or claim an eligible Open Shift/replacement offer.
+Goal
+Let Staff resolve schedule conflicts or take eligible extra work while preserving all hard scheduling rules and concurrency safety.
+Trigger
+The Staff member opens Shift Requests/Open Shifts.
+Pre-conditions
+The Staff member is authenticated; an eligible own assignment or active Open Shift exists.
+Post-conditions
+A swap request is submitted for review or an Open Shift claim succeeds atomically; invalid/ineligible requests are rejected.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open Shift Requests / Open Shifts.
+Display own eligible assignments, existing swap requests, and available Open Shifts.
+2
+Choose Request Swap or select an Open Shift.
+Display shift details and current eligibility status.
+3
+For a swap, choose an intended partner/shift if the workflow supports direct swap; for Open Shift, choose Claim.
+Run preliminary eligibility checks.
+4
+Confirm the request/claim.
+Revalidate availability, leave, overlap, skill, hour, and rest constraints using current data.
+5
+Wait for result.
+Create a Pending swap request or atomically assign the Open Shift if still vacant.
+6
+Review status.
+Display Pending/Accepted/Rejected/Already Filled status and create relevant notifications.
+Alternative Flow
+Staff becomes ineligible
+Step
+Actor Action
+System Response
+1
+Confirm a request after availability/leave/schedule data changed.
+Reject the request and display the failed eligibility reason.
+Alternative Flow
+Open Shift already filled
+Step
+Actor Action
+System Response
+1
+Attempt to claim an Open Shift that another Staff member has just claimed.
+Return Already Filled/Conflict and refresh the Open Shift list.
+Exception Flow
+Concurrency conflict
+Step
+Actor Action
+System Response
+1
+Two valid claims reach the server nearly simultaneously.
+Use locking/transaction control so only one assignment is committed.
+2
+Receive the later response.
+Inform the later claimant that the vacancy is no longer available.
+Priority
+High
+Business Rule
+BR13, BR14, BR23
+UC.24: View Timesheet / Working Hours
+a.  Use Case Specification
+Use Case ID
+UC.24
+Use Case Name
+View Timesheet / Working Hours
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Staff
+Brief Description
+Allows Staff to view their own approved timesheets and actual working-hour summaries for selected periods.
+Goal
+Provide transparent access to actual recorded working time without exposing other employees’ data.
+Trigger
+The Staff member opens Timesheet / Working Hours.
+Pre-conditions
+The Staff member is authenticated; attendance/timesheet data may exist for the selected period.
+Post-conditions
+The Staff member sees only their own approved/available timesheet records and calculated working-hour summaries.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open Timesheet / Working Hours.
+Display current-period working-hour summary and timesheet entries.
+2
+Select a period.
+Load the Staff member’s attendance-derived timesheet records.
+3
+Select an entry.
+Display scheduled time, actual attendance, approved working time, and status.
+4
+Review totals.
+Display period total approved/recorded hours and relevant adjustment status.
+Alternative Flow
+Timesheet pending approval
+Step
+Actor Action
+System Response
+1
+Open an entry that has not yet been approved.
+Display Pending/Unapproved status and distinguish it from approved working-hour totals.
+Alternative Flow
+No timesheet data
+Step
+Actor Action
+System Response
+1
+Select a period without attendance/timesheet records.
+Display No Data for the selected period.
+Exception Flow
+Timesheet data cannot be loaded
+Step
+Actor Action
+System Response
+1
+Open the page during a backend/network error.
+Display a temporary error and allow retry without exposing another employee’s data.
+Priority
+High
+Business Rule
+BR18, BR22
+UC.25: View Notifications
+a.  Use Case Specification
+Use Case ID
+UC.25
+Use Case Name
+View Notifications
+Created by
+C1SE.57 Team
+Last updated by
+C1SE.57 Team
+Date Created
+Aug 30, 2026
+Date last updated
+Aug 31, 2026
+Actors
+Staff
+Brief Description
+Allows Staff to view in-app notifications about schedules, leave, swaps, Open Shifts, attendance-related updates, and other supported events.
+Goal
+Ensure Staff receive timely operational status changes that affect their work.
+Trigger
+The Staff member opens Notifications.
+Pre-conditions
+The Staff member is authenticated; zero or more notifications may exist.
+Post-conditions
+Notifications are displayed in chronological order and may be marked as read; opening a notification does not itself change the underlying business decision.
+Main Flow
+Step
+Actor Action
+System Response
+1
+Open Notifications.
+Display unread count and notification list ordered by time.
+2
+Filter or scroll if needed.
+Load additional notifications within the Staff member’s scope.
+3
+Select a notification.
+Display notification detail and link/context to the related schedule/request where supported.
+4
+Return to the list.
+Mark the selected notification as read and update unread count.
+Alternative Flow
+No notifications
+Step
+Actor Action
+System Response
+1
+Open Notifications with no current items.
+Display an empty-state message without error.
+Alternative Flow
+Related item no longer active
+Step
+Actor Action
+System Response
+1
+Open a notification for an expired Open Shift or superseded schedule change.
+Display the notification history and current item status rather than allowing an invalid action.
+Exception Flow
+Notification service/data unavailable
+Step
+Actor Action
+System Response
+1
+Open Notifications during a temporary backend error.
+Display a load-error message; core business records remain unchanged.
+Priority
+Medium
+Business Rule
+BR23
+2.5.6. Software Quality Attributes
+The quality attributes below define measurable or verifiable expectations for the MVP. Measurements are evaluated in the agreed academic test environment and are not claims of production-scale service-level agreements.
+2.5.6.1. Usability
+• The Web and Mobile interfaces shall use consistent terminology for Employee, Availability, Shift, Draft Schedule, Published Schedule, Leave, Attendance, and Timesheet.
+• Primary Staff tasks - viewing schedule, registering availability, check-in/check-out, leave, and shift requests - should be reachable through direct navigation without requiring administrative knowledge.
+• Validation errors shall identify the affected field or rule and provide actionable correction guidance.
+• Draft schedules, published schedules, unfilled positions, pending requests, and approved records shall be visually distinguishable to reduce operational ambiguity.
+2.5.6.2. Reliability
+• Laravel and Microsoft SQL Server are the core system of record. Failure of the Scheduling Service or AI Service shall not make core employee, manual scheduling, attendance, timesheet, dashboard, and report functions unavailable.
+• Auto-scheduling jobs shall expose explicit lifecycle states such as queued/running/succeeded/failed or equivalent, so a timeout is not mistaken for a successful schedule.
+• Open Shift assignment shall be concurrency-safe: one vacancy can be assigned successfully to only one Staff member.
+• Critical write operations such as publishing a schedule, accepting an Open Shift, and approving/correcting attendance shall use transactional integrity appropriate to the selected implementation.
+2.5.6.3. Security
+• Protected API functions shall require authentication and server-side RBAC authorization for Admin, Manager, or Staff as appropriate.
+• Passwords shall be stored using one-way password hashing; plaintext passwords shall not be stored in the application database.
+• JWT/session handling shall include expiry and validation; authorization decisions shall not rely only on client-side UI hiding.
+• User inputs shall be validated and parameterized ORM/query techniques shall be used to reduce common injection risks.
+• GPS coordinates shall be collected only for attendance events in the MVP; continuous employee location tracking is not permitted.
+• Audit-relevant changes such as schedule publication, account status changes, attendance corrections, and important configuration changes shall be traceable.
+2.5.6.4. Maintainability
+• Core business logic shall be organized in Laravel modules/services with clear separation from the optional Scheduling and AI services.
+• The Laravel-to-Scheduling and Laravel-to-AI interfaces shall use documented JSON/API contracts so services can be tested independently.
+• Scheduling constraints shall be implemented as identifiable rules with test datasets that allow individual hard constraints to be verified.
+• Source code shall follow the project coding standards for React/JavaScript, Laravel/PHP, and Python, with version control in Git/GitHub.
+2.5.6.5. Portability
+• The Manager/Admin Web application shall run on modern desktop browsers used in the project test environment and use responsive layouts for practical screen sizes.
+• The Staff Mobile App shall be implemented with React Native using JavaScript/JSX and shall access business functions only through the Laravel REST API.
+• Docker/Docker Compose shall be used for repeatable local/test deployment of core backend, database/cache, Scheduling Service, and optional AI Service where applicable.
+2.5.6.6. Performance
+• Core API endpoints target P95 response time below 500 ms for ordinary CRUD/read operations in the defined test environment, excluding long-running external/optimization jobs.
+• The Scheduling Engine target is approximately 15 seconds or less for the agreed academic dataset of about 20-30 employees for a weekly scheduling period, subject to configured solver time limit.
+• Automatically generated schedules must have zero hard-constraint violations in the validation test suite.
+• The system shall return an explicit timeout/failure state when an optional service exceeds its configured timeout, instead of blocking core requests indefinitely.
+• Report/export jobs that exceed normal request time should be executed asynchronously when the implementation requires it.
+2.6. Software Design Description
+This section reserves the diagram structure required by the SRS template. Diagram content is intentionally left blank in this version and will be inserted after the corresponding analysis/design review.
+2.6.1. Sequence Diagrams
+2.6.1.1. Login
+SEQ:UC.01
+2.6.1.2. Manage User Accounts
+SEQ:UC.02
+2.6.1.3. Manage Account Access
+SEQ:UC.03
+2.6.1.4. View System / Service Health
+SEQ:UC.04
+2.6.1.5. Manage System Configuration
+SEQ:UC.05
+2.6.1.6. Login
+SEQ:UC.06
+2.6.1.7. Manage Employees and Skills
+SEQ:UC.07
+2.6.1.8. Manage Shifts and Scheduling Rules
+SEQ:UC.08
+2.6.1.9. View Staff Availability
+SEQ:UC.09
+2.6.1.10. Run Auto Scheduling
+SEQ:UC.10
+2.6.1.11. Review / Edit / Publish Schedule
+SEQ:UC.11
+2.6.1.12. Review Leave Requests
+SEQ:UC.12
+2.6.1.13. Manage Swap / Open Shift / Replacement
+SEQ:UC.13
+2.6.1.14. Manage Attendance and Timesheet
+SEQ:UC.14
+2.6.1.15. View Dashboard / Export Reports
+SEQ:UC.15
+2.6.1.16. Ask AI Assistant
+SEQ:UC.16
+2.6.1.17. Login
+SEQ:UC.17
+2.6.1.18. View / Update Personal Profile
+SEQ:UC.18
+2.6.1.19. Register Availability
+SEQ:UC.19
+2.6.1.20. View Work Schedule
+SEQ:UC.20
+2.6.1.21. GPS Check-in / Check-out
+SEQ:UC.21
+2.6.1.22. Submit Leave Request
+SEQ:UC.22
+2.6.1.23. Request Shift Swap / Accept Open Shift
+SEQ:UC.23
+2.6.1.24. View Timesheet / Working Hours
+SEQ:UC.24
+2.6.1.25. View Notifications
+SEQ:UC.25
+2.6.2. Activity Diagrams
+2.6.2.1. Login
+ACT:UC.01
+2.6.2.2. Manage User Accounts
+ACT:UC.02
+2.6.2.3. Manage Account Access
+ACT:UC.03
+2.6.2.4. View System / Service Health
+ACT:UC.04
+2.6.2.5. Manage System Configuration
+ACT:UC.05
+2.6.2.6. Login
+ACT:UC.06
+2.6.2.7. Manage Employees and Skills
+ACT:UC.07
+2.6.2.8. Manage Shifts and Scheduling Rules
+ACT:UC.08
+2.6.2.9. View Staff Availability
+ACT:UC.09
+2.6.2.10. Run Auto Scheduling
+ACT:UC.10
+2.6.2.11. Review / Edit / Publish Schedule
+ACT:UC.11
+2.6.2.12. Review Leave Requests
+ACT:UC.12
+2.6.2.13. Manage Swap / Open Shift / Replacement
+ACT:UC.13
+2.6.2.14. Manage Attendance and Timesheet
+ACT:UC.14
+2.6.2.15. View Dashboard / Export Reports
+ACT:UC.15
+2.6.2.16. Ask AI Assistant
+ACT:UC.16
+2.6.2.17. Login
+ACT:UC.17
+2.6.2.18. View / Update Personal Profile
+ACT:UC.18
+2.6.2.19. Register Availability
+ACT:UC.19
+2.6.2.20. View Work Schedule
+ACT:UC.20
+2.6.2.21. GPS Check-in / Check-out
+ACT:UC.21
+2.6.2.22. Submit Leave Request
+ACT:UC.22
+2.6.2.23. Request Shift Swap / Accept Open Shift
+ACT:UC.23
+2.6.2.24. View Timesheet / Working Hours
+ACT:UC.24
+2.6.2.25. View Notifications
+ACT:UC.25
+2.6.3. State Diagram
+2.6.4. Class Diagram
+2.6.5. Allocation Diagram
+Appendix A: Glossary
+Term
+Definition
+Admin
+Platform administrator responsible for accounts, access, service health, and permitted system configuration.
+Manager
+Store manager who manages staff, shifts, schedules, attendance, timesheets, reports, and operational decisions.
+Staff
+Employee who uses the Mobile App for availability, schedule viewing, attendance, leave, shift requests, timesheets, and notifications.
+Availability
+Time intervals submitted by Staff indicating when they are available to work.
+Shift
+A defined work period with start/end times and staffing requirements.
+Shift Requirement
+Required headcount, position, skill, skill level, or priority associated with a shift.
+Draft Schedule
+A proposed schedule that is not official until reviewed and published by the Manager.
+Published Schedule
+The official schedule visible to Staff after Manager approval.
+Hard Constraint
+A scheduling rule that must not be violated, such as approved leave, overlap prevention, required skill, or work-hour limits.
+Soft Constraint
+A preference optimized when possible, such as fairness or reduced overtime, without overriding hard constraints.
+Open Shift
+A vacant assignment offered to eligible Staff for claiming or replacement.
+Attendance
+Actual check-in/check-out events captured for a Staff member.
+Timesheet
+Approved actual working-time record derived from attendance and applicable rules.
+Geofence
+Allowed geographic radius around the store used to validate GPS attendance events.
+OR-Tools CP-SAT
+Google OR-Tools constraint programming solver used by the Scheduling Service.
+Scheduling Service
+Optional Python/FastAPI service that calculates constraint-based draft schedules.
+AI Assistant
+Optional advisory service that explains verified operational data and does not make official HR decisions.
+Graceful Degradation
+Architecture behavior in which core Laravel/Microsoft SQL Server functions remain available when optional Scheduling or AI services are unavailable.
+RBAC
+Role-Based Access Control used to restrict functions according to Admin, Manager, and Staff roles.
+JWT
+JSON Web Token used by the API for authenticated access sessions.

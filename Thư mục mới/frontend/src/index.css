@@ -1,0 +1,12 @@
+/* file: frontend/src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Thiết lập màu nền tổng thể giúp giao diện thanh lịch và dễ nhìn [3] */
+body {
+  margin: 0;
+  background-color: #c3c7cb;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #1f2937;
+}
