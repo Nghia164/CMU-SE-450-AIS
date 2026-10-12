@@ -1,19 +1,10 @@
-// FR07 - Ca trống
-// Cần làm:
-//  - Xem ca trống
-//  - Nhận ca
-//  - Nếu người khác nhận trước: hiện thông báo lỗi
+import { useState } from "react";
+import { CalendarClock, UserPlus } from "lucide-react";
+const seed = [{ id: 1, date: "2026-10-13", shift: "Ca sáng", time: "07:00–12:00", role: "Phục vụ", needed: 2, incentive: 30000 }, { id: 2, date: "2026-10-14", shift: "Ca tối", time: "17:00–22:00", role: "Pha chế", needed: 1, incentive: 50000 }, { id: 3, date: "2026-10-16", shift: "Ca chiều", time: "12:00–17:00", role: "Thu ngân", needed: 1, incentive: 0 }];
 export default function OpenShiftPage() {
-  return (
-    <div>
-      <h1 className="mb-4 text-2xl font-semibold">Ca trống</h1>
-      <div className="rounded-lg border border-gray-200 bg-white p-4">
-        <ul className="list-disc pl-5">
-        <li>Xem ca trống</li>
-        <li>Nhận ca</li>
-        <li>Nếu người khác nhận trước: hiện thông báo lỗi</li>
-        </ul>
-      </div>
-    </div>
-  );
+  const [items, setItems] = useState(seed);
+  const [claimed, setClaimed] = useState([]);
+  const [notice, setNotice] = useState("");
+  const claim = (id) => { if (claimed.includes(id)) return; setClaimed((list) => [...list, id]); setNotice("Đã ghi nhận ý định nhận ca trong dữ liệu mẫu. Cần backend xác nhận trước khi phân công chính thức."); };
+  return <div className="space-y-6"><div><p className="text-sm font-medium text-blue-700">CƠ HỘI NHẬN CA</p><h1 className="mt-1 text-2xl font-bold">Ca trống</h1><p className="mt-1 text-sm text-slate-500">Xem các ca còn thiếu nhân viên và đăng ký nhận ca phù hợp.</p></div><div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">Ca mẫu để xem trước. Đăng ký chưa được gửi lên máy chủ.</div>{notice && <p role="status" className="rounded-lg bg-blue-50 p-3 text-sm text-blue-800">{notice}</p>}<div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{items.map((item) => <article key={item.id} className="rounded-xl border bg-white p-5 shadow-sm"><div className="flex items-center justify-between"><span className="rounded-full bg-amber-100 px-2 py-1 text-xs font-semibold text-amber-800">Đang thiếu người</span><CalendarClock size={19} className="text-blue-700"/></div><h2 className="mt-4 text-lg font-semibold">{item.shift}</h2><p className="mt-1 text-sm text-slate-500">{new Date(item.date + "T00:00:00").toLocaleDateString("vi-VN")} · {item.time}</p><div className="mt-4 border-t pt-3 text-sm"><p>Vị trí: <strong>{item.role}</strong></p><p className="mt-1">Số người cần: <strong>{item.needed}</strong></p><p className="mt-1">Thưởng: <strong>{item.incentive.toLocaleString("vi-VN")} ₫</strong></p></div><button disabled={claimed.includes(item.id)} onClick={() => claim(item.id)} className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-blue-700 px-3 py-2 text-sm font-semibold text-white disabled:bg-green-100 disabled:text-green-800"><UserPlus size={16}/>{claimed.includes(item.id) ? "Đã đăng ký (mẫu)" : "Đăng ký nhận ca"}</button></article>)}</div></div>;
 }
