@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CalendarClock, UserPlus } from "lucide-react";
 const seed = [{ id: 1, date: "2026-10-13", shift: "Ca sáng", time: "07:00–12:00", role: "Phục vụ", needed: 2, incentive: 30000 }, { id: 2, date: "2026-10-14", shift: "Ca tối", time: "17:00–22:00", role: "Pha chế", needed: 1, incentive: 50000 }, { id: 3, date: "2026-10-16", shift: "Ca chiều", time: "12:00–17:00", role: "Thu ngân", needed: 1, incentive: 0 }];
 export default function OpenShiftPage() {
-  const [items, setItems] = useState(seed);
+  const [items] = useState(seed);
   const [claimed, setClaimed] = useState([]);
   const [notice, setNotice] = useState("");
   const claim = (id) => { if (claimed.includes(id)) return; setClaimed((list) => [...list, id]); setNotice("Đã ghi nhận ý định nhận ca trong dữ liệu mẫu. Cần backend xác nhận trước khi phân công chính thức."); };
