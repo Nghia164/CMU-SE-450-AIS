@@ -1,15 +1,14 @@
-// FR04 - Đăng ký rảnh/bận
-// Cần làm:
-//  - Chọn rảnh / bận cho cả 7 ngày trong tuần
+import { useState } from "react";
+import { CalendarCheck, Save } from "lucide-react";
+const days = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"];
+const periods = ["Ca sáng", "Ca chiều", "Ca tối"];
+const initial = days.map((day) => ({ day, periods: [true, true, false] }));
 export default function AvailabilityPage() {
-  return (
-    <div>
-      <h1 className="mb-4 text-2xl font-semibold">Đăng ký rảnh/bận</h1>
-      <div className="rounded-lg border border-gray-200 bg-white p-4">
-        <ul className="list-disc pl-5">
-        <li>Chọn rảnh / bận cho cả 7 ngày trong tuần</li>
-        </ul>
-      </div>
-    </div>
-  );
+  const [availability, setAvailability] = useState(initial);
+  const [week, setWeek] = useState("2026-10-12");
+  const [note, setNote] = useState("");
+  const [notice, setNotice] = useState("");
+  const toggle = (dayIndex, periodIndex) => setAvailability((items) => items.map((item, i) => i === dayIndex ? { ...item, periods: item.periods.map((v, j) => j === periodIndex ? !v : v) } : item));
+  const save = () => setNotice("Đã lưu lựa chọn trong phiên giao diện mẫu. Chưa gửi lên hệ thống.");
+  return <div className="space-y-6"><div><p className="text-sm font-medium text-blue-700">LỊCH CÁ NHÂN</p><h1 className="mt-1 text-2xl font-bold">Đăng ký rảnh / bận</h1><p className="mt-1 text-sm text-slate-500">Chọn các ca bạn có thể làm để hỗ trợ quản lý xếp lịch.</p></div><div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">Lựa chọn mặc định là dữ liệu demo. Đăng ký chưa được gửi đến quản lý.</div>{notice && <p role="status" className="rounded-lg bg-blue-50 p-3 text-sm text-blue-800">{notice}</p>}<section className="rounded-xl border bg-white p-5 shadow-sm"><label className="flex max-w-xs flex-col gap-1 text-sm text-slate-600">Tuần bắt đầu từ<input type="date" value={week} onChange={(e) => setWeek(e.target.value)} className="rounded-lg border px-3 py-2 text-slate-900"/></label><div className="mt-5 overflow-x-auto"><table className="w-full min-w-[620px] text-left text-sm"><thead className="bg-slate-50"><tr><th className="px-4 py-3">Ngày</th>{periods.map((p) => <th key={p} className="px-4 py-3 text-center">{p}</th>)}</tr></thead><tbody className="divide-y">{availability.map((item, i) => { const date = new Date(week + "T00:00:00"); date.setDate(date.getDate() + i); return <tr key={item.day}><td className="px-4 py-4"><p className="font-medium">{item.day}</p><p className="text-xs text-slate-500">{date.toLocaleDateString("vi-VN")}</p></td>{item.periods.map((checked, j) => <td key={periods[j]} className="px-4 py-4 text-center"><input type="checkbox" aria-label={item.day + " " + periods[j]} checked={checked} onChange={() => toggle(i,j)} className="h-4 w-4 accent-blue-700"/></td>)}</tr>; })}</tbody></table></div><label className="mt-5 block text-sm text-slate-600">Ghi chú cho quản lý<textarea value={note} onChange={(e) => setNote(e.target.value)} rows="3" placeholder="Ví dụ: chỉ có thể làm ca tối vào cuối tuần" className="mt-1 block w-full rounded-lg border px-3 py-2"/></label><button onClick={save} className="mt-4 inline-flex items-center gap-2 rounded-lg bg-blue-700 px-4 py-2 text-sm font-semibold text-white"><Save size={16}/>Lưu đăng ký</button></section><div className="flex gap-3 rounded-xl border border-blue-100 bg-blue-50 p-4 text-sm text-blue-900"><CalendarCheck size={20}/><p>Đăng ký rảnh/bận là thông tin tham khảo; hãy báo trực tiếp quản lý nếu có thay đổi khẩn cấp.</p></div></div>;
 }
