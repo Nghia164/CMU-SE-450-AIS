@@ -1,15 +1,12 @@
-// FR03 - Thông tin cá nhân
-// Cần làm:
-//  - Xem và sửa thông tin cá nhân
+import { useState } from "react";
+import { UserRound, Save, LockKeyhole } from "lucide-react";
+const initial = { name: "Nguyễn Văn An", email: "nguyenvanan@gmail.com", phone: "0905123456", birthDate: "2002-05-12", role: "Phục vụ", contract: "Bán thời gian" };
 export default function ProfilePage() {
-  return (
-    <div>
-      <h1 className="mb-4 text-2xl font-semibold">Thông tin cá nhân</h1>
-      <div className="rounded-lg border border-gray-200 bg-white p-4">
-        <ul className="list-disc pl-5">
-        <li>Xem và sửa thông tin cá nhân</li>
-        </ul>
-      </div>
-    </div>
-  );
+  const [profile, setProfile] = useState(initial);
+  const [notice, setNotice] = useState("");
+  const [passwords, setPasswords] = useState({ current: "", next: "", confirm: "" });
+  const [passwordNotice, setPasswordNotice] = useState("");
+  const save = (e) => { e.preventDefault(); setNotice("Đã cập nhật thông tin trong phiên giao diện mẫu. Chưa lưu lên máy chủ."); };
+  const changePassword = (e) => { e.preventDefault(); if (passwords.next.length < 8) return setPasswordNotice("Mật khẩu mới cần có ít nhất 8 ký tự."); if (passwords.next !== passwords.confirm) return setPasswordNotice("Mật khẩu xác nhận không khớp."); setPasswordNotice("Biểu mẫu hợp lệ. Chức năng đổi mật khẩu chưa kết nối API."); setPasswords({ current: "", next: "", confirm: "" }); };
+  return <div className="mx-auto max-w-4xl space-y-6"><div><p className="text-sm font-medium text-blue-700">TÀI KHOẢN CỦA TÔI</p><h1 className="mt-1 text-2xl font-bold">Thông tin cá nhân</h1><p className="mt-1 text-sm text-slate-500">Xem và cập nhật hồ sơ nhân viên.</p></div><div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">Thông tin minh họa để xem trước giao diện.</div>{notice && <p role="status" className="rounded-lg bg-blue-50 p-3 text-sm text-blue-800">{notice}</p>}<form onSubmit={save} className="rounded-xl border bg-white p-5 shadow-sm"><div className="mb-5 flex items-center gap-3 border-b pb-4"><div className="rounded-full bg-blue-50 p-3 text-blue-700"><UserRound size={24}/></div><div><h2 className="font-semibold">{profile.name}</h2><p className="text-sm text-slate-500">{profile.role} · {profile.contract}</p></div></div><div className="grid gap-4 sm:grid-cols-2"><label className="text-sm text-slate-600">Họ và tên<input required value={profile.name} onChange={(e) => setProfile({ ...profile, name: e.target.value })} className="mt-1 block w-full rounded-lg border px-3 py-2 text-slate-900"/></label><label className="text-sm text-slate-600">Email<input required type="email" value={profile.email} onChange={(e) => setProfile({ ...profile, email: e.target.value })} className="mt-1 block w-full rounded-lg border px-3 py-2 text-slate-900"/></label><label className="text-sm text-slate-600">Số điện thoại<input required type="tel" value={profile.phone} onChange={(e) => setProfile({ ...profile, phone: e.target.value })} className="mt-1 block w-full rounded-lg border px-3 py-2 text-slate-900"/></label><label className="text-sm text-slate-600">Ngày sinh<input type="date" value={profile.birthDate} onChange={(e) => setProfile({ ...profile, birthDate: e.target.value })} className="mt-1 block w-full rounded-lg border px-3 py-2 text-slate-900"/></label><label className="text-sm text-slate-600">Vị trí<input readOnly value={profile.role} className="mt-1 block w-full rounded-lg border bg-slate-50 px-3 py-2 text-slate-500"/></label><label className="text-sm text-slate-600">Loại hợp đồng<input readOnly value={profile.contract} className="mt-1 block w-full rounded-lg border bg-slate-50 px-3 py-2 text-slate-500"/></label></div><button className="mt-5 inline-flex items-center gap-2 rounded-lg bg-blue-700 px-4 py-2 text-sm font-semibold text-white"><Save size={16}/>Lưu thay đổi</button></form><form onSubmit={changePassword} className="rounded-xl border bg-white p-5 shadow-sm"><h2 className="flex items-center gap-2 font-semibold"><LockKeyhole size={18}/>Đổi mật khẩu</h2>{passwordNotice && <p role="status" className="mt-3 rounded-lg bg-blue-50 p-3 text-sm text-blue-800">{passwordNotice}</p>}<div className="mt-4 grid gap-4 sm:grid-cols-3">{[["current","Mật khẩu hiện tại"],["next","Mật khẩu mới"],["confirm","Xác nhận mật khẩu"]].map(([key,label]) => <label key={key} className="text-sm text-slate-600">{label}<input required type="password" value={passwords[key]} onChange={(e) => setPasswords({ ...passwords, [key]: e.target.value })} className="mt-1 block w-full rounded-lg border px-3 py-2"/></label>)}</div><button className="mt-4 rounded-lg border px-4 py-2 text-sm font-semibold">Kiểm tra biểu mẫu</button></form></div>;
 }
