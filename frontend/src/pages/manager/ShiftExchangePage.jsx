@@ -1,17 +1,9 @@
-// FR06 - Đổi ca
-// Cần làm:
-//  - Danh sách yêu cầu đổi ca
-//  - Duyệt / từ chối
+import { useState } from "react";
+import { Check, X, ArrowLeftRight } from "lucide-react";
+const seed = [{ id: 1, from: "Nguyễn Văn An", to: "Trần Thị Bích", date: "2026-10-13", shift: "Ca sáng", status: "Chờ duyệt", reason: "Có lịch học đột xuất" }, { id: 2, from: "Lê Minh Cường", to: "Hoàng Văn Nam", date: "2026-10-14", shift: "Ca tối", status: "Chờ duyệt", reason: "Việc cá nhân" }, { id: 3, from: "Phạm Thị Dung", to: "Nguyễn Văn An", date: "2026-10-16", shift: "Ca chiều", status: "Đã duyệt", reason: "Đổi lịch học" }];
 export default function ShiftExchangePage() {
-  return (
-    <div>
-      <h1 className="mb-4 text-2xl font-semibold">Đổi ca</h1>
-      <div className="rounded-lg border border-gray-200 bg-white p-4">
-        <ul className="list-disc pl-5">
-        <li>Danh sách yêu cầu đổi ca</li>
-        <li>Duyệt / từ chối</li>
-        </ul>
-      </div>
-    </div>
-  );
+  const [items, setItems] = useState(seed); const [filter, setFilter] = useState("Tất cả"); const [notice, setNotice] = useState("");
+  const update = (id, status) => { setItems((list) => list.map((item) => item.id === id ? { ...item, status } : item)); setNotice("Đã cập nhật trạng thái trong dữ liệu mẫu."); };
+  const visible = items.filter((item) => filter === "Tất cả" || item.status === filter);
+  return <div className="space-y-6"><div><p className="text-sm font-medium text-blue-700">YÊU CẦU NHÂN VIÊN</p><h1 className="mt-1 text-2xl font-bold">Duyệt đổi ca</h1><p className="mt-1 text-sm text-slate-500">Kiểm tra người đổi, ca làm và trạng thái yêu cầu.</p></div><div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">Dữ liệu mẫu. Thao tác chưa được gửi đến backend.</div>{notice && <p role="status" className="rounded-lg bg-blue-50 p-3 text-sm text-blue-800">{notice}</p>}<div className="flex items-center gap-3"><ArrowLeftRight className="text-blue-700"/><select value={filter} onChange={(e) => setFilter(e.target.value)} className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"><option>Tất cả</option><option>Chờ duyệt</option><option>Đã duyệt</option><option>Từ chối</option></select><span className="text-sm text-slate-500">{visible.length} yêu cầu</span></div><div className="overflow-x-auto rounded-xl border border-slate-200 bg-white"><table className="w-full text-left text-sm"><thead className="bg-slate-50 text-slate-600"><tr>{["Người yêu cầu","Người đổi cùng","Ngày","Ca","Lý do","Trạng thái","Thao tác"].map((h) => <th key={h} className="px-4 py-3 font-semibold">{h}</th>)}</tr></thead><tbody className="divide-y divide-slate-100">{visible.map((item) => <tr key={item.id}><td className="px-4 py-3 font-medium">{item.from}</td><td className="px-4 py-3">{item.to}</td><td className="whitespace-nowrap px-4 py-3">{new Date(item.date + "T00:00:00").toLocaleDateString("vi-VN")}</td><td className="px-4 py-3">{item.shift}</td><td className="min-w-40 px-4 py-3">{item.reason}</td><td className="px-4 py-3"><span className={"rounded-full px-2 py-1 text-xs font-semibold " + (item.status === "Đã duyệt" ? "bg-green-100 text-green-700" : item.status === "Từ chối" ? "bg-red-100 text-red-700" : "bg-amber-100 text-amber-800")}>{item.status}</span></td><td className="px-4 py-3"><div className="flex gap-2">{item.status === "Chờ duyệt" && <><button aria-label="Duyệt" onClick={() => update(item.id, "Đã duyệt")} className="rounded-lg bg-green-50 p-2 text-green-700"><Check size={16}/></button><button aria-label="Từ chối" onClick={() => update(item.id, "Từ chối")} className="rounded-lg bg-red-50 p-2 text-red-700"><X size={16}/></button></>}</div></td></tr>)}</tbody></table>{visible.length === 0 && <p className="p-8 text-center text-sm text-slate-500">Không có yêu cầu phù hợp.</p>}</div></div>;
 }
