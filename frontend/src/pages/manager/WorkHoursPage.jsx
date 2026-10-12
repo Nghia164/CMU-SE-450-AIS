@@ -1,15 +1,10 @@
-// FR09 - Giờ làm
-// Cần làm:
-//  - Tổng hợp giờ làm theo lịch đã duyệt
+import { useMemo, useState } from "react";
+import { Download, Clock3, Users } from "lucide-react";
+const initial = [{ id: "NV001", name: "Nguyễn Văn An", role: "Phục vụ", planned: 32, actual: 30 }, { id: "NV002", name: "Trần Thị Bích", role: "Pha chế", planned: 28, actual: 28 }, { id: "NV003", name: "Lê Minh Cường", role: "Phục vụ", planned: 24, actual: 22 }, { id: "NV004", name: "Phạm Thị Dung", role: "Pha chế", planned: 30, actual: 31 }, { id: "NV005", name: "Hoàng Văn Nam", role: "Thu ngân", planned: 20, actual: 18 }];
 export default function WorkHoursPage() {
-  return (
-    <div>
-      <h1 className="mb-4 text-2xl font-semibold">Giờ làm</h1>
-      <div className="rounded-lg border border-gray-200 bg-white p-4">
-        <ul className="list-disc pl-5">
-        <li>Tổng hợp giờ làm theo lịch đã duyệt</li>
-        </ul>
-      </div>
-    </div>
-  );
+  const [query, setQuery] = useState(""); const [basis, setBasis] = useState("approved");
+  const rows = useMemo(() => initial.filter((r) => (r.name + r.id + r.role).toLowerCase().includes(query.toLowerCase())), [query]);
+  const total = rows.reduce((sum, r) => sum + (basis === "approved" ? r.actual : r.planned), 0);
+  const exportCsv = () => { const csv = ["Mã nhân viên,Họ tên,Vị trí,Giờ theo lịch,Giờ thực tế", ...rows.map((r) => [r.id, r.name, r.role, r.planned, r.actual].join(","))].join("\n"); const url = URL.createObjectURL(new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8" })); const a = document.createElement("a"); a.href = url; a.download = "tong-hop-gio-lam.csv"; a.click(); URL.revokeObjectURL(url); };
+  return <div className="space-y-6"><div className="flex flex-wrap items-end justify-between gap-3"><div><p className="text-sm font-medium text-blue-700">THỜI GIAN LÀM VIỆC</p><h1 className="mt-1 text-2xl font-bold">Tổng hợp giờ làm</h1><p className="mt-1 text-sm text-slate-500">Theo dõi giờ trong lịch và giờ thực tế.</p></div><button onClick={exportCsv} className="inline-flex items-center gap-2 rounded-lg border bg-white px-4 py-2 text-sm font-semibold"><Download size={16}/>Xuất CSV</button></div><div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">Số liệu minh họa, chưa lấy từ lịch đã duyệt hoặc bảng chấm công thật.</div><div className="grid gap-4 sm:grid-cols-3"><div className="rounded-xl border bg-white p-5"><Clock3 className="text-blue-700"/><p className="mt-3 text-sm text-slate-500">Tổng giờ đang xem</p><p className="mt-1 text-3xl font-bold">{total} giờ</p></div><div className="rounded-xl border bg-white p-5"><Users className="text-blue-700"/><p className="mt-3 text-sm text-slate-500">Nhân viên</p><p className="mt-1 text-3xl font-bold">{rows.length}</p></div><div className="rounded-xl border bg-white p-5"><Clock3 className="text-amber-600"/><p className="mt-3 text-sm text-slate-500">Chênh lệch tổng</p><p className="mt-1 text-3xl font-bold">{rows.reduce((s, r) => s + r.actual - r.planned, 0)} giờ</p></div></div><div className="flex flex-wrap gap-3"><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Tìm tên, mã hoặc vị trí..." className="min-w-60 flex-1 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"/><select value={basis} onChange={(e) => setBasis(e.target.value)} className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"><option value="approved">Giờ thực tế (minh họa)</option><option value="planned">Giờ theo lịch (minh họa)</option></select></div><div className="overflow-x-auto rounded-xl border border-slate-200 bg-white"><table className="w-full text-left text-sm"><thead className="bg-slate-50 text-slate-600"><tr>{["Mã NV","Nhân viên","Vị trí","Theo lịch","Thực tế","Chênh lệch"].map((h) => <th key={h} className="px-4 py-3 font-semibold">{h}</th>)}</tr></thead><tbody className="divide-y divide-slate-100">{rows.map((r) => <tr key={r.id}><td className="px-4 py-3 text-slate-500">{r.id}</td><td className="px-4 py-3 font-medium">{r.name}</td><td className="px-4 py-3">{r.role}</td><td className="px-4 py-3">{r.planned} giờ</td><td className="px-4 py-3">{r.actual} giờ</td><td className={"px-4 py-3 font-semibold " + (r.actual < r.planned ? "text-red-600" : r.actual > r.planned ? "text-amber-600" : "text-green-700")}>{r.actual - r.planned > 0 ? "+" : ""}{r.actual - r.planned} giờ</td></tr>)}</tbody></table>{rows.length === 0 && <p className="p-8 text-center text-sm text-slate-500">Không tìm thấy nhân viên.</p>}</div></div>;
 }
