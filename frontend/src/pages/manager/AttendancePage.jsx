@@ -1,17 +1,10 @@
-// FR11 - Chấm công
-// Cần làm:
-//  - Xem chấm công của mọi nhân viên
-//  - Chỉnh khi sai sót, bắt buộc nhập lý do
+import { useState } from "react";
+import { Search, Pencil, Save, X } from "lucide-react";
+const seed = [{ id: 1, code: "NV001", name: "Nguyễn Văn An", date: "2026-10-12", shift: "Ca sáng", checkIn: "07:03", checkOut: "12:00", status: "Đi muộn" }, { id: 2, code: "NV002", name: "Trần Thị Bích", date: "2026-10-12", shift: "Ca sáng", checkIn: "06:56", checkOut: "12:02", status: "Hợp lệ" }, { id: 3, code: "NV003", name: "Lê Minh Cường", date: "2026-10-12", shift: "Ca chiều", checkIn: "12:15", checkOut: "17:00", status: "Đi muộn" }, { id: 4, code: "NV004", name: "Phạm Thị Dung", date: "2026-10-12", shift: "Ca tối", checkIn: "17:00", checkOut: "", status: "Chưa checkout" }];
 export default function AttendancePage() {
-  return (
-    <div>
-      <h1 className="mb-4 text-2xl font-semibold">Chấm công</h1>
-      <div className="rounded-lg border border-gray-200 bg-white p-4">
-        <ul className="list-disc pl-5">
-        <li>Xem chấm công của mọi nhân viên</li>
-        <li>Chỉnh khi sai sót, bắt buộc nhập lý do</li>
-        </ul>
-      </div>
-    </div>
-  );
+  const [rows, setRows] = useState(seed); const [query, setQuery] = useState(""); const [editing, setEditing] = useState(null); const [draft, setDraft] = useState(null); const [notice, setNotice] = useState("");
+  const visible = rows.filter((r) => (r.name + r.code).toLowerCase().includes(query.toLowerCase()));
+  const startEdit = (row) => { setEditing(row.id); setDraft({ checkIn: row.checkIn, checkOut: row.checkOut, reason: "" }); setNotice(""); };
+  const save = (id) => { if (!draft.reason.trim()) return setNotice("Vui lòng nhập lý do điều chỉnh."); setRows((list) => list.map((r) => r.id === id ? { ...r, ...draft, status: "Đã điều chỉnh" } : r)); setEditing(null); setDraft(null); setNotice("Đã lưu điều chỉnh trong dữ liệu mẫu."); };
+  return <div className="space-y-6"><div><p className="text-sm font-medium text-blue-700">THEO DÕI CA LÀM</p><h1 className="mt-1 text-2xl font-bold">Chấm công nhân viên</h1><p className="mt-1 text-sm text-slate-500">Kiểm tra giờ vào/ra và ghi rõ lý do khi điều chỉnh.</p></div><div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">Bảng minh họa. Chỉnh sửa chưa được lưu lên hệ thống chấm công.</div>{notice && <p role="status" className="rounded-lg bg-blue-50 p-3 text-sm text-blue-800">{notice}</p>}<div className="relative max-w-md"><Search size={17} className="absolute left-3 top-3 text-slate-400"/><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Tìm nhân viên..." className="w-full rounded-lg border border-slate-300 bg-white py-2 pl-9 pr-3 text-sm"/></div><div className="overflow-x-auto rounded-xl border border-slate-200 bg-white"><table className="w-full text-left text-sm"><thead className="bg-slate-50 text-slate-600"><tr>{["Nhân viên","Ngày","Ca","Giờ vào","Giờ ra","Trạng thái","Thao tác"].map((h) => <th key={h} className="px-4 py-3 font-semibold">{h}</th>)}</tr></thead><tbody className="divide-y divide-slate-100">{visible.map((row) => <tr key={row.id}><td className="whitespace-nowrap px-4 py-3"><p className="font-medium">{row.name}</p><p className="text-xs text-slate-500">{row.code}</p></td><td className="whitespace-nowrap px-4 py-3">{new Date(row.date + "T00:00:00").toLocaleDateString("vi-VN")}</td><td className="px-4 py-3">{row.shift}</td>{editing === row.id ? <><td className="px-2 py-3"><input type="time" value={draft.checkIn} onChange={(e) => setDraft({ ...draft, checkIn: e.target.value })} className="rounded border px-2 py-1"/></td><td className="px-2 py-3"><input type="time" value={draft.checkOut} onChange={(e) => setDraft({ ...draft, checkOut: e.target.value })} className="rounded border px-2 py-1"/></td><td className="px-2 py-3"><input required value={draft.reason} onChange={(e) => setDraft({ ...draft, reason: e.target.value })} placeholder="Lý do điều chỉnh" className="min-w-40 rounded border px-2 py-1"/></td><td className="px-4 py-3"><div className="flex gap-1"><button onClick={() => save(row.id)} aria-label="Lưu" className="rounded bg-green-50 p-2 text-green-700"><Save size={16}/></button><button onClick={() => { setEditing(null); setDraft(null); }} aria-label="Hủy" className="rounded bg-slate-100 p-2"><X size={16}/></button></div></td></> : <><td className="px-4 py-3">{row.checkIn || "—"}</td><td className="px-4 py-3">{row.checkOut || "—"}</td><td className="px-4 py-3"><span className={"rounded-full px-2 py-1 text-xs font-semibold " + (row.status === "Hợp lệ" ? "bg-green-100 text-green-700" : row.status === "Đi muộn" ? "bg-amber-100 text-amber-800" : "bg-slate-100 text-slate-600")}>{row.status}</span></td><td className="px-4 py-3"><button onClick={() => startEdit(row)} aria-label="Chỉnh sửa" className="rounded-lg border p-2 hover:bg-slate-50"><Pencil size={16}/></button></td></>}</tr>)}</tbody></table>{visible.length === 0 && <p className="p-8 text-center text-sm text-slate-500">Không tìm thấy kết quả.</p>}</div></div>;
 }
