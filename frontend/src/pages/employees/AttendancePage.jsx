@@ -1,17 +1,9 @@
-// FR11 - Chấm công
-// Cần làm:
-//  - Check-in / check-out từng ca
-//  - Hiện kết quả: hợp lệ / trễ / ngoài khu vực
+import { useState } from "react";
+import { MapPin, Clock3, CheckCircle2 } from "lucide-react";
+const seed = [{ id: 1, date: "2026-10-12", shift: "Ca sáng", time: "07:00–12:00", checkedIn: true, checkedOut: true }, { id: 2, date: "2026-10-12", shift: "Ca chiều", time: "12:00–17:00", checkedIn: false, checkedOut: false }];
 export default function AttendancePage() {
-  return (
-    <div>
-      <h1 className="mb-4 text-2xl font-semibold">Chấm công</h1>
-      <div className="rounded-lg border border-gray-200 bg-white p-4">
-        <ul className="list-disc pl-5">
-        <li>Check-in / check-out từng ca</li>
-        <li>Hiện kết quả: hợp lệ / trễ / ngoài khu vực</li>
-        </ul>
-      </div>
-    </div>
-  );
+  const [items, setItems] = useState(seed);
+  const [notice, setNotice] = useState("");
+  const mark = (id, action) => { setItems((list) => list.map((item) => item.id === id ? { ...item, [action]: true } : item)); setNotice("Đã ghi nhận thao tác trong giao diện mẫu. Hệ thống chưa xác minh vị trí hoặc gửi dữ liệu lên máy chủ."); };
+  return <div className="space-y-6"><div><p className="text-sm font-medium text-blue-700">THEO DÕI THỜI GIAN</p><h1 className="mt-1 text-2xl font-bold">Chấm công</h1><p className="mt-1 text-sm text-slate-500">Ghi nhận giờ bắt đầu và kết thúc ca làm việc.</p></div><div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">Bản demo không đọc GPS, không xác minh khu vực và không gửi chấm công thật.</div>{notice && <p role="status" className="rounded-lg bg-blue-50 p-3 text-sm text-blue-800">{notice}</p>}<div className="grid gap-4 md:grid-cols-2">{items.map((item) => <article key={item.id} className="rounded-xl border bg-white p-5 shadow-sm"><div className="flex items-center justify-between"><span className="rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-700">{item.shift}</span><Clock3 size={20} className="text-blue-700"/></div><h2 className="mt-4 text-lg font-semibold">{new Date(item.date + "T00:00:00").toLocaleDateString("vi-VN")}</h2><p className="mt-1 text-sm text-slate-500">{item.time}</p><div className="mt-4 grid grid-cols-2 gap-3"><div className="rounded-lg bg-slate-50 p-3"><p className="text-xs text-slate-500">Check-in</p><p className="mt-1 font-semibold">{item.checkedIn ? "Đã ghi nhận" : "Chưa thực hiện"}</p></div><div className="rounded-lg bg-slate-50 p-3"><p className="text-xs text-slate-500">Check-out</p><p className="mt-1 font-semibold">{item.checkedOut ? "Đã ghi nhận" : "Chưa thực hiện"}</p></div></div><div className="mt-4 flex flex-wrap gap-2">{!item.checkedIn && <button onClick={() => mark(item.id, "checkedIn")} className="rounded-lg bg-blue-700 px-4 py-2 text-sm font-semibold text-white">Check-in</button>}{item.checkedIn && !item.checkedOut && <button onClick={() => mark(item.id, "checkedOut")} className="rounded-lg bg-blue-700 px-4 py-2 text-sm font-semibold text-white">Check-out</button>}{item.checkedIn && item.checkedOut && <span className="inline-flex items-center gap-2 text-sm font-semibold text-green-700"><CheckCircle2 size={17}/>Đã hoàn tất</span>}</div></article>)}</div><div className="flex gap-3 rounded-xl border bg-white p-4 text-sm text-slate-600"><MapPin size={20} className="shrink-0 text-slate-500"/><p>Vị trí chỉ được xác minh khi backend và chính sách chấm công thực tế được tích hợp.</p></div></div>;
 }
