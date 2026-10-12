@@ -1,19 +1,9 @@
-// FR12 - Lương
-// Cần làm:
-//  - Cấu hình đơn giá giờ, hệ số ca
-//  - Bảng tổng hợp giờ + lương theo kỳ
-//  - Xuất PDF
+import { useMemo, useState } from "react";
+import { Download, Banknote, Settings2 } from "lucide-react";
+const seed = [{ id: "NV001", name: "Nguyễn Văn An", hours: 30, rate: 28000 }, { id: "NV002", name: "Trần Thị Bích", hours: 28, rate: 30000 }, { id: "NV003", name: "Lê Minh Cường", hours: 22, rate: 26000 }, { id: "NV004", name: "Phạm Thị Dung", hours: 31, rate: 30000 }, { id: "NV005", name: "Hoàng Văn Nam", hours: 18, rate: 26000 }];
 export default function PayrollPage() {
-  return (
-    <div>
-      <h1 className="mb-4 text-2xl font-semibold">Lương</h1>
-      <div className="rounded-lg border border-gray-200 bg-white p-4">
-        <ul className="list-disc pl-5">
-        <li>Cấu hình đơn giá giờ, hệ số ca</li>
-        <li>Bảng tổng hợp giờ + lương theo kỳ</li>
-        <li>Xuất PDF</li>
-        </ul>
-      </div>
-    </div>
-  );
+  const [rows, setRows] = useState(seed); const [period, setPeriod] = useState("2026-10"); const [multiplier, setMultiplier] = useState(1.2); const [nightMultiplier, setNightMultiplier] = useState(1.3); const [notice, setNotice] = useState("");
+  const total = useMemo(() => rows.reduce((sum, r) => sum + r.hours * r.rate, 0), [rows]);
+  const exportCsv = () => { const csv = ["Mã NV,Họ tên,Giờ làm,Đơn giá,Ước tính", ...rows.map((r) => [r.id, r.name, r.hours, r.rate, r.hours * r.rate].join(","))].join("\n"); const url = URL.createObjectURL(new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8" })); const a = document.createElement("a"); a.href = url; a.download = "bang-luong.csv"; a.click(); URL.revokeObjectURL(url); };
+  return <div className="space-y-6"><div className="flex flex-wrap items-end justify-between gap-3"><div><p className="text-sm font-medium text-blue-700">LƯƠNG & CHI PHÍ</p><h1 className="mt-1 text-2xl font-bold">Tính lương</h1><p className="mt-1 text-sm text-slate-500">Ước tính tiền công theo giờ làm và đơn giá.</p></div><button onClick={exportCsv} className="inline-flex items-center gap-2 rounded-lg border bg-white px-4 py-2 text-sm font-semibold"><Download size={16}/>Xuất CSV</button></div><div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">Số liệu demo để kiểm thử giao diện, không phải bảng lương chính thức. Chưa áp dụng chính sách thuế, phụ cấp hoặc quy định pháp lý.</div>{notice && <p role="status" className="rounded-lg bg-blue-50 p-3 text-sm text-blue-800">{notice}</p>}<div className="grid gap-4 sm:grid-cols-3"><div className="rounded-xl border bg-white p-5"><Banknote className="text-blue-700"/><p className="mt-3 text-sm text-slate-500">Tổng ước tính</p><p className="mt-1 text-2xl font-bold">{total.toLocaleString("vi-VN")} ₫</p></div><div className="rounded-xl border bg-white p-5"><p className="text-sm text-slate-500">Nhân viên</p><p className="mt-2 text-2xl font-bold">{rows.length}</p></div><div className="rounded-xl border bg-white p-5"><p className="text-sm text-slate-500">Kỳ tính</p><input type="month" value={period} onChange={(e) => setPeriod(e.target.value)} className="mt-2 w-full rounded-lg border px-3 py-2"/></div></div><section className="rounded-xl border bg-white p-5"><h2 className="flex items-center gap-2 font-semibold"><Settings2 size={18}/>Thiết lập hệ số minh họa</h2><div className="mt-4 grid gap-4 sm:grid-cols-2"><label className="text-sm">Hệ số ca chiều<input type="number" min="1" max="3" step="0.1" value={multiplier} onChange={(e) => setMultiplier(Number(e.target.value))} className="mt-1 block w-full rounded-lg border px-3 py-2"/></label><label className="text-sm">Hệ số ca tối<input type="number" min="1" max="3" step="0.1" value={nightMultiplier} onChange={(e) => setNightMultiplier(Number(e.target.value))} className="mt-1 block w-full rounded-lg border px-3 py-2"/></label></div><button onClick={() => setNotice("Hệ số đã cập nhật trên giao diện. Bảng hiện tại chưa phân tách giờ theo loại ca.")} className="mt-3 rounded-lg border px-3 py-2 text-sm font-semibold">Lưu hệ số</button></section><div className="overflow-x-auto rounded-xl border bg-white"><table className="w-full text-left text-sm"><thead className="bg-slate-50"><tr>{["Mã NV","Nhân viên","Giờ làm demo","Đơn giá/giờ","Tổng ước tính"].map((h) => <th key={h} className="px-4 py-3 font-semibold text-slate-600">{h}</th>)}</tr></thead><tbody className="divide-y">{rows.map((r) => <tr key={r.id}><td className="px-4 py-3 text-slate-500">{r.id}</td><td className="px-4 py-3 font-medium">{r.name}</td><td className="px-4 py-3">{r.hours}</td><td className="px-4 py-3"><input aria-label={"Đơn giá " + r.name} type="number" min="0" value={r.rate} onChange={(e) => setRows((list) => list.map((x) => x.id === r.id ? { ...x, rate: Number(e.target.value) } : x))} className="w-28 rounded border px-2 py-1"/></td><td className="px-4 py-3 font-semibold">{(r.hours * r.rate).toLocaleString("vi-VN")} ₫</td></tr>)}</tbody></table></div></div>;
 }
