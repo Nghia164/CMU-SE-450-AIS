@@ -1,23 +1,30 @@
-// FR05 - Lập lịch
-// Cần làm:
-//  - Nút chạy lập lịch (giới hạn 15 giây, có trạng thái chờ)
-//  - Xem lịch đề xuất
-//  - Chỉnh tay từng ca
-//  - Hiện cảnh báo vi phạm ràng buộc / lý do vô nghiệm
-//  - Nút Apply (không cho Apply nếu vi phạm ràng buộc cứng)
+import { useMemo, useState } from "react";
+import { CalendarDays, ChevronLeft, ChevronRight, WandSparkles, AlertTriangle, Download } from "lucide-react";
+
+const names = ["Nguyễn Văn An", "Trần Thị Bích", "Lê Minh Cường", "Phạm Thị Dung", "Hoàng Văn Nam"];
+const shifts = [{ name: "Ca sáng", time: "07:00–12:00", color: "bg-sky-100 text-sky-800" }, { name: "Ca chiều", time: "12:00–17:00", color: "bg-amber-100 text-amber-800" }, { name: "Ca tối", time: "17:00–22:00", color: "bg-violet-100 text-violet-800" }];
+const initial = [{ day: 0, shift: 0, employee: 0 }, { day: 0, shift: 1, employee: 1 }, { day: 0, shift: 2, employee: 2 }, { day: 1, shift: 0, employee: 3 }, { day: 1, shift: 1, employee: 4 }, { day: 2, shift: 0, employee: 1 }, { day: 2, shift: 1, employee: 2 }, { day: 2, shift: 2, employee: 0 }, { day: 3, shift: 0, employee: 4 }, { day: 4, shift: 1, employee: 3 }, { day: 5, shift: 0, employee: 0 }, { day: 6, shift: 2, employee: 1 }];
+const dayNames = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"];
+
 export default function SchedulePage() {
-  return (
-    <div>
-      <h1 className="mb-4 text-2xl font-semibold">Lập lịch</h1>
-      <div className="rounded-lg border border-gray-200 bg-white p-4">
-        <ul className="list-disc pl-5">
-        <li>Nút chạy lập lịch (giới hạn 15 giây, có trạng thái chờ)</li>
-        <li>Xem lịch đề xuất</li>
-        <li>Chỉnh tay từng ca</li>
-        <li>Hiện cảnh báo vi phạm ràng buộc / lý do vô nghiệm</li>
-        <li>Nút Apply (không cho Apply nếu vi phạm ràng buộc cứng)</li>
-        </ul>
-      </div>
-    </div>
-  );
+  const [week, setWeek] = useState(0);
+  const [assignments, setAssignments] = useState(initial);
+  const [status, setStatus] = useState("Nháp");
+  const [notice, setNotice] = useState("");
+  const [employee, setEmployee] = useState("all");
+  const [editItem, setEditItem] = useState(null);
+  const dates = useMemo(() => Array.from({ length: 7 }, (_, i) => { const d = new Date(); d.setDate(d.getDate() - ((d.getDay() + 6) % 7) + week * 7 + i); return d; }), [week]);
+  const filtered = assignments.filter((a) => employee === "all" || String(a.employee) === employee);
+  const exportCsv = () => { const csv = ["Ngày,Ca,Thời gian,Nhân viên", ...filtered.map((a) => [dates[a.day].toLocaleDateString("vi-VN"), shifts[a.shift].name, shifts[a.shift].time, names[a.employee]].join(","))].join("\n"); const url = URL.createObjectURL(new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8" })); const a = document.createElement("a"); a.href = url; a.download = "lich-lam-viec.csv"; a.click(); URL.revokeObjectURL(url); };
+  const runDraft = () => { setStatus("Nháp"); setNotice("Đây là dữ liệu minh họa. Chưa gọi dịch vụ OR-Tools nên không phải kết quả xếp lịch tự động thật."); };
+  const changeAssignment = (index, nextEmployee) => { setAssignments((items) => items.map((item, i) => i === index ? { ...item, employee: Number(nextEmployee) } : item)); setEditItem(null); setNotice("Đã cập nhật phân công trong dữ liệu mẫu."); setStatus("Nháp"); };
+  return <div className="space-y-6">
+    <div className="flex flex-wrap items-end justify-between gap-3"><div><p className="text-sm font-medium text-blue-700">LẬP KẾ HOẠCH</p><h1 className="mt-1 text-2xl font-bold text-slate-900">Lịch làm việc</h1><p className="mt-1 text-sm text-slate-500">Xem và điều chỉnh phân công theo tuần.</p></div><div className="flex gap-2"><button onClick={exportCsv} className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold"><Download size={16}/>Xuất CSV</button><button onClick={runDraft} className="inline-flex items-center gap-2 rounded-lg bg-blue-700 px-3 py-2 text-sm font-semibold text-white"><WandSparkles size={16}/>Tạo bản nháp</button></div></div>
+    <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">Lịch hiện tại là dữ liệu minh họa, chưa kết nối API lập lịch hoặc lưu lịch chính thức.</div>
+    {notice && <div role="status" className="rounded-lg bg-blue-50 px-4 py-3 text-sm text-blue-800">{notice}</div>}
+    <section className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-4"><div className="flex items-center gap-3"><CalendarDays className="text-blue-700"/><div><p className="font-semibold text-slate-900">Tuần {dates[0].toLocaleDateString("vi-VN")} – {dates[6].toLocaleDateString("vi-VN")}</p><p className="text-sm text-slate-500">Trạng thái: <span className="font-semibold">{status}</span></p></div></div><div className="flex gap-2"><button aria-label="Tuần trước" onClick={() => setWeek((w) => w - 1)} className="rounded-lg border p-2"><ChevronLeft size={18}/></button><button onClick={() => setWeek(0)} className="rounded-lg border px-3 text-sm">Tuần này</button><button aria-label="Tuần sau" onClick={() => setWeek((w) => w + 1)} className="rounded-lg border p-2"><ChevronRight size={18}/></button></div><select value={employee} onChange={(e) => setEmployee(e.target.value)} className="rounded-lg border border-slate-300 px-3 py-2 text-sm"><option value="all">Tất cả nhân viên</option>{names.map((n, i) => <option key={n} value={i}>{n}</option>)}</select></section>
+    <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-7">{dates.map((date, day) => <section key={date.toISOString()} className="min-h-52 rounded-xl border border-slate-200 bg-white p-3"><div className="mb-3 border-b border-slate-100 pb-2"><p className="text-sm font-semibold text-slate-900">{dayNames[day]}</p><p className="text-xs text-slate-500">{date.toLocaleDateString("vi-VN", { day: "2-digit", month: "2-digit" })}</p></div><div className="space-y-2">{filtered.map((item) => ({ ...item, originalIndex: assignments.indexOf(item) })).filter((a) => a.day === day).map((a) => <button key={a.originalIndex} onClick={() => setEditItem(a.originalIndex)} className={"block w-full rounded-lg p-2 text-left " + shifts[a.shift].color}><span className="block text-xs font-semibold">{shifts[a.shift].name}</span><span className="mt-1 block text-xs">{shifts[a.shift].time}</span><span className="mt-1 block truncate text-xs">{names[a.employee]}</span></button>)}</div></section>)}</div>
+    {editItem !== null && <div className="rounded-xl border border-blue-200 bg-blue-50 p-4"><h2 className="font-semibold text-slate-900">Điều chỉnh phân công</h2><p className="mt-1 text-sm text-slate-600">{dayNames[assignments[editItem].day]} · {shifts[assignments[editItem].shift].name}</p><div className="mt-3 flex flex-wrap gap-2"><select defaultValue={assignments[editItem].employee} id="schedule-employee" className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm">{names.map((n, i) => <option key={n} value={i}>{n}</option>)}</select><button onClick={() => changeAssignment(editItem, document.getElementById("schedule-employee").value)} className="rounded-lg bg-blue-700 px-4 py-2 text-sm font-semibold text-white">Lưu phân công</button><button onClick={() => setEditItem(null)} className="rounded-lg border bg-white px-4 py-2 text-sm">Hủy</button></div></div>}
+    <div className="flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"><AlertTriangle size={19} className="mt-0.5 shrink-0"/><div><p className="font-semibold">Trước khi công bố lịch</p><p className="mt-1">Cần xác minh giờ rảnh, thời gian nghỉ giữa ca và nhu cầu nhân sự. Nút công bố chưa được bật vì chưa có API xác nhận quyền và lưu lịch.</p></div></div>
+  </div>;
 }
