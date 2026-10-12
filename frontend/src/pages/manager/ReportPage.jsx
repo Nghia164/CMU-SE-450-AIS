@@ -1,15 +1,9 @@
-// FR10 - Báo cáo
-// Cần làm:
-//  - Tạo và xuất báo cáo PDF
+import { useMemo, useState } from "react";
+import { Download, FileText, Users, Clock3 } from "lucide-react";
+const data = [{ name: "Nguyễn Văn An", shifts: 8, hours: 30, late: 1 }, { name: "Trần Thị Bích", shifts: 7, hours: 28, late: 0 }, { name: "Lê Minh Cường", shifts: 6, hours: 22, late: 2 }, { name: "Phạm Thị Dung", shifts: 8, hours: 31, late: 0 }, { name: "Hoàng Văn Nam", shifts: 5, hours: 18, late: 1 }];
 export default function ReportPage() {
-  return (
-    <div>
-      <h1 className="mb-4 text-2xl font-semibold">Báo cáo</h1>
-      <div className="rounded-lg border border-gray-200 bg-white p-4">
-        <ul className="list-disc pl-5">
-        <li>Tạo và xuất báo cáo PDF</li>
-        </ul>
-      </div>
-    </div>
-  );
+  const [period, setPeriod] = useState("2026-10"); const [metric, setMetric] = useState("hours");
+  const rows = useMemo(() => [...data].sort((a, b) => b[metric] - a[metric]), [metric]);
+  const exportCsv = () => { const csv = ["Nhân viên,Số ca,Giờ làm,Đi muộn", ...rows.map((r) => [r.name, r.shifts, r.hours, r.late].join(","))].join("\n"); const url = URL.createObjectURL(new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8" })); const a = document.createElement("a"); a.href = url; a.download = "bao-cao-" + period + ".csv"; a.click(); URL.revokeObjectURL(url); };
+  return <div className="space-y-6"><div className="flex flex-wrap items-end justify-between gap-3"><div><p className="text-sm font-medium text-blue-700">PHÂN TÍCH VẬN HÀNH</p><h1 className="mt-1 text-2xl font-bold">Báo cáo</h1><p className="mt-1 text-sm text-slate-500">Tổng hợp ca làm, giờ làm và tình trạng đi muộn.</p></div><div className="flex gap-2"><button onClick={exportCsv} className="inline-flex items-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm font-semibold"><Download size={16}/>Xuất CSV</button><button onClick={() => window.print()} className="inline-flex items-center gap-2 rounded-lg bg-blue-700 px-3 py-2 text-sm font-semibold text-white"><FileText size={16}/>In / lưu PDF</button></div></div><div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">Báo cáo sử dụng dữ liệu demo. Chức năng In / lưu PDF mở hộp thoại in của trình duyệt.</div><div className="flex flex-wrap gap-3"><label className="text-sm text-slate-600">Kỳ báo cáo<input type="month" value={period} onChange={(e) => setPeriod(e.target.value)} className="mt-1 block rounded-lg border bg-white px-3 py-2"/></label><label className="text-sm text-slate-600">Sắp xếp theo<select value={metric} onChange={(e) => setMetric(e.target.value)} className="mt-1 block rounded-lg border bg-white px-3 py-2"><option value="hours">Giờ làm</option><option value="shifts">Số ca</option><option value="late">Số lần đi muộn</option></select></label></div><div className="grid gap-4 sm:grid-cols-3"><div className="rounded-xl border bg-white p-5"><Users className="text-blue-700"/><p className="mt-3 text-sm text-slate-500">Nhân viên trong mẫu</p><p className="mt-1 text-3xl font-bold">{data.length}</p></div><div className="rounded-xl border bg-white p-5"><Clock3 className="text-blue-700"/><p className="mt-3 text-sm text-slate-500">Tổng giờ mẫu</p><p className="mt-1 text-3xl font-bold">{data.reduce((s, r) => s + r.hours, 0)}</p></div><div className="rounded-xl border bg-white p-5"><FileText className="text-blue-700"/><p className="mt-3 text-sm text-slate-500">Tổng ca mẫu</p><p className="mt-1 text-3xl font-bold">{data.reduce((s, r) => s + r.shifts, 0)}</p></div></div><div className="overflow-x-auto rounded-xl border bg-white"><table className="w-full text-left text-sm"><thead className="bg-slate-50"><tr>{["#","Nhân viên","Số ca","Giờ làm","Lần đi muộn"].map((h) => <th key={h} className="px-4 py-3 font-semibold text-slate-600">{h}</th>)}</tr></thead><tbody className="divide-y">{rows.map((r, i) => <tr key={r.name}><td className="px-4 py-3 text-slate-500">{i + 1}</td><td className="px-4 py-3 font-medium">{r.name}</td><td className="px-4 py-3">{r.shifts}</td><td className="px-4 py-3">{r.hours} giờ</td><td className="px-4 py-3">{r.late}</td></tr>)}</tbody></table></div></div>;
 }
