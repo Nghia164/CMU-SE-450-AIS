@@ -1,19 +1,10 @@
-// FR08 - Nghỉ phép
-// Cần làm:
-//  - Danh sách đơn nghỉ đột xuất
-//  - Xem 3-5 gợi ý người thay (AI)
-//  - Chọn người thay
+import { useState } from "react";
+import { Check, X, UserRoundSearch } from "lucide-react";
+const seed = [{ id: 1, name: "Nguyễn Văn An", type: "Nghỉ đột xuất", start: "2026-10-13", end: "2026-10-13", reason: "Bị ốm", status: "Chờ duyệt" }, { id: 2, name: "Trần Thị Bích", type: "Nghỉ phép", start: "2026-10-15", end: "2026-10-16", reason: "Việc gia đình", status: "Chờ duyệt" }, { id: 3, name: "Lê Minh Cường", type: "Nghỉ phép", start: "2026-10-10", end: "2026-10-10", reason: "Lịch học", status: "Đã duyệt" }];
+const replacements = ["Hoàng Văn Nam", "Phạm Thị Dung", "Trần Thị Bích"];
 export default function LeavePage() {
-  return (
-    <div>
-      <h1 className="mb-4 text-2xl font-semibold">Nghỉ phép</h1>
-      <div className="rounded-lg border border-gray-200 bg-white p-4">
-        <ul className="list-disc pl-5">
-        <li>Danh sách đơn nghỉ đột xuất</li>
-        <li>Xem 3-5 gợi ý người thay (AI)</li>
-        <li>Chọn người thay</li>
-        </ul>
-      </div>
-    </div>
-  );
+  const [items, setItems] = useState(seed); const [filter, setFilter] = useState("Tất cả"); const [selected, setSelected] = useState(null); const [notice, setNotice] = useState("");
+  const update = (id, status) => { setItems((list) => list.map((item) => item.id === id ? { ...item, status } : item)); setSelected(null); setNotice("Đã cập nhật đơn trong dữ liệu mẫu."); };
+  const visible = items.filter((item) => filter === "Tất cả" || item.status === filter);
+  return <div className="space-y-6"><div><p className="text-sm font-medium text-blue-700">QUẢN LÝ ĐƠN TỪ</p><h1 className="mt-1 text-2xl font-bold">Đơn xin nghỉ</h1><p className="mt-1 text-sm text-slate-500">Xem lý do, thời gian nghỉ và cân nhắc nhân sự thay thế.</p></div><div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">Dữ liệu mẫu. Gợi ý người thay chỉ mang tính minh họa, chưa dùng AI hoặc kiểm tra lịch rảnh.</div>{notice && <p role="status" className="rounded-lg bg-blue-50 p-3 text-sm text-blue-800">{notice}</p>}<div className="flex items-center gap-3"><select value={filter} onChange={(e) => setFilter(e.target.value)} className="rounded-lg border bg-white px-3 py-2 text-sm"><option>Tất cả</option><option>Chờ duyệt</option><option>Đã duyệt</option><option>Từ chối</option></select><span className="text-sm text-slate-500">{visible.length} đơn</span></div><div className="space-y-3">{visible.map((item) => <article key={item.id} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm"><div className="flex flex-wrap items-start justify-between gap-3"><div><div className="flex flex-wrap items-center gap-2"><h2 className="font-semibold text-slate-900">{item.name}</h2><span className={"rounded-full px-2 py-1 text-xs font-semibold " + (item.status === "Chờ duyệt" ? "bg-amber-100 text-amber-800" : item.status === "Đã duyệt" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700")}>{item.status}</span></div><p className="mt-2 text-sm text-slate-600">{item.type} · {new Date(item.start + "T00:00:00").toLocaleDateString("vi-VN")} – {new Date(item.end + "T00:00:00").toLocaleDateString("vi-VN")}</p><p className="mt-1 text-sm text-slate-500">Lý do: {item.reason}</p></div>{item.status === "Chờ duyệt" && <div className="flex gap-2"><button onClick={() => setSelected(item.id)} className="inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-semibold"><UserRoundSearch size={16}/>Người thay</button><button onClick={() => update(item.id, "Đã duyệt")} className="rounded-lg bg-green-50 p-2 text-green-700"><Check size={17}/></button><button onClick={() => update(item.id, "Từ chối")} className="rounded-lg bg-red-50 p-2 text-red-700"><X size={17}/></button></div>}</div>{selected === item.id && <div className="mt-4 rounded-lg bg-slate-50 p-4"><p className="mb-3 text-sm font-semibold">Danh sách gợi ý minh họa — cần kiểm tra lịch rảnh trước khi chọn</p><div className="flex flex-wrap gap-2">{replacements.filter((name) => name !== item.name).map((name) => <button key={name} onClick={() => { setNotice("Đã chọn " + name + " làm phương án thay thế trong giao diện mẫu. Chưa cập nhật lịch chính thức."); setSelected(null); }} className="rounded-lg border bg-white px-3 py-2 text-sm hover:border-blue-400">{name}</button>)}</div></div>}</article>)}</div>{visible.length === 0 && <div className="rounded-xl border bg-white p-8 text-center text-sm text-slate-500">Không có đơn phù hợp.</div>}</div>;
 }
