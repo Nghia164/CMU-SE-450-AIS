@@ -1,19 +1,9 @@
-// FR13 - AI Assistant
-// Cần làm:
-//  - Hộp chat hỏi đáp
-//  - Chỉ gợi ý, Manager quyết định
-//  - Khi LLM lỗi/chậm: báo lỗi rõ ràng, không ảnh hưởng chức năng khác
+import { useState } from "react";
+import { Bot, Send, UserRound, RotateCcw } from "lucide-react";
+const suggestions = ["Những ca nào đang thiếu nhân viên?", "Tôi nên kiểm tra gì trước khi công bố lịch?", "Làm thế nào giảm số ca đi muộn?"];
 export default function AssistantPage() {
-  return (
-    <div>
-      <h1 className="mb-4 text-2xl font-semibold">AI Assistant</h1>
-      <div className="rounded-lg border border-gray-200 bg-white p-4">
-        <ul className="list-disc pl-5">
-        <li>Hộp chat hỏi đáp</li>
-        <li>Chỉ gợi ý, Manager quyết định</li>
-        <li>Khi LLM lỗi/chậm: báo lỗi rõ ràng, không ảnh hưởng chức năng khác</li>
-        </ul>
-      </div>
-    </div>
-  );
+  const [messages, setMessages] = useState([{ role: "assistant", text: "Xin chào! Tôi có thể giúp bạn xem xét quy trình xếp lịch. Các câu trả lời ở trang demo này chỉ là gợi ý chung, không truy cập dữ liệu nhân viên thật." }]);
+  const [input, setInput] = useState(""); const [busy, setBusy] = useState(false);
+  const send = (text = input) => { const value = text.trim(); if (!value || busy) return; setMessages((items) => [...items, { role: "user", text: value }]); setInput(""); setBusy(true); window.setTimeout(() => { setMessages((items) => [...items, { role: "assistant", text: "Đây là gợi ý minh họa, chưa được tạo bởi mô hình AI hoặc dữ liệu hệ thống. Hãy kiểm tra nhu cầu nhân sự từng ca, thời gian rảnh đã đăng ký, thời gian nghỉ giữa hai ca và các ca còn thiếu người. Người quản lý cần xác minh kết quả trước khi áp dụng." }]); setBusy(false); }, 350); };
+  return <div className="mx-auto max-w-4xl space-y-6"><div><p className="text-sm font-medium text-blue-700">HỖ TRỢ QUẢN LÝ</p><h1 className="mt-1 text-2xl font-bold">Trợ lý AI</h1><p className="mt-1 text-sm text-slate-500">Tham khảo gợi ý cho việc vận hành và xếp lịch.</p></div><div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">Chưa kết nối API AI. Nội dung phản hồi hiện tại là mẫu và không được dùng làm quyết định nhân sự.</div><section className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"><div className="flex items-center gap-3 border-b p-4"><div className="rounded-lg bg-blue-50 p-2 text-blue-700"><Bot size={22}/></div><div><h2 className="font-semibold">Smart Scheduling Assistant</h2><p className="text-xs text-slate-500">Chế độ xem trước</p></div><button onClick={() => setMessages([{ role: "assistant", text: "Cuộc trò chuyện đã được làm mới. Bạn có thể chọn câu hỏi gợi ý bên dưới." }])} className="ml-auto rounded-lg border p-2" aria-label="Làm mới"><RotateCcw size={16}/></button></div><div className="max-h-[460px] min-h-64 space-y-4 overflow-y-auto bg-slate-50 p-4">{messages.map((m, i) => <div key={i} className={"flex gap-3 " + (m.role === "user" ? "flex-row-reverse" : "")}><div className={"rounded-full p-2 " + (m.role === "user" ? "bg-blue-700 text-white" : "bg-white text-blue-700")}>{m.role === "user" ? <UserRound size={17}/> : <Bot size={17}/>}</div><div className={"max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-6 " + (m.role === "user" ? "bg-blue-700 text-white" : "border bg-white text-slate-700")}>{m.text}</div></div>)}{busy && <p className="text-sm text-slate-500">Đang chuẩn bị phản hồi mẫu…</p>}</div><div className="border-t p-4"><div className="mb-3 flex flex-wrap gap-2">{suggestions.map((s) => <button key={s} onClick={() => send(s)} className="rounded-full border border-slate-300 px-3 py-2 text-left text-xs text-slate-600 hover:border-blue-400 hover:text-blue-700">{s}</button>)}</div><form onSubmit={(e) => { e.preventDefault(); send(); }} className="flex gap-2"><input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Nhập câu hỏi..." className="min-w-0 flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm"/><button disabled={!input.trim() || busy} className="inline-flex items-center gap-2 rounded-lg bg-blue-700 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"><Send size={16}/>Gửi</button></form></div></section></div>;
 }
