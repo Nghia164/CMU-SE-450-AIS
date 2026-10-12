@@ -1,15 +1,11 @@
-// FR05 - Lịch của tôi
-// Cần làm:
-//  - Xem lịch làm việc của mình (dạng Calendar)
+import { useMemo, useState } from "react";
+import { CalendarDays, ChevronLeft, ChevronRight, Download } from "lucide-react";
+const shifts = [{ name: "Ca sáng", time: "07:00–12:00", color: "bg-sky-100 text-sky-800" }, { name: "Ca chiều", time: "12:00–17:00", color: "bg-amber-100 text-amber-800" }, { name: "Ca tối", time: "17:00–22:00", color: "bg-violet-100 text-violet-800" }];
+const seed = [{ day: 0, shift: 0 }, { day: 1, shift: 1 }, { day: 2, shift: 0 }, { day: 4, shift: 2 }, { day: 5, shift: 1 }];
+const labels = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"];
 export default function MySchedulePage() {
-  return (
-    <div>
-      <h1 className="mb-4 text-2xl font-semibold">Lịch của tôi</h1>
-      <div className="rounded-lg border border-gray-200 bg-white p-4">
-        <ul className="list-disc pl-5">
-        <li>Xem lịch làm việc của mình (dạng Calendar)</li>
-        </ul>
-      </div>
-    </div>
-  );
+  const [offset, setOffset] = useState(0);
+  const dates = useMemo(() => Array.from({ length: 7 }, (_, i) => { const d = new Date(); d.setDate(d.getDate() - ((d.getDay() + 6) % 7) + offset * 7 + i); return d; }), [offset]);
+  const exportCsv = () => { const csv = ["Ngày,Ca,Thời gian", ...seed.map((s) => [dates[s.day].toLocaleDateString("vi-VN"), shifts[s.shift].name, shifts[s.shift].time].join(","))].join("\n"); const url = URL.createObjectURL(new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8" })); const a = document.createElement("a"); a.href = url; a.download = "lich-cua-toi.csv"; a.click(); URL.revokeObjectURL(url); };
+  return <div className="space-y-6"><div className="flex flex-wrap items-end justify-between gap-3"><div><p className="text-sm font-medium text-blue-700">LỊCH CÁ NHÂN</p><h1 className="mt-1 text-2xl font-bold">Lịch làm việc của tôi</h1><p className="mt-1 text-sm text-slate-500">Theo dõi các ca được phân công theo tuần.</p></div><button onClick={exportCsv} className="inline-flex items-center gap-2 rounded-lg border bg-white px-4 py-2 text-sm font-semibold"><Download size={16}/>Xuất CSV</button></div><div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">Lịch minh họa, chưa được lấy từ lịch đã công bố của quản lý.</div><section className="flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-white p-4"><div className="flex items-center gap-3"><CalendarDays className="text-blue-700"/><div><h2 className="font-semibold">Tuần {dates[0].toLocaleDateString("vi-VN")} – {dates[6].toLocaleDateString("vi-VN")}</h2><p className="text-sm text-slate-500">{seed.length} ca trong dữ liệu mẫu</p></div></div><div className="flex gap-2"><button onClick={() => setOffset((v) => v - 1)} aria-label="Tuần trước" className="rounded-lg border p-2"><ChevronLeft size={18}/></button><button onClick={() => setOffset(0)} className="rounded-lg border px-3 text-sm">Tuần này</button><button onClick={() => setOffset((v) => v + 1)} aria-label="Tuần sau" className="rounded-lg border p-2"><ChevronRight size={18}/></button></div></section><div className="grid gap-3 md:grid-cols-2 xl:grid-cols-7">{dates.map((date, i) => <section key={date.toISOString()} className="min-h-44 rounded-xl border bg-white p-3"><p className="text-sm font-semibold">{labels[i]}</p><p className="mb-3 mt-1 border-b pb-2 text-xs text-slate-500">{date.toLocaleDateString("vi-VN", { day: "2-digit", month: "2-digit" })}</p><div className="space-y-2">{seed.filter((s) => s.day === i).map((s) => <div key={s.shift} className={"rounded-lg p-3 " + shifts[s.shift].color}><p className="text-sm font-semibold">{shifts[s.shift].name}</p><p className="mt-1 text-xs">{shifts[s.shift].time}</p></div>)}</div></section>)}</div></div>;
 }
